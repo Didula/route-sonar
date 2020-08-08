@@ -4,9 +4,9 @@ import FullCmp from './containers/full-cmp';
 
 function App() {
   return (
-    <div>
+    <>
       <FullCmp></FullCmp>
-    </div>
+    </>
   );
 }
 
