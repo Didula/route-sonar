@@ -31,7 +31,11 @@
 
 .FBox > *:last-child a{
     color: #b60000;
+}
+
+.FBox > *:last-child a:hover {
     font-family: Mina-Bold;
+    text-decoration: none;
 }
 
 @media (min-width:500px) {
