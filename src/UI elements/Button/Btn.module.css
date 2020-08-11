@@ -9,6 +9,10 @@
     border-width: 2px;
 }
 
+.Btn:focus {
+    outline: none;
+}
+
 .Main {
     background-color: #b60000;
     color: white;
