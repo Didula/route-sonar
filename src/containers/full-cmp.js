@@ -1,11 +1,13 @@
 import React from 'react';
 import MapContainer from '../components/map-container';
 import AddressPanel from '../components/address-panel';
+import Header from './LayoutGeneral/Header/Header';
+import Auxi from '../hoc/Auxi';
 
 function FullCmp() {
   return (
-    <section>
-        <div style = {{height: '60px'}}>Header cmp goes here</div>
+    <Auxi>
+        <Header />
         <div className = "container-fluid p-0">
             <div className = "row no-gutters">
                 <div className = "col-4">
@@ -16,7 +18,7 @@ function FullCmp() {
                 </div>
             </div>
         </div>
-    </section>
+    </Auxi>
   );
 }
 
