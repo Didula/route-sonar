@@ -13,8 +13,16 @@
     height: 25px;
 }
 
-.LocInput input[type=text] {
-    color: #C7C7C7;
+.LocInput input {
+    color: black;
     background-color:transparent;
     border: transparent;
+}
+
+.LocInput input:focus {
+    outline: none;
+}
+
+.LocInput input::placeholder {
+    color: #C7C7C7;
 }
