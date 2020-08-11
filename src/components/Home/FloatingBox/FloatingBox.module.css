@@ -1,0 +1,16 @@
+.FBox {
+    width: 90%;
+    height: 500px;
+    margin: 170px 0 auto;
+    padding: 40px;
+    background-color: white;
+    border-radius: 5px;
+    font-family: Mina-Regular;
+}
+
+@media (min-width:500px) {
+    .FBox {
+        width: 450px;
+        margin-left: 10%;
+    }
+}
