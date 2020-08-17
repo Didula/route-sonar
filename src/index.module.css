@@ -11,3 +11,13 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+@font-face {
+  font-family: 'Mina-Regular';
+  src: local('Mina-Regular'), url(./assets/Mina-Regular.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Mina-Bold';
+  src: local('Mina-Bold'), url(./assets/Mina-Bold.ttf) format('truetype');
+}

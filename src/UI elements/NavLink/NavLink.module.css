@@ -1,5 +1,5 @@
 .NavLink {
-    font-family: Mira-Regular;
+    font-family: Mina-Regular;
     width: 100%;
     margin: 10px 0;
     box-sizing: border-box;
@@ -33,7 +33,7 @@
     }
     
     .NavLink a:hover {
-        font-family: Mira-Bold;
+        font-family: Mina-Bold;
     }
     
     .NavLink a:active,
