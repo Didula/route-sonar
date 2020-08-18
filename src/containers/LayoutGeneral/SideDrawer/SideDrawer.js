@@ -2,7 +2,7 @@ import React from 'react';
 
 import Logo from '../../../UI elements/Logo/Logo';
 import NavBar from '../Header/NavBar/NavBar';
-import classes from './SideDrawer.css';
+import classes from './SideDrawer.module.css';
 import Backdrop from '../../../UI elements/backdrop/Backdrop';
 import Auxi from '../../../hoc/Auxi';
 

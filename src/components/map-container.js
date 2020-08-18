@@ -1,6 +1,6 @@
 import React from 'react';
 import { GoogleMap, useLoadScript, Marker, InfoWindow } from '@react-google-maps/api';
-import mapStyles from '../styles/map-styles';
+import mapStyles from './Map/map-styles';
 
 const mapContainerStyle = {
     width: "100vw",
