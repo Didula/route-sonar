@@ -11,12 +11,13 @@ import {
 // todo we will replace this css with our own in the future.
 import "@reach/combobox/styles.css";
 
-const PlacesAutocomplete = () => {
+const PlacesAutocomplete = (props) => {
     const {
         ready,
         value,
         suggestions: { status, data },
         setValue,
+        clearSuggestions
     } = usePlacesAutocomplete();
 
     const handleInput = (e) => {
@@ -26,11 +27,11 @@ const PlacesAutocomplete = () => {
     const handleSelect = (val) => {
         setValue(val, false);
         // Get latitude and longitude via utility functions
+        clearSuggestions();
         getGeocode({ address: val })
             .then((results) => getLatLng(results[0]))
             .then(({ lat, lng }) => {
-                console.log(val);
-                console.log("📍 Coordinates: ", { lat, lng });
+                props.onLocationSelect({ lat, lng })
             })
             .catch((error) => {
                 console.log("😱 Error: ", error);

@@ -12,15 +12,14 @@ const mapOptions = {
     disableDefaultUI: true,
     zoomControl: true
 }
-const center = {lat: 6.7584063, lng: 79.890089}
 export default function Map(props) {
 
     return (
         <div>
             <GoogleMap
                 mapContainerStyle={mapsContainerStyle}
-                zoom={14}
-                center={center}
+                zoom={15}
+                center={props.center}
                 options={mapOptions}
                 onClick={(event) => {
                     console.log(event)
