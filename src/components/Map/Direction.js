@@ -1,22 +1,14 @@
-import React, {useState, useCallback} from "react";
+import React, {useState, useCallback, useEffect} from "react";
 import {DirectionsRenderer, DirectionsService} from "@react-google-maps/api";
 
 export default function Direction(props) {
     // specify the start point
-    const origin = {lat: props.startPoint.lat, lng: props.startPoint.lng}
-    const destination = {lat: 6.841165, lng: 79.965431};
+    // const origin = {}
+    // const destination = {};
     // specify the end point
-    const transitPoints = [
-        {
-            location: {lat: 6.931970, lng: 79.857750},
-            stopover: true
-        },
-        {location: {lat: 6.847278, lng: 79.926605}},
-        {location: {lat: 6.839670, lng: 79.875969}},
-    ];
+    const transitPoints = [];
     // specify the waypoints (in no particular order)
 
-    // const [origin, setOrigin] = useState({lat: props.startPoint.lat, lng: props.startPoint.lng});
     const [currentDirection, setCurrentDirection] = useState(null);
     // Save the route information obtained by API call to DirectionsService here
 
@@ -42,19 +34,16 @@ export default function Direction(props) {
                 }
             }
         }
-    },[origin]);
-
-    const setOriginHandler = (newOrigin) => {
-    }
+    });
 
     return (
         <div>
             <DirectionsService
                 options={{
-                    origin,
-                    destination,
+                    origin: props.startPoint,
+                    destination: props.endPoint,
                     travelMode: "DRIVING",
-                    optimizeWaypoints: true,
+                    optimizeWaypoints: false,
                     waypoints: transitPoints
                 }}
                 callback={directionsCallback}

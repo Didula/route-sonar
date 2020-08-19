@@ -26,7 +26,7 @@ export default function Map(props) {
                     console.log(event)
                 }}>
                 {/*<Marker position={props.center}/>*/}
-                <Direction startPoint={props.center}/>
+                <Direction startPoint={props.center} endPoint={props.endpoint}/>
             </GoogleMap>
         </div>
     );
