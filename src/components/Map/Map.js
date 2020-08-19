@@ -1,5 +1,6 @@
 import React from "react";
-import {GoogleMap} from "@react-google-maps/api";
+import { GoogleMap} from "@react-google-maps/api";
+import Direction from "./Direction";
 import mapStyles from './map-styles'
 
 
@@ -23,7 +24,10 @@ export default function Map(props) {
                 options={mapOptions}
                 onClick={(event) => {
                     console.log(event)
-                }}/>
+                }}>
+                {/*<Marker position={props.center}/>*/}
+                <Direction startPoint={props.center}/>
+            </GoogleMap>
         </div>
     );
 }
