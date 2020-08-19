@@ -1,29 +1,13 @@
 .SideBar {
-    width: 500px;
+    position: fixed;
+    z-index: 150;
+    width: 25vw;
     height: 100vh;
     background-color: white;
     float: left;
-    padding: 20px;
+    padding: 20px 2.5vw;
 }
 
 .SideBar > *:not(:first-child) {
     margin: 30px auto;
-}
-
-.SideBar > :nth-child(2) > :last-child {
-    width: 320px !important;
-}
-
-.SideBar > :nth-child(2) > :first-child {
-    font-family: Mina-Regular;
-    margin: auto 0;
-}
-
-.SideBar > :nth-child(2) {
-    display: flex;
-    justify-content: space-between;
-}
-
-.SideBar > :nth-child(4)  {
-    margin: 30px 0;
 }
