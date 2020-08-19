@@ -7,10 +7,12 @@ import SideContent from './SideContent/SideContent';
 import SideFooter from './SideFooter/SideFooter';
 import AddRoute from '../../UI elements/AddRoute/AddRoute';
 
-const sideBar = () => (
+const sideBar = (props) => (
         <div className={classes.SideBar}>
             <SideHeader />
-            <SideContent />
+            <SideContent
+                selectedStartPoint={props.selectedStartPoint}
+                onStartPointSelect={props.onStartPointSelect}/>
             <AddRoute />
             <SideFooter />
         </div>

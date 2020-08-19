@@ -48,6 +48,8 @@ const PlacesAutocomplete = (props) => {
                 ()=>{console.log("Geolocation fetching error")},
                 geolocationOptions)
         }
+        setValue(props.value, false);
+        clearSuggestions();
     },[])
 
     const handleInput = (e) => {
@@ -62,7 +64,7 @@ const PlacesAutocomplete = (props) => {
             .then((results) => getLatLng(results[0]))
             .then(({ lat, lng }) => {
                 console.log({ lat, lng })
-                props.onLocationSelect({ lat, lng })
+                props.onLocationSelect({coordinates:{ lat, lng }, address: val})
             })
             .catch((error) => {
                 console.log("😱 Error: ", error);
