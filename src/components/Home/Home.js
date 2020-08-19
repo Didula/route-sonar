@@ -9,7 +9,8 @@ import Map from '../Map/Map'
 
 const Home = () => {
     //todo This component should be a container. will be moved in the future.
-    const [selectedStartPoint, setSelectedStartPoint] = useState({lat: 0, lng: 0});
+    const [selectedStartPoint, setSelectedStartPoint] = useState(null);
+    const [selectedEndPoint, setSelectedEndPoint] = useState(null);
     const selectStartPointHandler = startPoint => {
         setSelectedStartPoint(startPoint);
     }
@@ -18,7 +19,7 @@ const Home = () => {
         <Auxi>
             <Header/>
             <FBox onStartPointSelect={selectStartPointHandler}/>
-            <Map center={selectedStartPoint} endpoint={{lat: 6.8569811, lng: 79.87440250000002}}/>
+            <Map startPoint={selectedStartPoint} endpoint={{lat: 6.8569811, lng: 79.87440250000002}}/>
         </Auxi>
     );
 }

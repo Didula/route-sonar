@@ -46,11 +46,12 @@ export default function Map(props) {
 
     const directionsCallback = useCallback((googleResponse) => {
         if (googleResponse) {
+            console.log(googleResponse);
+            console.log(currentDirection);
             if (currentDirection) {
-                if (
-                    googleResponse.status === "OK" &&
-                    googleResponse.geocoded_waypoints.length !==
-                    currentDirection.geocoded_waypoints.length) {
+                if (googleResponse.status === "OK" &&
+                    googleResponse.routes[0].overview_polyline !==
+                    currentDirection.routes[0].overview_polyline) {
                     console.log("since the route is changed to update the state");
                     setCurrentDirection(googleResponse);
                 } else {
@@ -67,6 +68,20 @@ export default function Map(props) {
         }
     });
 
+    let directionService = <div></div>
+    if(props.startPoint && props.endpoint){
+        directionService = <DirectionsService
+            options={{
+                origin: props.startPoint,
+                destination: props.endpoint,
+                travelMode: "DRIVING",
+                optimizeWaypoints: false,
+                waypoints: transitPoints
+            }}
+            callback={directionsCallback}
+        />
+    }
+
     return (
         <div>
             <GoogleMap
@@ -78,16 +93,7 @@ export default function Map(props) {
                     console.log(event)
                 }}>
                 {/*<Marker position={props.center}/>*/}
-                <DirectionsService
-                    options={{
-                        origin: props.center,
-                        destination: props.endpoint,
-                        travelMode: "DRIVING",
-                        optimizeWaypoints: false,
-                        waypoints: transitPoints
-                    }}
-                    callback={directionsCallback}
-                />
+                {directionService}
                 {currentDirection !== null && (<DirectionsRenderer options={{directions: currentDirection}}/>)}
             </GoogleMap>
         </div>
