@@ -4,8 +4,9 @@ import mapStyles from './map-styles'
 
 
 const mapsContainerStyle = {
-    width: '100vw',
-    height: '100vh'
+    width: '70vw',
+    height: '100vh',
+    float: 'right'
 }
 const mapOptions = {
     styles: mapStyles,

@@ -1,0 +1,19 @@
+.SideHeader {
+    height: 8vh;
+    width: 400px;
+    display: flex;
+}
+
+.SideHeader > :first-child {
+    padding: 0 !important;
+}
+
+.SideHeader > * img{
+    height: 50px !important;
+}
+
+.SideHeader > :last-child {
+    margin-top: 15px;
+    margin-right: 20px;
+    margin-left: auto;
+}

@@ -71,7 +71,7 @@ const PlacesAutocomplete = (props) => {
 
     return (
         <Combobox onSelect={handleSelect} aria-labelledby="demo">
-            <ComboboxInput placeholder="Starting Point" value={value} onChange={handleInput} disabled={!ready} />
+            <ComboboxInput placeholder={props.text} value={value} onChange={handleInput} disabled={!ready} />
             <ComboboxPopover>
                 <ComboboxList>
                     {status === "OK" &&
