@@ -2,8 +2,8 @@ import React, {useEffect, useState} from 'react';
 
 import Auxi from '../../hoc/Auxi';
 import Header from '../../containers/LayoutGeneral/Header/Header';
-import StartBox from "../StartBox/StartBox";
-import SideDrawer from "../../containers/LayoutGeneral/SideDrawer/SideDrawer";
+// import StartBox from "../StartBox/StartBox";
+import FBox from './FloatingBox/FloatingBox';
 import Map from '../Map/Map'
 
 const Home = () => {
@@ -35,9 +35,8 @@ const Home = () => {
     return (
         <Auxi>
             <Header/>
+            <FBox onSelectStartPoint={selectStartPointHandler}/>
             <Map center={selectedStartPoint}/>
-            <SideDrawer/>
-            <StartBox onSelectStartPoint={selectStartPointHandler}/>
         </Auxi>
     );
 }

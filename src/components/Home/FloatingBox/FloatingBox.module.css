@@ -1,11 +1,13 @@
 .FBox {
-    width: 90%;
+    position: fixed;
+    z-index: 200;
     height: auto;
-    margin: 170px 0 auto;
+    margin: 170px auto auto 10%;
     padding: 40px;
     background-color: white;
     border-radius: 5px;
     font-family: Mina-Regular;
+    width: 370px;
 }
 
 .FBox > *:not(:first-child) {
@@ -23,6 +25,10 @@
     display: flex;
 }
 
+.FBox > *:nth-child(4) p {
+    margin: 0;
+}
+
 .FBox > *:nth-child(4) img {
     margin:0 25px;
     width: 25px;
@@ -36,11 +42,4 @@
 .FBox > *:last-child a:hover {
     font-family: Mina-Bold;
     text-decoration: none;
-}
-
-@media (min-width:500px) {
-    .FBox {
-        width: 450px;
-        margin-left: 10%;
-    }
 }

@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from "react";
+
 import usePlacesAutocomplete, {getGeocode, getLatLng} from "use-places-autocomplete";
 import {
     Combobox,
@@ -8,8 +9,10 @@ import {
     ComboboxOption,
 } from "@reach/combobox";
 
+import './LocationSearchInputs.css';
+
 // todo we will replace this css with our own in the future.
-import "@reach/combobox/styles.css";
+// import "@reach/combobox/styles.css";
 
 const PlacesAutocomplete = (props) => {
     const [lat, setLat] = useState(0);
@@ -67,7 +70,7 @@ const PlacesAutocomplete = (props) => {
 
     return (
         <Combobox onSelect={handleSelect} aria-labelledby="demo">
-            <ComboboxInput value={value} onChange={handleInput} disabled={!ready} />
+            <ComboboxInput placeholder="Starting Point" value={value} onChange={handleInput} disabled={!ready} />
             <ComboboxPopover>
                 <ComboboxList>
                     {status === "OK" &&
