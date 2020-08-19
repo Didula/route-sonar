@@ -38,10 +38,10 @@ const Home = () => {
 
     return (
         <Auxi>
-            {/* <Header /> */}
-            {/* <FBox /> */}
+            {/* <Header/>
+            <FBox onSelectStartPoint={selectStartPointHandler}/> */}
             <SideBar />
-            <Map />
+            <Map center={selectedStartPoint} endpoint={{lat: 6.8569811, lng: 79.87440250000002}}/>
         </Auxi>
     );
 }

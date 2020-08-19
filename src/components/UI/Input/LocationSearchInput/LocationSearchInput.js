@@ -61,6 +61,7 @@ const PlacesAutocomplete = (props) => {
         getGeocode({ address: val })
             .then((results) => getLatLng(results[0]))
             .then(({ lat, lng }) => {
+                console.log({ lat, lng })
                 props.onLocationSelect({ lat, lng })
             })
             .catch((error) => {

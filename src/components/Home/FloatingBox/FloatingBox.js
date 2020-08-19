@@ -16,8 +16,8 @@ const fBox = (props) => (
             <p>Route Details</p>
        </div>
        <div>
-            <Btn clicked='/' btnType='Main'>Add Locations</Btn>
-            <Btn clicked='/' btnType='Secondary'>Upload Locations</Btn>
+            <Btn clicked={() => {}} btnType='Main'>Add Locations</Btn>
+            <Btn clicked={() => {}} btnType='Secondary'>Upload Locations</Btn>
        </div>
        <div>
            <p>Need any assistance? <a href='#'>Visit F&Q Section</a></p>
