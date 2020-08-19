@@ -10,7 +10,7 @@ const navBar = (props) => (
         <NavLink link="/">Pricing</NavLink>
         <NavLink link="/">F&Q</NavLink>
         <NavLink link="/">Contact</NavLink>
-        <Login />
+        <Login link='/' />
     </ul>
 );
 

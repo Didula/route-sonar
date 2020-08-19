@@ -5,6 +5,9 @@ import Header from '../../containers/LayoutGeneral/Header/Header';
 // import StartBox from "../StartBox/StartBox";
 import FBox from './FloatingBox/FloatingBox';
 import Map from '../Map/Map'
+import SideBar from '../../containers/SideBar/SideBar';
+
+import './Home.module.css';
 
 const Home = () => {
     //todo This component should be a container. will be moved in the future.
@@ -12,6 +15,7 @@ const Home = () => {
     const selectStartPointHandler = startPoint => {
         setSelectedStartPoint(startPoint);
     }
+
 
     useEffect(() => {
         const geolocationOptions = {
@@ -34,9 +38,10 @@ const Home = () => {
 
     return (
         <Auxi>
-            <Header/>
-            <FBox onSelectStartPoint={selectStartPointHandler}/>
-            <Map center={selectedStartPoint}/>
+            {/* <Header /> */}
+            {/* <FBox /> */}
+            <SideBar />
+            <Map />
         </Auxi>
     );
 }

@@ -1,0 +1,10 @@
+.HamIcon * {
+    width: 25px ;
+    height: 2px;
+    background-color: black;
+    border-radius: 1px;
+}
+
+.HamIcon :not(:first-child) {
+    margin-top: 4px;
+}

@@ -1,0 +1,29 @@
+.SideBar {
+    width: 500px;
+    height: 100vh;
+    background-color: white;
+    float: left;
+    padding: 20px;
+}
+
+.SideBar > *:not(:first-child) {
+    margin: 30px auto;
+}
+
+.SideBar > :nth-child(2) > :last-child {
+    width: 320px !important;
+}
+
+.SideBar > :nth-child(2) > :first-child {
+    font-family: Mina-Regular;
+    margin: auto 0;
+}
+
+.SideBar > :nth-child(2) {
+    display: flex;
+    justify-content: space-between;
+}
+
+.SideBar > :nth-child(4)  {
+    margin: 30px 0;
+}
