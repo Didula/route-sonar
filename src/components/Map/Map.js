@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, useState} from "react";
-import {DirectionsRenderer, DirectionsService, GoogleMap} from "@react-google-maps/api";
+import {DirectionsRenderer, DirectionsService, GoogleMap, Marker} from "@react-google-maps/api";
 import mapStyles from './map-styles'
 
 
@@ -86,13 +86,13 @@ export default function Map(props) {
         <div>
             <GoogleMap
                 mapContainerStyle={mapsContainerStyle}
-                zoom={15}
+                zoom={12}
                 center={currentLocation}
                 options={mapOptions}
                 onClick={(event) => {
                     console.log(event)
                 }}>
-                {/*<Marker position={props.center}/>*/}
+                <Marker position={props.startPoint}/>
                 {directionService}
                 {currentDirection !== null && (<DirectionsRenderer options={{directions: currentDirection}}/>)}
             </GoogleMap>

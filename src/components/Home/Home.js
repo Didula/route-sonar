@@ -19,7 +19,8 @@ const Home = () => {
         <Auxi>
             <Header/>
             <FBox onStartPointSelect={selectStartPointHandler}/>
-            <Map startPoint={selectedStartPoint} endpoint={{lat: 6.8569811, lng: 79.87440250000002}}/>
+            {/*<Map startPoint={selectedStartPoint} endpoint={{lat: 6.8569811, lng: 79.87440250000002}}/>*/}
+            <Map startPoint={selectedStartPoint} endpoint={selectedEndPoint}/>
         </Auxi>
     );
 }
