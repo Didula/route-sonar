@@ -25,7 +25,6 @@ export default function Direction(props) {
                     console.log("same as last time do not update state for route");
                 }
             } else {
-                console.log(googleResponse);
                 if (googleResponse.status === "OK") {
                     console.log("first time for a route is set, updates the state");
                     setCurrentDirection(googleResponse);
@@ -38,6 +37,7 @@ export default function Direction(props) {
 
     return (
         <div>
+            {console.log(props.startPoint, props.endPoint)}
             <DirectionsService
                 options={{
                     origin: props.startPoint,
