@@ -1,0 +1,32 @@
+.LocInput {
+    width: 370px;
+    height: 50px;
+    background-color: #F6F5F6;
+    border-radius: 5px;
+    display: flex;
+    line-height: 50px;
+}
+
+.LocInput:hover {
+    background-color: #e7e7e7;
+}
+
+.LocInput img {
+    margin:10px 25px 0 25px;
+    width: 25px;
+    height: 25px;
+}
+
+.LocInput input {
+    color: black;
+    background-color:transparent;
+    border: transparent;
+}
+
+.LocInput input:focus {
+    outline: none;
+}
+
+.LocInput input::placeholder {
+    color: #C7C7C7;
+}

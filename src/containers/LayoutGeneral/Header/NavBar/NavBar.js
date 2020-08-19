@@ -2,6 +2,7 @@ import React from 'react';
 
 import NavLink from '../../../../UI elements/NavLink/NavLink';
 import classes from './NavBar.module.css';
+import Login from '../Login/Login';
 
 const navBar = (props) => (
     <ul className={classes.NavBar}>
@@ -9,7 +10,7 @@ const navBar = (props) => (
         <NavLink link="/">Pricing</NavLink>
         <NavLink link="/">F&Q</NavLink>
         <NavLink link="/">Contact</NavLink>
-        <NavLink link="/">Login</NavLink>
+        <Login />
     </ul>
 );
 
