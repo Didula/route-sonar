@@ -1,0 +1,6 @@
+.SideFooter {
+    bottom: 0;
+    height: 10vh;
+    display: flex;
+    justify-content: space-between;
+}

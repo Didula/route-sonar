@@ -1,0 +1,10 @@
+.SideContent {
+    height: 62vh;
+    overflow-y: auto;
+    padding-right: 10px;
+    margin: 10px auto auto !important;
+}
+
+.SideContent > * {
+    margin: 30px auto;
+}

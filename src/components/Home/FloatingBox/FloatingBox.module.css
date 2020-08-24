@@ -1,0 +1,45 @@
+.FBox {
+    position: fixed;
+    z-index: 200;
+    height: auto;
+    margin: 170px auto auto 10%;
+    padding: 40px;
+    background-color: white;
+    border-radius: 5px;
+    font-family: Mina-Regular;
+    width: 370px;
+}
+
+.FBox > *:not(:first-child) {
+    margin-top: 40px;
+}
+
+.FBox > *:nth-child(5){
+    display: flex;
+    justify-content: space-between;
+}
+
+.FBox > *:nth-child(4) {
+    height: 30px;
+    line-height: 30px;
+    display: flex;
+}
+
+.FBox > *:nth-child(4) p {
+    margin: 0;
+}
+
+.FBox > *:nth-child(4) img {
+    margin:0 25px;
+    width: 25px;
+    height: 25px;
+}
+
+.FBox > *:last-child a{
+    color: #b60000;
+}
+
+.FBox > *:last-child a:hover {
+    font-family: Mina-Bold;
+    text-decoration: none;
+}

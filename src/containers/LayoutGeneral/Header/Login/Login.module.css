@@ -1,0 +1,49 @@
+.Login{
+    width: 70px;
+    height: 100px;
+    line-height: 100px;
+    display: flex;
+    flex-flow: row;
+    font-family: Mina-Regular;
+}
+
+.Login > * {
+    padding-left: 10px;
+}
+
+.Login:hover * {
+    text-decoration: none;
+    font-family: Mina-Bold;
+    border-width: 3px 3px 0;
+}
+
+.Login a {
+    display: block;
+    color: #b60000;
+}
+
+.Head {
+    width: 10px;
+    height: 10px;
+    border-radius: 15px;
+    border-color: #b60000;
+    border-style: solid;
+    border-width: 2px;
+}
+
+.Body {
+    width: 20px;
+    height: 8px;
+    border-radius: 5px 5px 0 0;
+    border-color: #b60000;
+    border-style: solid;
+    border-width: 2px 2px 0;
+}
+
+.Login a .Icon {
+    margin: 38px 0;
+}
+
+.Login a .Icon > * {
+    margin: 2px auto;
+}

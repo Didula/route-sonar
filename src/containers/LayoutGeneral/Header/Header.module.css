@@ -8,7 +8,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 10%;
+    padding: 0 10vw;
     box-sizing: border-box;
-    z-index:100;
+    z-index: 100;
 }
