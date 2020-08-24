@@ -6,6 +6,7 @@ import SideHeader from './SideHeader/SideHeader';
 import SideContent from './SideContent/SideContent';
 import SideFooter from './SideFooter/SideFooter';
 import AddRoute from '../../UI elements/AddRoute/AddRoute';
+import LocInput from "../../UI elements/LocInput/LocInput";
 
 const sideBar = (props) => (
         <div className={classes.SideBar}>
@@ -14,6 +15,7 @@ const sideBar = (props) => (
                 selectedStartPoint={props.selectedStartPoint}
                 onStartPointSelect={props.onStartPointSelect}/>
             <AddRoute />
+            <LocInput/>
             <SideFooter />
         </div>
 );

@@ -11,9 +11,6 @@ import {
 
 import './LocationSearchInputs.css';
 
-// todo we will replace this css with our own in the future.
-// import "@reach/combobox/styles.css";
-
 const PlacesAutocomplete = (props) => {
     const [lat, setLat] = useState(0);
     const [lng, setLng] = useState(0)
@@ -63,7 +60,6 @@ const PlacesAutocomplete = (props) => {
         getGeocode({ address: val })
             .then((results) => getLatLng(results[0]))
             .then(({ lat, lng }) => {
-                console.log({ lat, lng })
                 props.onLocationSelect({coordinates:{ lat, lng }, address: val})
             })
             .catch((error) => {

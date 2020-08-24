@@ -5,9 +5,8 @@ import LocInput from '../../../UI elements/LocInput/LocInput';
 
 const sideContent = (props) => (
         <div className={classes.SideContent}>
-            <LocInput value={props.selectedStartPoint} onStartPointSelect={props.onStartPointSelect} text="Starting point" />
+            <LocInput value={props.selectedStartPoint} onSelectStartPoint={props.onStartPointSelect} text="Starting point" />
             <hr />
-            <LocInput text='Route Point #1' />
         </div>
 );
 
