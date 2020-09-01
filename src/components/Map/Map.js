@@ -19,7 +19,9 @@ export default function Map(props) {
     // const origin = {}
     // const destination = {};
     // specify the end point
-    const transitPoints = [];
+    const transitPoints = [{location: {lat: 6.879479, lng: 79.9293734}, stopover: true},
+        {location: {lat: 6.89264, lng: 79.88426299999}, stopover: true},
+        {location: {lat: 6.9059857, lng: 79.9182208}, stopover: true}];
     // specify the waypoints (in no particular order)
 
     const [currentDirection, setCurrentDirection] = useState(null);
@@ -47,7 +49,7 @@ export default function Map(props) {
 
     const directionsCallback = useCallback((googleResponse) => {
         if (googleResponse) {
-            console.log(googleResponse);
+            console.log('Google response',googleResponse);
             console.log(currentDirection);
             if (currentDirection) {
                 if (googleResponse.status === "OK" &&

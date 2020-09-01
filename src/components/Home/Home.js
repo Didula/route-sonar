@@ -11,9 +11,9 @@ import './Home.module.css';
 
 const Home = () => {
     //todo This component should be a container. will be moved in the future.
-    const [selectedStartPoint, setSelectedStartPoint] = useState(null);
+    const [selectedStartPoint, setSelectedStartPoint] = useState({lat: 6.936175599999999, lng: 79.8440651});
     const [selectedStartPointAddress, setSelectedStartPointAddress] = useState(null);
-    const [selectedEndPoint, setSelectedEndPoint] = useState(null);
+    const [selectedEndPoint, setSelectedEndPoint] = useState({lat: 6.8569811, lng: 79.87440250000002});
     const [toggleBoxes, setToggleBoxes] = useState(false);
     const [markers, setMarkers] = useState([]);
     const [wayPoints, setWayPoints] = useState([]);
