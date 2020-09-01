@@ -15,7 +15,6 @@
     color: black;
     background-color:transparent;
     border: transparent;
-    font-family: Mina-Regular;
     outline: none;
   }
   
@@ -24,7 +23,6 @@
     background: rgba(255, 255, 255, 0.9);
     font-size: 85%;
     color: black;
-    font-family: Mina-Regular;
     z-index: 250;
   }
   

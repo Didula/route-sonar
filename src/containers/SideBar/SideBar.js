@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import classes from "./SideBar.module.css";
 
@@ -6,9 +6,12 @@ import SideHeader from './SideHeader/SideHeader';
 import SideContent from './SideContent/SideContent';
 import SideFooter from './SideFooter/SideFooter';
 import AddRoute from '../../UI elements/AddRoute/AddRoute';
-import LocInput from "../../UI elements/LocInput/LocInput";
+import Login from '../../components/login/login';
 
 const SideBar = ({selectedStartPoint, onStartPointSelect, inputList, setInputList}) => {
+    // States
+    const [modalShow, setModalShow] = React.useState(false); 
+
     return (
         <div className={classes.SideBar}>
             <SideHeader />
@@ -19,8 +22,13 @@ const SideBar = ({selectedStartPoint, onStartPointSelect, inputList, setInputLis
                 setInputList = {setInputList}/>
             <AddRoute 
                 inputList = {inputList}
-                setInputList = {setInputList}/>
-            {/* <LocInput/> */}
+                setInputList = {setInputList}
+                modalShow = {modalShow}
+                setModalShow = {setModalShow}/>
+            <Login
+                show={modalShow}
+                onHide={() => setModalShow(false)}
+            />
             <SideFooter />
         </div>
     );

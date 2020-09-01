@@ -1,0 +1,9 @@
+.scaff{
+    display: flex;
+}
+.scaff__sideNav{
+    width: 25vw;
+}
+/* .scaff__body{
+    width: 75vw;
+} */

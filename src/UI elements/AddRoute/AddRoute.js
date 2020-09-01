@@ -3,12 +3,26 @@ import React from 'react';
 import classes from './AddRoute.module.css';
 import locPin from '../../assets/add.png';
 
-const addRoute = ({setInputList, inputList}) => {
+const addRoute = ({setInputList, inputList, modalShow, setModalShow}) => {
+    const inputSize = 6;   // Maximum number of input of unlogged user
+
+    const togglePopup = () => {  
+        setModalShow({  
+            modalShow: !modalShow  
+        });  
+    }
+
     const addRouteClickHandler = () => {
-        setInputList([
-            ...inputList,
-            { id: Math.random()*1000, location: ''}
-        ]);
+        if (inputList.length === inputSize)
+        {
+            togglePopup();
+        }
+        else{
+            setInputList([
+                ...inputList,
+                { id: Math.random()*1000, location: ''}
+            ]);
+        }
     };
 
     return (
