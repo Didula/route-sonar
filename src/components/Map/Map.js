@@ -13,7 +13,7 @@ const mapOptions = {
     disableDefaultUI: true,
     zoomControl: true
 }
-export default function Map(props) {
+export default function Map({startPoint, endpoint, inputList, setInputList}) {
 
     // specify the start point
     // const origin = {}
@@ -70,11 +70,11 @@ export default function Map(props) {
     });
 
     let directionService = <div></div>
-    if(props.startPoint && props.endpoint){
+    if(startPoint && endpoint){
         directionService = <DirectionsService
             options={{
-                origin: props.startPoint,
-                destination: props.endpoint,
+                origin: startPoint,
+                destination: endpoint,
                 travelMode: "DRIVING",
                 optimizeWaypoints: false,
                 waypoints: transitPoints
@@ -89,13 +89,21 @@ export default function Map(props) {
                 mapContainerStyle={mapsContainerStyle}
                 zoom={12}
                 center={currentLocation}
-                options={mapOptions}
-                onClick={(event) => {
-                    console.log(event)
-                }}>
-                <Marker position={props.startPoint}/>
+                options={mapOptions}>
+                {/* <Marker position={props.startPoint}/>
                 {directionService}
-                {currentDirection !== null && (<DirectionsRenderer options={{directions: currentDirection}}/>)}
+                {currentDirection !== null && (<DirectionsRenderer options={{directions: currentDirection}}/>)} */}
+                {
+                    inputList.map((marker) => {
+                        if(marker.filled === true){
+                            return <Marker
+                                key = {marker.id}
+                                position = {{lat: marker.lat, lng: marker.lng}}
+                            />
+                        }
+                        return;
+                    })
+                }
             </GoogleMap>
         </div>
     );

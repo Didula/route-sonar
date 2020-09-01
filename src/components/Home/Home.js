@@ -17,6 +17,8 @@ const Home = () => {
     const [toggleBoxes, setToggleBoxes] = useState(false);
     const [markers, setMarkers] = useState([]);
     const [wayPoints, setWayPoints] = useState([]);
+    // State - to contain input list
+    const [inputList, setInputList] = useState([{ id: Math.random()*1000, location: '', lat: '', lng: ''}]);
 
     const selectStartPointHandler = startPoint => {
         console.log("Home received start ", startPoint)
@@ -43,7 +45,9 @@ const Home = () => {
         inputComponent = <SideBar
             onAddRoutePoint={addAnotherRoutePointHandler}
             selectedStartPoint={selectedStartPointAddress}
-            onStartPointSelect={selectStartPointHandler}/>
+            onStartPointSelect={selectStartPointHandler}
+            inputList = {inputList}
+            setInputList = {setInputList}/>
     }
 
     return (
@@ -55,7 +59,9 @@ const Home = () => {
                 markers={markers}
                 wayPoints={wayPoints}
                 startPoint={selectedStartPoint}
-                endpoint={selectedEndPoint}/>
+                endpoint={selectedEndPoint}
+                inputList={inputList}
+                setInputList = {setInputList}/>
         </Auxi>
     );
 }

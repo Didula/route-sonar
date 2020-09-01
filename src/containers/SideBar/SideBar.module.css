@@ -3,11 +3,11 @@
     z-index: 150;
     width: 25vw;
     height: 100vh;
-    background-color: white;
+    background-color: #fffeff;
     float: left;
     padding: 20px 2.5vw;
 }
 
 .SideBar > *:not(:first-child) {
-    margin: 30px auto;
+    /* margin: 10px auto; */
 }

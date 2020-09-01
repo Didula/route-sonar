@@ -60,7 +60,21 @@ const PlacesAutocomplete = (props) => {
         getGeocode({ address: val })
             .then((results) => getLatLng(results[0]))
             .then(({ lat, lng }) => {
-                props.onLocationSelect({coordinates:{ lat, lng }, address: val})
+                props.onLocationSelect({coordinates:{ lat, lng }, address: val});
+                if (props.inputList !== undefined){
+                    props.setInputList(props.inputList.map((item) => {
+                        if (item.id === props.locInput.id){
+                            return {
+                                ...item,
+                                location: val,
+                                lat: lat,
+                                lng: lng,
+                                filled: true
+                            }
+                        }
+                        return item;
+                    }));
+                }
             })
             .catch((error) => {
                 console.log("😱 Error: ", error);

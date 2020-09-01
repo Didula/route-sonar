@@ -2,8 +2,13 @@
     --reach-combobox: 1;
   }
 
+  [data-reach-combobox] {
+    margin-right: 12px;
+    width: calc(100% - 49px);
+  }
+
   [data-reach-combobox-input] {
-    width: 270px;
+    width: 100%;
     height: 50px;
     border-radius: 5px;
     line-height: 50px;
@@ -15,7 +20,7 @@
   }
   
   [data-reach-combobox-popover] {
-    border: solid 1px #C7C7C7;
+    /* border: solid 1px #C7C7C7; */
     background: rgba(255, 255, 255, 0.9);
     font-size: 85%;
     color: black;
