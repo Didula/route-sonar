@@ -7,7 +7,7 @@ import InputField from '../../components/UI/Input/LocationSearchInput/LocationSe
 const locInput = (props) => (
     <div className={classes.LocInput}>
         <img src={locPin} alt='+'/>
-        <InputField text={props.text} value={props.value} onLocationSelect={props.onSelectStartPoint} />
+        <InputField text={props.text} value={props.value} onLocationSelect={props.onSelectPoint} />
     </div>
 );
 

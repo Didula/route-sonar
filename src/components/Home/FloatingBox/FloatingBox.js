@@ -9,7 +9,7 @@ import Btn from '../../../UI elements/Button/Btn';
 const fBox = (props) => (
    <div className={classes.FBox}>
        <h2>Where are you <span style={{color:'#b60000'}}>headed?</span></h2>
-       <LocInput onSelectStartPoint={props.onStartPointSelect}  text='Starting Location'/>
+       <LocInput onSelectPoint={props.onStartPointSelect}  text='Starting Location'/>
        <hr/>
        <div>
             <img src={locPin} alt='+'/>

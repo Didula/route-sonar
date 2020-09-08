@@ -19,9 +19,9 @@ export default function Map(props) {
     // const origin = {}
     // const destination = {};
     // specify the end point
-    const transitPoints = [{location: {lat: 6.879479, lng: 79.9293734}, stopover: true},
+    const transitPoints = [/*{location: {lat: 6.879479, lng: 79.9293734}, stopover: true},
         {location: {lat: 6.89264, lng: 79.88426299999}, stopover: true},
-        {location: {lat: 6.9059857, lng: 79.9182208}, stopover: true}];
+        {location: {lat: 6.9059857, lng: 79.9182208}, stopover: true}*/];
     // specify the waypoints (in no particular order)
 
     const [currentDirection, setCurrentDirection] = useState(null);
@@ -34,22 +34,24 @@ export default function Map(props) {
             timeout: 1000 * 60, // 1 min (1000 ms * 60 sec * 1 minute = 60 000ms)
             maximumAge: 1000 * 3600 * 24 // 24 hour
         };
-        if(navigator && navigator.geolocation){
+        if (navigator && navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
-                (position)=>{
+                (position) => {
                     const currentLocation = {lat: 0, lng: 0};
                     currentLocation.lat = position.coords.latitude;
                     currentLocation.lng = position.coords.longitude;
                     setCurrentLocation(currentLocation)
                 },
-                ()=>{console.log("Geolocation fetching error")},
+                () => {
+                    console.log("Geolocation fetching error")
+                },
                 geolocationOptions)
         }
-    },[])
+    }, [])
 
     const directionsCallback = useCallback((googleResponse) => {
         if (googleResponse) {
-            console.log('Google response',googleResponse);
+            console.log('Google response', googleResponse);
             console.log(currentDirection);
             if (currentDirection) {
                 if (googleResponse.status === "OK" &&
@@ -71,15 +73,32 @@ export default function Map(props) {
         }
     });
 
-    let directionService = <div></div>
-    if(props.startPoint && props.endpoint){
+    let directionService = null
+
+    let wayPoints = [...props.markers];
+    let wayPointCoordinates = [];
+
+    if (wayPoints.length > 2) {
+        wayPoints.splice(0, 1);
+        wayPoints.pop();
+    }
+
+    wayPoints.map(point => (wayPointCoordinates.push(
+        {
+            location: point.coordinates,
+            stopover: true
+        }))
+    )
+    console.log('coordinates', wayPointCoordinates);
+
+    if (props.markers.length > 2) {
         directionService = <DirectionsService
             options={{
-                origin: props.startPoint,
-                destination: props.endpoint,
+                origin: props.markers[0].coordinates,
+                destination: props.markers[props.markers.length - 1].coordinates,
                 travelMode: "DRIVING",
-                optimizeWaypoints: false,
-                waypoints: transitPoints
+                optimizeWaypoints: true,
+                waypoints: wayPointCoordinates
             }}
             callback={directionsCallback}
         />
@@ -95,7 +114,9 @@ export default function Map(props) {
                 onClick={(event) => {
                     console.log(event)
                 }}>
-                <Marker position={props.startPoint}/>
+                {props.markers.map(marker => (
+                    <Marker key={marker.placeId} position={marker.coordinates}/>
+                ))}
                 {directionService}
                 {currentDirection !== null && (<DirectionsRenderer options={{directions: currentDirection}}/>)}
             </GoogleMap>

@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 
 import Auxi from '../../hoc/Auxi';
 import Header from '../../containers/LayoutGeneral/Header/Header';
-// import StartBox from "../StartBox/StartBox";
 import FBox from './FloatingBox/FloatingBox';
 import Map from '../Map/Map'
 import SideBar from '../../containers/SideBar/SideBar';
@@ -11,20 +10,30 @@ import './Home.module.css';
 
 const Home = () => {
     //todo This component should be a container. will be moved in the future.
-    const [selectedStartPoint, setSelectedStartPoint] = useState({lat: 6.936175599999999, lng: 79.8440651});
+    const [selectedStartPoint, setSelectedStartPoint] = useState('');
     const [selectedStartPointAddress, setSelectedStartPointAddress] = useState(null);
-    const [selectedEndPoint, setSelectedEndPoint] = useState({lat: 6.8569811, lng: 79.87440250000002});
+    const [routePointInputs, setRoutePointInputs] = useState([{id:1, value:''}]);
     const [toggleBoxes, setToggleBoxes] = useState(false);
     const [markers, setMarkers] = useState([]);
-    const [wayPoints, setWayPoints] = useState([]);
+    const [mapInputMarkers, setMapInputMarkers] = useState([]);
 
     const selectStartPointHandler = startPoint => {
         console.log("Home received start ", startPoint)
         setSelectedStartPoint(startPoint.coordinates);
         setSelectedStartPointAddress(startPoint.address);
+        setMarkers(prevMarkers => {
+            if(prevMarkers.length === 0){
+                return [...prevMarkers, startPoint]
+            } else {
+                let markers = [...prevMarkers];
+                markers[0] = startPoint;
+                return markers;
+            }
+        });
     }
 
-    let inputComponent = null;
+    console.log(markers);
+
     const addLocationClickHandler = () => {
         if (selectedStartPoint) {
             setToggleBoxes(!toggleBoxes);
@@ -32,30 +41,40 @@ const Home = () => {
     }
 
     const addAnotherRoutePointHandler = (point) => {
-        setWayPoints(preWayPoints => [...preWayPoints, ...point]);
+        setRoutePointInputs(prevRoutePointInputs =>
+            [...prevRoutePointInputs, {id: prevRoutePointInputs.length + 1, value:''}]);
     }
 
+    const routeLocationSelectHandler = (point) => {
+        setMarkers(prevMarkers =>
+            [...prevMarkers, point]);
+    }
+
+    const optimizeRouteClickHandler = () => {
+        setMapInputMarkers(markers);
+    }
+
+    let inputComponent = null;
     if (!toggleBoxes) {
         inputComponent = <FBox
             onStartPointSelect={selectStartPointHandler}
             onAddLocationClick={addLocationClickHandler}/>
     } else {
         inputComponent = <SideBar
-            onAddRoutePoint={addAnotherRoutePointHandler}
             selectedStartPoint={selectedStartPointAddress}
-            onStartPointSelect={selectStartPointHandler}/>
+            onStartPointSelect={selectStartPointHandler}
+            onLocationSelect={routeLocationSelectHandler}
+            onAddRoutePoint={addAnotherRoutePointHandler}
+            onOptimizeRoutes={optimizeRouteClickHandler}
+            routePoints={routePointInputs}/>
     }
 
     return (
         <Auxi>
             <Header/>
             {inputComponent}
-            {/*<Map startPoint={selectedStartPoint} endpoint={{lat: 6.8569811, lng: 79.87440250000002}}/>*/}
             <Map
-                markers={markers}
-                wayPoints={wayPoints}
-                startPoint={selectedStartPoint}
-                endpoint={selectedEndPoint}/>
+                markers={markers}/>
         </Auxi>
     );
 }
