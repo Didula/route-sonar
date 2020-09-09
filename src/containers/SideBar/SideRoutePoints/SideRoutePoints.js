@@ -4,7 +4,7 @@ import LocInput from '../../../UI elements/LocInput/LocInput';
 import AddRoute from "../../../UI elements/AddRoute/AddRoute";
 
 const sideRoutePoints = (props) => (
-    <div>
+    <div className={classes.SideRoutePoints}>
         <div>
             {props.markers.map((point,i) => {
                 let locationInputArray = [];

@@ -74,7 +74,7 @@ export default function Map(props) {
         wayPoints.pop();
     }
 
-    wayPoints.map(point => (wayPointCoordinates.push(
+    wayPoints.filter(point => point.coordinates.lat !== '' && point.coordinates.lng !== '').map(point => (wayPointCoordinates.push(
         {
             location: point.coordinates,
             stopover: true

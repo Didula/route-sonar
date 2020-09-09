@@ -1,8 +1,5 @@
-SideRoutePoints{
-
-}
-
-LocInput{
-    margin: 1rem 0;
-    padding: 0.5rem 1rem;
+.SideRoutePoints{
+    height: 70vh;
+    overflow-x: hidden;
+    overflow-y: scroll;
 }

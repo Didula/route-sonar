@@ -9,5 +9,5 @@
 }
 
 .SideBar > *:not(:first-child) {
-    margin: 30px auto;
+    margin: 10px auto;
 }
