@@ -6,15 +6,30 @@ import AddRoute from "../../../UI elements/AddRoute/AddRoute";
 const sideRoutePoints = (props) => (
     <div>
         <div>
-            {props.routePointInputFields.map(point => (
-                <LocInput
-                    className={classes}
-                    key={point.id}
-                    data-letter={point.id}
-                    value={point.value}
-                    onSelectPoint={props.onLocationSelect}
-                    text="Route point"/>
-            ))}
+            {props.markers.map((point,i) => {
+                let locationInputArray = [];
+                // Remove 1st element from rendering because it is the starting point.
+                if(i !== 0){
+                    locationInputArray.push((
+                        <LocInput
+                            className={classes}
+                            key={i}
+                            data-letter={point.id}
+                            value={point.value}
+                            onSelectPoint={(location) =>
+                                props.onSelectLocation(prevMarkers => {
+                                    // updating respective element.
+                                    let markers = [...prevMarkers];
+                                    markers[i] = {address: location.address, coordinates:location.coordinates, placeId: location.placeId };
+                                    return markers;
+                                })
+                            }
+                            text="Route point"/>
+                    ))
+                }
+                return locationInputArray;
+            }
+            )}
         </div>
         <AddRoute addPointClick={props.onAddAnotherPoint}/>
     </div>

@@ -15,15 +15,6 @@ const mapOptions = {
 }
 export default function Map(props) {
 
-    // specify the start point
-    // const origin = {}
-    // const destination = {};
-    // specify the end point
-    const transitPoints = [/*{location: {lat: 6.879479, lng: 79.9293734}, stopover: true},
-        {location: {lat: 6.89264, lng: 79.88426299999}, stopover: true},
-        {location: {lat: 6.9059857, lng: 79.9182208}, stopover: true}*/];
-    // specify the waypoints (in no particular order)
-
     const [currentDirection, setCurrentDirection] = useState(null);
     const [currentLocation, setCurrentLocation] = useState(null);
     // Save the route information obtained by API call to DirectionsService here
@@ -114,9 +105,14 @@ export default function Map(props) {
                 onClick={(event) => {
                     console.log(event)
                 }}>
-                {props.markers.map(marker => (
-                    <Marker key={marker.placeId} position={marker.coordinates}/>
-                ))}
+                {props.markers.map(marker => {
+                    let markerArray = [];
+                    if (marker.coordinates.lat !== '' && marker.coordinates.lng !== '') {
+                        console.log('In map building markers',marker);
+                        markerArray.push(<Marker key={marker.placeId} position={marker.coordinates}/>)
+                    }
+                    return markerArray;
+                })}
                 {directionService}
                 {currentDirection !== null && (<DirectionsRenderer options={{directions: currentDirection}}/>)}
             </GoogleMap>

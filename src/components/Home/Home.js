@@ -12,7 +12,7 @@ const Home = () => {
     //todo This component should be a container. will be moved in the future.
     const [selectedStartPoint, setSelectedStartPoint] = useState('');
     const [selectedStartPointAddress, setSelectedStartPointAddress] = useState(null);
-    const [routePointInputs, setRoutePointInputs] = useState([{id:1, value:''}]);
+    const [routePointInputs, setRoutePointInputs] = useState([{id: 1, value: ''}]);
     const [toggleBoxes, setToggleBoxes] = useState(false);
     const [markers, setMarkers] = useState([]);
     const [mapInputMarkers, setMapInputMarkers] = useState([]);
@@ -21,10 +21,12 @@ const Home = () => {
         console.log("Home received start ", startPoint)
         setSelectedStartPoint(startPoint.coordinates);
         setSelectedStartPointAddress(startPoint.address);
+        // Adding start point as the first element of markers.
         setMarkers(prevMarkers => {
-            if(prevMarkers.length === 0){
+            if (prevMarkers.length === 0) {
                 return [...prevMarkers, startPoint]
             } else {
+                // updating first element.
                 let markers = [...prevMarkers];
                 markers[0] = startPoint;
                 return markers;
@@ -41,13 +43,17 @@ const Home = () => {
     }
 
     const addAnotherRoutePointHandler = (point) => {
-        setRoutePointInputs(prevRoutePointInputs =>
-            [...prevRoutePointInputs, {id: prevRoutePointInputs.length + 1, value:''}]);
-    }
-
-    const routeLocationSelectHandler = (point) => {
+        // Adding an empty marker.
         setMarkers(prevMarkers =>
-            [...prevMarkers, point]);
+            [...prevMarkers,
+                {
+                    placeId: '',
+                    coordinates: {lat: '', lng: ''},
+                    address: ''
+                }
+            ]);
+        /*setRoutePointInputs(prevRoutePointInputs =>
+            [...prevRoutePointInputs, {id: prevRoutePointInputs.length + 1, value:''}]);*/
     }
 
     const optimizeRouteClickHandler = () => {
@@ -63,10 +69,10 @@ const Home = () => {
         inputComponent = <SideBar
             selectedStartPoint={selectedStartPointAddress}
             onStartPointSelect={selectStartPointHandler}
-            onLocationSelect={routeLocationSelectHandler}
             onAddRoutePoint={addAnotherRoutePointHandler}
             onOptimizeRoutes={optimizeRouteClickHandler}
-            routePoints={routePointInputs}/>
+            onSelectLocation={setMarkers}
+            markers={markers}/>
     }
 
     return (

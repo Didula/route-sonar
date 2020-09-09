@@ -14,9 +14,10 @@ const sideBar = (props) => (
             selectedStartPoint={props.selectedStartPoint}
             onStartPointSelect={props.onStartPointSelect}/>
         <SideRoutePoints
+            onSelectLocation={props.onSelectLocation}
             onAddAnotherPoint={props.onAddRoutePoint}
             onLocationSelect={props.onLocationSelect}
-            routePointInputFields={props.routePoints}/>
+            markers={props.markers}/>
         <SideFooter onOptimize={props.onOptimizeRoutes}/>
     </div>
 );
