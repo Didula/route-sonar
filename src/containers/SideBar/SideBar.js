@@ -14,6 +14,7 @@ const sideBar = (props) => (
             selectedStartPoint={props.selectedStartPoint}
             onStartPointSelect={props.onStartPointSelect}/>
         <SideRoutePoints
+            setCurrentLocation={props.setCurrentLocation}
             onSelectLocation={props.onSelectLocation}
             onAddAnotherPoint={props.onAddRoutePoint}
             onLocationSelect={props.onLocationSelect}

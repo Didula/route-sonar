@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
 import Auxi from '../../hoc/Auxi';
 import Header from '../../containers/LayoutGeneral/Header/Header';
@@ -15,6 +15,28 @@ const Home = () => {
     const [toggleBoxes, setToggleBoxes] = useState(false);
     const [markers, setMarkers] = useState([]);
     const [directionServiceOptions, setDirectionServiceOptions] = useState(null);
+    const [currentLocation, setCurrentLocation] = useState(null);
+
+    useEffect(() => {
+        const geolocationOptions = {
+            enableHighAccuracy: true,
+            timeout: 1000 * 60, // 1 min (1000 ms * 60 sec * 1 minute = 60 000ms)
+            maximumAge: 1000 * 3600 * 24 // 24 hour
+        };
+        if (navigator && navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const currentLocation = {lat: 0, lng: 0};
+                    currentLocation.lat = position.coords.latitude;
+                    currentLocation.lng = position.coords.longitude;
+                    setCurrentLocation(currentLocation)
+                },
+                () => {
+                    console.log("Geolocation fetching error")
+                },
+                geolocationOptions)
+        }
+    }, [])
 
     const selectStartPointHandler = startPoint => {
         setSelectedStartPoint(startPoint.coordinates);
@@ -30,6 +52,7 @@ const Home = () => {
                 return markers;
             }
         });
+        setCurrentLocation(startPoint.coordinates);
     }
 
     const addLocationClickHandler = () => {
@@ -105,7 +128,8 @@ const Home = () => {
             onAddRoutePoint={addAnotherRoutePointHandler}
             onOptimizeRoutes={optimizeRouteClickHandler}
             onSelectLocation={setMarkers}
-            markers={markers}/>
+            markers={markers}
+            setCurrentLocation={setCurrentLocation}/>
     }
 
     return (
@@ -114,7 +138,8 @@ const Home = () => {
             {inputComponent}
             <Map
                 markers={markers}
-                directionServiceOptions={directionServiceOptions}/>
+                directionServiceOptions={directionServiceOptions}
+                currentLocation={currentLocation}/>
         </Auxi>
     );
 }

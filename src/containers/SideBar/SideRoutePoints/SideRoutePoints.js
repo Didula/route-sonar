@@ -16,13 +16,19 @@ const sideRoutePoints = (props) => (
                             key={i}
                             data-letter={point.id}
                             value={point.value}
-                            onSelectPoint={(location) =>
+                            onSelectPoint={(location) => {
+                                props.setCurrentLocation(location.coordinates);
                                 props.onSelectLocation(prevMarkers => {
                                     // updating respective element.
                                     let markers = [...prevMarkers];
-                                    markers[i] = {address: location.address, coordinates:location.coordinates, placeId: location.placeId };
+                                    markers[i] = {
+                                        address: location.address,
+                                        coordinates: location.coordinates,
+                                        placeId: location.placeId
+                                    };
                                     return markers;
                                 })
+                            }
                             }
                             text="Route point"/>
                     ))

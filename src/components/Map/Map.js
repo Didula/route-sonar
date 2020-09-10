@@ -19,7 +19,7 @@ export default function Map(props) {
     const [currentLocation, setCurrentLocation] = useState(null);
     // Save the route information obtained by API call to DirectionsService here
 
-    useEffect(() => {
+/*    useEffect(() => {
         const geolocationOptions = {
             enableHighAccuracy: true,
             timeout: 1000 * 60, // 1 min (1000 ms * 60 sec * 1 minute = 60 000ms)
@@ -38,7 +38,7 @@ export default function Map(props) {
                 },
                 geolocationOptions)
         }
-    }, [])
+    }, [])*/
 
     const directionsCallback = useCallback((googleResponse) => {
         if (googleResponse) {
@@ -76,7 +76,7 @@ export default function Map(props) {
             <GoogleMap
                 mapContainerStyle={mapsContainerStyle}
                 zoom={12}
-                center={currentLocation}
+                center={props.currentLocation}
                 options={mapOptions}
                 onClick={(event) => {
                 }}>
