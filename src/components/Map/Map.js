@@ -42,8 +42,6 @@ export default function Map(props) {
 
     const directionsCallback = useCallback((googleResponse) => {
         if (googleResponse) {
-            console.log('Google response', googleResponse);
-            console.log(currentDirection);
             if (currentDirection) {
                 if (googleResponse.status === "OK" &&
                     googleResponse.routes[0].overview_polyline !==
@@ -62,25 +60,9 @@ export default function Map(props) {
                 }
             }
         }
-    });
+    },[]);
 
     let directionService = null
-
-    let wayPoints = [...props.markers];
-    let wayPointCoordinates = [];
-
-    if (wayPoints.length > 2) {
-        wayPoints.splice(0, 1);
-        wayPoints.pop();
-    }
-
-    wayPoints.filter(point => point.coordinates.lat !== '' && point.coordinates.lng !== '').map(point => (wayPointCoordinates.push(
-        {
-            location: point.coordinates,
-            stopover: true
-        }))
-    )
-    console.log('coordinates', wayPointCoordinates);
 
     if (props.markers.length > 2 && props.directionServiceOptions !== null) {
         directionService = <DirectionsService
@@ -97,12 +79,10 @@ export default function Map(props) {
                 center={currentLocation}
                 options={mapOptions}
                 onClick={(event) => {
-                    console.log(event)
                 }}>
                 {props.markers.map(marker => {
                     let markerArray = [];
                     if (marker.coordinates.lat !== '' && marker.coordinates.lng !== '') {
-                        console.log('In map building markers',marker);
                         markerArray.push(<Marker key={marker.placeId} position={marker.coordinates}/>)
                     }
                     return markerArray;

@@ -7,19 +7,16 @@ import Map from '../Map/Map'
 import SideBar from '../../containers/SideBar/SideBar';
 
 import './Home.module.css';
-import {DirectionsService} from "@react-google-maps/api";
 
 const Home = () => {
     //todo This component should be a container. will be moved in the future.
     const [selectedStartPoint, setSelectedStartPoint] = useState('');
     const [selectedStartPointAddress, setSelectedStartPointAddress] = useState(null);
-    const [routePointInputs, setRoutePointInputs] = useState([{id: 1, value: ''}]);
     const [toggleBoxes, setToggleBoxes] = useState(false);
     const [markers, setMarkers] = useState([]);
     const [directionServiceOptions, setDirectionServiceOptions] = useState(null);
 
     const selectStartPointHandler = startPoint => {
-        console.log("Home received start ", startPoint)
         setSelectedStartPoint(startPoint.coordinates);
         setSelectedStartPointAddress(startPoint.address);
         // Adding start point as the first element of markers.
@@ -34,8 +31,6 @@ const Home = () => {
             }
         });
     }
-
-    console.log(markers);
 
     const addLocationClickHandler = () => {
         if (selectedStartPoint) {
@@ -74,33 +69,27 @@ const Home = () => {
                 stopover: true
             }))
         )
-        if(markers.length < 2){
+        if (markers.length < 2) {
             // Only start point is enabled.
             destination = null;
-        } else if (markers.length === 2) {
+        } else /*if (markers.length === 2) */{
             // Only start point and end point input fields are enabled.
             // Check destination input field is filled.
-            if (markers[markers.length - 1].coordinates.lat && markers[markers.length - 1].coordinates.lng) {
-                destination = markers[markers.length - 1].coordinates;
-            }
-        } else {
-            // One or more way points inputs are enabled.
-            if (markers[markers.length - 1].coordinates.lat && markers[markers.length - 1].coordinates.lng) {
-                destination = markers[markers.length - 1].coordinates;
-            }
+            let markersClone = [...markers];
+            console.log(markersClone);
+            let lastFilledField = markersClone.reverse().find(point => (point.coordinates.lat !== '' && point.coordinates.lng !== ''))
+            destination = lastFilledField.coordinates;
         }
 
-        console.log('coordinates', wayPointCoordinates);
-
-        if (markers.length > 2) {
+        if (markers.length >= 2) {
             // Always replace the old value.
-                setDirectionServiceOptions({
-                    origin: markers[0].coordinates,
-                    destination: destination,
-                    travelMode: "DRIVING",
-                    optimizeWaypoints: true,
-                    waypoints: wayPointCoordinates
-                });
+            setDirectionServiceOptions({
+                origin: markers[0].coordinates,
+                destination: destination,
+                travelMode: "DRIVING",
+                optimizeWaypoints: true,
+                waypoints: wayPointCoordinates
+            });
         }
     }
 

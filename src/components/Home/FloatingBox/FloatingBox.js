@@ -20,7 +20,7 @@ const fBox = (props) => (
             <Btn clicked={() => {}} btnType='Secondary'>Upload Locations</Btn>
        </div>
        <div>
-           <p>Need any assistance? <a href='#'>Visit F&Q Section</a></p>
+           <p>Need any assistance? <a href='/'>Visit F&Q Section</a></p>
        </div>
    </div>
 );
