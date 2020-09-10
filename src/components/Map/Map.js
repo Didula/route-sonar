@@ -82,15 +82,9 @@ export default function Map(props) {
     )
     console.log('coordinates', wayPointCoordinates);
 
-    if (props.markers.length > 2) {
+    if (props.markers.length > 2 && props.directionServiceOptions !== null) {
         directionService = <DirectionsService
-            options={{
-                origin: props.markers[0].coordinates,
-                destination: props.markers[props.markers.length - 1].coordinates,
-                travelMode: "DRIVING",
-                optimizeWaypoints: true,
-                waypoints: wayPointCoordinates
-            }}
+            options={props.directionServiceOptions}
             callback={directionsCallback}
         />
     }
