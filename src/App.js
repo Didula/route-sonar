@@ -8,7 +8,7 @@ const libraries = ["places"];
 
 function App() {
     const {isLoaded, loadError} = useLoadScript({
-        googleMapsApiKey: "",
+        googleMapsApiKey: 'AIzaSyB_OjxFPgR42bOlSCfJp_S6rEJTqoJMsfI',
         libraries
     });
     if (loadError) return "Error Loading error";
