@@ -1,16 +1,17 @@
 :root {
     --reach-combobox: 1;
+    width: calc(100% - 26px);
   }
 
   [data-reach-combobox-input] {
-    width: 270px;
     height: 50px;
     border-radius: 5px;
     line-height: 50px;
     color: black;
     background-color:transparent;
     border: transparent;
-    font-family: Mina-Regular;
+    font-family: 'Hind Madurai', sans-serif;
+    font-size: 14px;
     outline: none;
   }
   
@@ -19,7 +20,7 @@
     background: rgba(255, 255, 255, 0.9);
     font-size: 85%;
     color: black;
-    font-family: Mina-Regular;
+    font-family: 'Hind Madurai', sans-serif;
     z-index: 250;
   }
   
@@ -50,5 +51,9 @@
   
   [data-suggested-value] {
     font-weight: bold;
+  }
+
+  locInput{
+    width: calc(100% - 26px);
   }
   

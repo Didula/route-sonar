@@ -134,7 +134,7 @@ const Home = () => {
 
     return (
         <Auxi>
-            <Header/>
+            { !toggleBoxes ? <Header/>: null }
             {inputComponent}
             <Map
                 markers={markers}

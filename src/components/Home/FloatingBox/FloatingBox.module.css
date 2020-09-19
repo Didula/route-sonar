@@ -6,8 +6,9 @@
     padding: 40px;
     background-color: white;
     border-radius: 5px;
-    font-family: Mina-Regular;
+    font-family: 'Hind Madurai', sans-serif;
     width: 370px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
 
 .FBox > *:not(:first-child) {
@@ -40,6 +41,6 @@
 }
 
 .FBox > *:last-child a:hover {
-    font-family: Mina-Bold;
+    font-family: 'Hind Madurai', sans-serif;
     text-decoration: none;
 }
