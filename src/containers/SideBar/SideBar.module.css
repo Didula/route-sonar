@@ -5,7 +5,7 @@
     height: 100vh;
     background-color: white;
     float: left;
-    padding: 20px 2.5vw;
+    padding: 0px 18px;
 }
 
 .SideBar > *:not(:first-child) {

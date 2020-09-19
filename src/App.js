@@ -4,6 +4,8 @@ import Home from './components/Home/Home';
 import Auxi from './hoc/Auxi';
 import {useLoadScript} from "@react-google-maps/api";
 
+import './styles/global.module.css';
+
 const libraries = ["places"];
 
 function App() {

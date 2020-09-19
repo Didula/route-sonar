@@ -1,7 +1,8 @@
 .Logo {
     height:100%;
-    box-sizing: border-box;
     padding: 10px;
+    display: flex;
+    align-items: center;
 }
 
 .Logo img {
@@ -10,7 +11,6 @@
 
 @media (min-width: 500px) {
     .Logo {
-        height:100%;
         box-sizing: border-box;
         padding: 20px;
     }

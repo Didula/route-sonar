@@ -1,10 +1,10 @@
 .Login{
     width: 70px;
-    height: 100px;
-    line-height: 100px;
+    /* height: 100px;
+    line-height: 100px; */
     display: flex;
     flex-flow: row;
-    font-family: Mina-Regular;
+    font-family: 'Hind Madurai', sans-serif;
 }
 
 .Login > * {
@@ -13,7 +13,7 @@
 
 .Login:hover * {
     text-decoration: none;
-    font-family: Mina-Bold;
+    font-family: 'Hind Madurai', sans-serif;
     border-width: 3px 3px 0;
 }
 
@@ -40,9 +40,9 @@
     border-width: 2px 2px 0;
 }
 
-.Login a .Icon {
+/* .Login a .Icon {
     margin: 38px 0;
-}
+} */
 
 .Login a .Icon > * {
     margin: 2px auto;

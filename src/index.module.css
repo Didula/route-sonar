@@ -13,11 +13,11 @@ code {
 }
 
 @font-face {
-  font-family: 'Mina-Regular';
+  font-family: 'Hind Madurai', sans-serif;
   src: local('Mina-Regular'), url(./assets/Mina-Regular.ttf) format('truetype');
 }
 
 @font-face {
-  font-family: 'Mina-Bold';
+  font-family: 'Hind Madurai', sans-serif;
   src: local('Mina-Bold'), url(./assets/Mina-Bold.ttf) format('truetype');
 }
