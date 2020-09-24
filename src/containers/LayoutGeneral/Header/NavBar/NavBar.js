@@ -6,10 +6,10 @@ import Login from '../Login/Login';
 
 const navBar = (props) => (
     <ul className={classes.NavBar}>
-        <NavLink link="/" active>About</NavLink>
-        <NavLink link="/">Pricing</NavLink>
-        <NavLink link="/">F&Q</NavLink>
-        <NavLink link="/">Contact</NavLink>
+        <NavLink link="/about" active>About</NavLink>
+        <NavLink link="/pricing">Pricing</NavLink>
+        <NavLink link="/faq">F&Q</NavLink>
+        <NavLink link="/contact">Contact</NavLink>
         <Login link='/' />
     </ul>
 );

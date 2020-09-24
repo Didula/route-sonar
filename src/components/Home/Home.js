@@ -5,10 +5,13 @@ import Header from '../../containers/LayoutGeneral/Header/Header';
 import FBox from './FloatingBox/FloatingBox';
 import Map from '../Map/Map'
 import SideBar from '../../containers/SideBar/SideBar';
-
 import './Home.module.css';
+import {useLoadScript} from "@react-google-maps/api";
+
+const LIBRARIES = ["places"];
 
 const Home = () => {
+
     //todo This component should be a container. will be moved in the future.
     const [selectedStartPoint, setSelectedStartPoint] = useState('');
     const [selectedStartPointAddress, setSelectedStartPointAddress] = useState(null);
@@ -17,26 +20,12 @@ const Home = () => {
     const [directionServiceOptions, setDirectionServiceOptions] = useState(null);
     const [currentLocation, setCurrentLocation] = useState(null);
 
-    useEffect(() => {
-        const geolocationOptions = {
-            enableHighAccuracy: true,
-            timeout: 1000 * 60, // 1 min (1000 ms * 60 sec * 1 minute = 60 000ms)
-            maximumAge: 1000 * 3600 * 24 // 24 hour
-        };
-        if (navigator && navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(
-                (position) => {
-                    const currentLocation = {lat: 0, lng: 0};
-                    currentLocation.lat = position.coords.latitude;
-                    currentLocation.lng = position.coords.longitude;
-                    setCurrentLocation(currentLocation)
-                },
-                () => {
-                    console.log("Geolocation fetching error")
-                },
-                geolocationOptions)
-        }
-    }, [])
+    const {isLoaded, loadError} = useLoadScript({
+        googleMapsApiKey: 'AIzaSyB_OjxFPgR42bOlSCfJp_S6rEJTqoJMsfI',
+        libraries: LIBRARIES
+    });
+    if (loadError) return "Error Loading error";
+    if (!isLoaded) return "Loading Maps";
 
     const selectStartPointHandler = startPoint => {
         setSelectedStartPoint(startPoint.coordinates);
@@ -138,8 +127,7 @@ const Home = () => {
             {inputComponent}
             <Map
                 markers={markers}
-                directionServiceOptions={directionServiceOptions}
-                currentLocation={currentLocation}/>
+                directionServiceOptions={directionServiceOptions}/>
         </Auxi>
     );
 }

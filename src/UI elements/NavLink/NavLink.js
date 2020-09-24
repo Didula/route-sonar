@@ -1,12 +1,16 @@
 import React from 'react';
 
 import classes from './NavLink.module.css';
+import {NavLink} from "react-router-dom";
 
 const navLink = (props) => (
     <li className={classes.NavLink}>
-        <a
-        href={props.link}
-        className={props.active ? classes.active : null}>{props.children}</a>
+        <NavLink
+            exact
+            to={props.link}
+            activeClassName={classes.active}>
+            {props.children}
+        </NavLink>
     </li>
 );
 
