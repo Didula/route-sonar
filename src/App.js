@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Home from './components/Home/Home';
+import Home from './containers/Home/Home';
 import Auxi from './hoc/Auxi';
 import {Switch, Redirect, Route} from "react-router-dom";
 import asyncLoader from "./hoc/AsyncLoader/asyncLoader";
