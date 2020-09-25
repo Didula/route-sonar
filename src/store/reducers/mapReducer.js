@@ -6,7 +6,8 @@ const initialState = {
     currentLocation: null,
     directionServiceOptions: null,
     startLocation: null,
-    loading: false
+    loading: false,
+    isOptimized: false
 }
 
 
@@ -30,7 +31,7 @@ const setStartPoint = (state, action) => {
         updatedMarkers = state.markers;
         updatedMarkers[0] = action.startPoint;
     }
-    return updateObject(state, {startLocation: action.startPoint, markers: updatedMarkers})
+    return updateObject(state, {startLocation: action.startPoint, markers: updatedMarkers, isOptimized: false})
 }
 
 const addBlankWayPoint = (state, action) => {
@@ -42,13 +43,13 @@ const addBlankWayPoint = (state, action) => {
     // todo : prevent adding blank way points if previous one is also blank
     let updatedMarkers = [...state.markers];
     updatedMarkers.push(blankWayPoint);
-    return updateObject(state, {markers: updatedMarkers})
+    return updateObject(state, {markers: updatedMarkers, isOptimized: false})
 }
 
 const updateWayPoint = (state, action) => {
     let updatedMarkers = [...state.markers];
     updatedMarkers[action.index] = action.wayPoint;
-    return updateObject(state, {markers: updatedMarkers});
+    return updateObject(state, {markers: updatedMarkers, isOptimized: false});
 }
 
 const setDirectionServiceOptions = (state, action) => {
@@ -74,7 +75,6 @@ const setDirectionServiceOptions = (state, action) => {
         // Only start point and end point input fields are enabled.
         // Check destination input field is filled.
         let markersClone = [...state.markers];
-        console.log(markersClone);
         let lastFilledField = markersClone.reverse().find(point => (point.coordinates.lat !== '' && point.coordinates.lng !== ''))
         destination = lastFilledField.coordinates;
     }
@@ -93,6 +93,10 @@ const setDirectionServiceOptions = (state, action) => {
     }
 }
 
+const setIsOptimized = (state, action) => {
+    return updateObject(state, {isOptimized: action.value})
+}
+
 
 const mapReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -106,6 +110,8 @@ const mapReducer = (state = initialState, action) => {
             return setCurrentLocationPoint(state, action);
         case actionTypes.PREPARE_DIRECTION_SERVICE_OPTIONS:
             return setDirectionServiceOptions(state, action);
+        case actionTypes.SET_IS_OPTIMIZED:
+            return setIsOptimized(state, action);
         default:
             return state;
     }

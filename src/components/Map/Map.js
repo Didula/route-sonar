@@ -25,11 +25,14 @@ const Map = (props) => {
 
     const directionsCallback = useCallback((googleResponse) => {
         if (googleResponse) {
+            console.log(googleResponse)
+            props.onSuccessFullOptimization(true);
             if (currentDirection) {
                 if (googleResponse.status === "OK" &&
                     googleResponse.routes[0].overview_polyline !==
                     currentDirection.routes[0].overview_polyline) {
                     console.log("since the route is changed to update the state");
+
                     setCurrentDirection(googleResponse);
                 } else {
                     console.log("same as last time do not update state for route");
@@ -54,6 +57,15 @@ const Map = (props) => {
         />
     }
 
+    let markerElements = null
+     markerElements = props.markers.map(marker => {
+         let markerArray = [];
+         if (marker.coordinates.lat !== '' && marker.coordinates.lng !== '') {
+             markerArray.push(<Marker key={marker.placeId} position={marker.coordinates}/>)
+         }
+         return markerArray;
+     })
+
     return (
         <div>
             <GoogleMap
@@ -63,13 +75,7 @@ const Map = (props) => {
                 options={mapOptions}
                 onClick={(event) => {
                 }}>
-                {props.markers.map(marker => {
-                    let markerArray = [];
-                    if (marker.coordinates.lat !== '' && marker.coordinates.lng !== '') {
-                        markerArray.push(<Marker key={marker.placeId} position={marker.coordinates}/>)
-                    }
-                    return markerArray;
-                })}
+                {!props.isOptimized && markerElements}
                 {directionService}
                 {currentDirection !== null && (<DirectionsRenderer options={{directions: currentDirection}}/>)}
             </GoogleMap>
@@ -82,13 +88,15 @@ const mapStateToProps = (state) => {
         currentLocation: state.map.currentLocation,
         startLocation: state.map.startLocation,
         markers: state.map.markers,
-        directionServiceOptions: state.map.directionServiceOptions
+        directionServiceOptions: state.map.directionServiceOptions,
+        isOptimized: state.map.isOptimized
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onFetchingCurrentUserLocation: () => dispatch(actions.fetchStartPoint())
+        onFetchingCurrentUserLocation: () => dispatch(actions.fetchStartPoint()),
+        onSuccessFullOptimization: (value) => dispatch(actions.setIsOptimized(value))
     }
 }
 

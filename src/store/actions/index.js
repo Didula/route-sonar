@@ -1,1 +1,9 @@
-export {fetchStartPoint,setStartPoint,setCurrentLocationPoint,addBlankWayPoint,updateWayPoint,prepareDirectionServiceOptions} from './mapActions'
+export {
+    fetchStartPoint,
+    setStartPoint,
+    setCurrentLocationPoint,
+    addBlankWayPoint,
+    updateWayPoint,
+    prepareDirectionServiceOptions,
+    setIsOptimized
+} from './mapActions'
