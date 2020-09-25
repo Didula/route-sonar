@@ -1,12 +1,13 @@
 import React, {useState} from "react";
+import {connect} from "react-redux";
 import {useLoadScript} from "@react-google-maps/api";
+
 import FBox from "../../components/FloatingBox/FloatingBox";
 import SideBar from "../../components/SideBar/SideBar";
 import Auxi from "../../hoc/Auxi";
 import Header from "../../components/UI/Header/Header";
 import Map from "../../components/Map/Map";
 import * as actions from "../../store/actions";
-import {connect} from "react-redux";
 
 const LIBRARIES = ["places"];
 
