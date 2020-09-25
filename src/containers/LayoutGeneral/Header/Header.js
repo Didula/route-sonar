@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Logo from '../../../UI elements/Logo/Logo';
+import Logo from '../../../components/UI/Logo/Logo';
 import classes from './Header.module.css';
 import NavBar from './NavBar/NavBar';
 import HamIcon from './HamIcon/HamIcon';

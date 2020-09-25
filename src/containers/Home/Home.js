@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {useLoadScript} from "@react-google-maps/api";
-import FBox from "../../components/Home/FloatingBox/FloatingBox";
+import FBox from "../../components/FloatingBox/FloatingBox";
 import SideBar from "../SideBar/SideBar";
 import Auxi from "../../hoc/Auxi";
 import Header from "../LayoutGeneral/Header/Header";

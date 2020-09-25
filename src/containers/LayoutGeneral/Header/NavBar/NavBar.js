@@ -1,6 +1,6 @@
 import React from 'react';
 
-import NavLink from '../../../../UI elements/NavLink/NavLink';
+import NavLink from '../../../../components/UI/NavLink/NavLink';
 import classes from './NavBar.module.css';
 import Login from '../Login/Login';
 

@@ -1,7 +1,7 @@
 import React from "react";
 
 import classes from "./SideHeader.module.css";
-import Logo from '../../../UI elements/Logo/Logo';
+import Logo from '../../../components/UI/Logo/Logo';
 import Button from 'react-bootstrap/Button';
 import HamIcon from '../../LayoutGeneral/Header/HamIcon/HamIcon';
 

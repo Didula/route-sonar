@@ -1,10 +1,10 @@
 import React from 'react';
 
 import classes from './FloatingBox.module.css';
-import locPin from '../../../assets/pin_icon.png';
+import locPin from '../../assets/pin_icon.png';
 
-import LocInput from '../../../UI elements/LocInput/LocInput';
-import Btn from '../../../UI elements/Button/Btn';
+import LocInput from '../UI/Input/LocInput/LocInput';
+import Btn from '../UI/Buttons/GenericButton/GenericButton';
 
 const fBox = (props) => (
    <div className={classes.FBox}>

@@ -9,14 +9,8 @@ import SideRoutePoints from "./SideRoutePoints/SideRoutePoints";
 import Login from '../../components/login/login';
 
 const SideBar = (props) => {
-    // States
-    const [modalShow, setModalShow] = React.useState(false);
 
-    // Similar to componentDidMount and componentDidUpdate:
-    // useEffect(() => {
-    //     console.log('effect', modalShow);
-    //     // setModalShow(true);
-    // });
+    const [modalShow, setModalShow] = React.useState(false);
 
     return (
         <div className={classes.SideBar}>

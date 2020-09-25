@@ -1,7 +1,7 @@
 import React from "react";
 
 import classes from "./SideFooter.module.css";
-import Btn from '../../../UI elements/Button/Btn';
+import Btn from '../../../components/UI/Buttons/GenericButton/GenericButton';
 
 const sideFooter = (props) => (
     <div className={classes.SideFooter}>

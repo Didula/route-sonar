@@ -1,7 +1,7 @@
 import React from 'react';
 
 import classes from './AddRoute.module.css';
-import locPin from '../../assets/add.png';
+import locPin from '../../../../assets/add.png';
 
 const addRoute = ({ addPointClick }) => {
 

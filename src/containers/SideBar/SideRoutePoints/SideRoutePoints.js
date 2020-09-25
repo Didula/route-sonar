@@ -2,8 +2,8 @@ import React from "react";
 import {connect} from 'react-redux';
 
 import classes from './SideRoutePoint.module.css'
-import LocInput from '../../../UI elements/LocInput/LocInput';
-import AddRoute from "../../../UI elements/AddRoute/AddRoute";
+import LocInput from '../../../components/UI/Input/LocInput/LocInput';
+import AddRoute from "../../../components/UI/Buttons/AddRoute/AddRoute";
 import * as actions from "../../../store/actions";
 
 const sideRoutePoints = (props) => (
