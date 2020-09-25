@@ -12,7 +12,6 @@ export function* fetchCurrentUserLocationSaga() {
         if (navigator && navigator.geolocation) {
             const location = yield call(getUserLocation);
             let currentLocation = {lat: location.coords.latitude, lng: location.coords.longitude};
-            console.log(currentLocation);
             yield put(actions.setCurrentLocationPoint(currentLocation));
         }
     } catch (error) {

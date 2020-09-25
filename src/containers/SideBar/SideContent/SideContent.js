@@ -6,17 +6,17 @@ import LocInput from '../../../UI elements/LocInput/LocInput';
 import Form from 'react-bootstrap/Form'
 
 const sideContent = (props) => (
-    <>
+    <div>
         <div className={classes.inputForm}>
             <Form className = "py-2">
                 <Form.Group controlId="formBasicEmail">
                     <Form.Label>Enter next destination and reference point</Form.Label>
-                    <div class = "row">
-                        <div class = "col-8">
-                            <Form.Control type="input" placeholder="Enter destination" class = "col-6" />
+                    <div className = "row">
+                        <div className = "col-8">
+                            <Form.Control type="input" placeholder="Enter destination" className = "col-6" />
                         </div>
-                        <div class = "col-4">
-                            <Form.Control type="input" placeholder="Reference" class = "col-6" />
+                        <div className = "col-4">
+                            <Form.Control type="input" placeholder="Reference" className = "col-6" />
                         </div>
                     </div>
                     <Form.Text className="text-muted">
@@ -29,7 +29,7 @@ const sideContent = (props) => (
             <LocInput value={props.selectedStartPoint} onSelectPoint={props.onStartPointSelect} text="Starting point" />
             <hr />
         </div>
-    </>
+    </div>
 );
 
 export default sideContent;

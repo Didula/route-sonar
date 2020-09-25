@@ -79,7 +79,10 @@ const Map = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-        currentLocation: state.map.currentLocation
+        currentLocation: state.map.currentLocation,
+        startLocation: state.map.startLocation,
+        markers: state.map.markers,
+        directionServiceOptions: state.map.directionServiceOptions
     }
 }
 

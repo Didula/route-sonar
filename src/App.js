@@ -6,11 +6,6 @@ import {Switch, Redirect, Route} from "react-router-dom";
 import asyncLoader from "./hoc/AsyncLoader/asyncLoader";
 import Header from "./containers/LayoutGeneral/Header/Header"
 import './styles/global.module.css';
-import {useLoadScript} from "@react-google-maps/api";
-
-
-
-
 
 const lazyLoadedAbout = asyncLoader(() => {
     return import("./containers/About/About");
@@ -27,8 +22,6 @@ const lazyLoadedContact = asyncLoader(() => {
 
 
 function App() {
-
-
     let routes = (
         <Switch>
             <Route path="/about" component={lazyLoadedAbout}/>

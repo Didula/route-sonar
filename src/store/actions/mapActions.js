@@ -13,17 +13,30 @@ export const setStartPoint = (startPoint) => {
     }
 }
 
-export const setCurrentLocationPoint = (startPoint) => {
+export const setCurrentLocationPoint = (currentLocationPoint) => {
     return {
         type: actionTypes.SET_CURRENT_USER_LOCATION,
-        startPoint: startPoint
+        currentLocationPoint: currentLocationPoint
     }
 }
 
-export const addWayPoint = (wayPoint) => {
+export const addBlankWayPoint = () => {
     return {
-        type: actionTypes.ADD_WAY_POINT,
-        wayPoint: wayPoint
+        type: actionTypes.ADD_BLANK_WAY_POINT
+    }
+}
+
+export const updateWayPoint = (wayPoint, index) => {
+    return {
+        type: actionTypes.UPDATE_WAY_POINT,
+        wayPoint: wayPoint,
+        index: index
+    }
+}
+
+export const prepareDirectionServiceOptions = () => {
+    return {
+        type: actionTypes.PREPARE_DIRECTION_SERVICE_OPTIONS
     }
 }
 

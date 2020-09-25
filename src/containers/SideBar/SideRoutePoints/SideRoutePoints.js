@@ -1,7 +1,10 @@
 import React from "react";
+import {connect} from 'react-redux';
+
 import classes from './SideRoutePoint.module.css'
 import LocInput from '../../../UI elements/LocInput/LocInput';
 import AddRoute from "../../../UI elements/AddRoute/AddRoute";
+import * as actions from "../../../store/actions";
 
 const sideRoutePoints = (props) => (
     <div className={classes.SideRoutePoints}>
@@ -17,17 +20,7 @@ const sideRoutePoints = (props) => (
                             data-letter={point.id}
                             value={point.value}
                             onSelectPoint={(location) => {
-                                props.setCurrentLocation(location.coordinates);
-                                props.onSelectLocation(prevMarkers => {
-                                    // updating respective element.
-                                    let markers = [...prevMarkers];
-                                    markers[i] = {
-                                        address: location.address,
-                                        coordinates: location.coordinates,
-                                        placeId: location.placeId
-                                    };
-                                    return markers;
-                                })
+                                props.onSelectingLocation(location,i)
                             }
                             }
                             text="Route point"/>
@@ -41,4 +34,14 @@ const sideRoutePoints = (props) => (
     </div>
 );
 
-export default sideRoutePoints;
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onSelectingLocation: (point, index) => {
+            dispatch (actions.updateWayPoint(point, index));
+            dispatch (actions.setCurrentLocationPoint(point.coordinates));
+        }
+    }
+}
+
+export default connect(null, mapDispatchToProps)(sideRoutePoints);
