@@ -1,9 +1,9 @@
 import React from 'react';
 
-import Logo from '../../../components/UI/Logo/Logo';
+import Logo from '../Logo/Logo';
 import classes from './Header.module.css';
-import NavBar from './NavBar/NavBar';
-import HamIcon from './HamIcon/HamIcon';
+import NavBar from '../NavBar/NavBar';
+import HamIcon from '../Buttons/HamIcon/HamIcon';
 
 const header = (props) => (
     <header className={classes.Header}>

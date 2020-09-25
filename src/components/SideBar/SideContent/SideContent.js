@@ -1,7 +1,7 @@
 import React from "react";
 
 import classes from "./SideContent.module.css";
-import LocInput from '../../../components/UI/Input/LocInput/LocInput';
+import LocInput from '../../UI/Input/LocInput/LocInput';
 
 import Form from 'react-bootstrap/Form'
 

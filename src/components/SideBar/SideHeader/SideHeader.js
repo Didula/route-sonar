@@ -1,9 +1,9 @@
 import React from "react";
 
 import classes from "./SideHeader.module.css";
-import Logo from '../../../components/UI/Logo/Logo';
+import Logo from '../../UI/Logo/Logo';
 import Button from 'react-bootstrap/Button';
-import HamIcon from '../../LayoutGeneral/Header/HamIcon/HamIcon';
+import HamIcon from '../../UI/Buttons/HamIcon/HamIcon';
 
 const sideHeader = ({modalShow, setModalShow}) => {
     const togglePopup = () => {

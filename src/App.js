@@ -4,7 +4,7 @@ import Home from './containers/Home/Home';
 import Auxi from './hoc/Auxi';
 import {Switch, Redirect, Route} from "react-router-dom";
 import asyncLoader from "./hoc/AsyncLoader/asyncLoader";
-import Header from "./containers/LayoutGeneral/Header/Header"
+import Header from "./components/UI/Header/Header"
 import './styles/global.module.css';
 
 const lazyLoadedAbout = asyncLoader(() => {

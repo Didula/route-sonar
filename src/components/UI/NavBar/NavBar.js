@@ -1,8 +1,8 @@
 import React from 'react';
 
-import NavLink from '../../../../components/UI/NavLink/NavLink';
+import NavLink from '../NavLink/NavLink';
 import classes from './NavBar.module.css';
-import Login from '../Login/Login';
+import Login from '../Buttons/Login/Login';
 
 const navBar = (props) => (
     <ul className={classes.NavBar}>

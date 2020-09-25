@@ -1,9 +1,9 @@
 import React, {useState} from "react";
 import {useLoadScript} from "@react-google-maps/api";
 import FBox from "../../components/FloatingBox/FloatingBox";
-import SideBar from "../SideBar/SideBar";
+import SideBar from "../../components/SideBar/SideBar";
 import Auxi from "../../hoc/Auxi";
-import Header from "../LayoutGeneral/Header/Header";
+import Header from "../../components/UI/Header/Header";
 import Map from "../../components/Map/Map";
 import * as actions from "../../store/actions";
 import {connect} from "react-redux";
