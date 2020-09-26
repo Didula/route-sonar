@@ -3,7 +3,7 @@ import React from "react";
 import classes from "./SideContent.module.css";
 import LocInput from '../../../UI elements/LocInput/LocInput';
 
-import Form from 'react-bootstrap/Form'
+import Form from 'react-bootstrap/Form';
 
 const sideContent = (props) => (
     <>
