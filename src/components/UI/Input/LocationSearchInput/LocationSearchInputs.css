@@ -1,6 +1,5 @@
 :root {
     --reach-combobox: 1;
-    width: calc(100% - 26px);
   }
 
   [data-reach-combobox-input] {
@@ -16,7 +15,7 @@
   }
   
   [data-reach-combobox-popover] {
-    border: solid 1px #C7C7C7;
+    /* border: solid 1px #C7C7C7; */
     background: rgba(255, 255, 255, 0.9);
     font-size: 85%;
     color: black;

@@ -1,0 +1,72 @@
+.rsAbtTitle1{
+    height: 60vh;
+    width: 100%;
+}
+.rsAbtTitle{
+    position: relative;
+}
+.rsAbtTitle > img {
+    max-width: 100%;
+    width: auto;
+    max-height: 100%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+}
+.rsAbtTitle > div{
+    position: absolute;
+    bottom: 0px;
+    color: #FFF;
+    background-color: rgb(0, 0, 0, 0.75);
+    padding: 12px 15px;
+    font-size: 24px;
+    line-height: 28px;
+}
+
+.rsAbtTitle2{
+    height: 60vh;
+}
+.rsAbtTitle3{
+    height: 60vh;
+}
+
+.rsAbtTitle > .rsAbtTitle_tile1{
+    height: 300px;
+}
+
+.rsAbtSection {
+    margin-top: 3rem;
+}
+
+.rsHeading1{
+    color: rgb(23, 23, 94);
+}
+
+.rsTextSpace{
+    letter-spacing: 1px;
+}
+
+
+/* Pricing Section */
+.rsPricingSection {
+    height: 100vh;
+    background: #fffcd3;
+}
+
+/* Contact Section */
+.rsContact{
+    background: #5145c1;
+    height: 60vh;
+}
+
+.rsContact h2{
+    font-size: 80px;
+    letter-spacing: -2.8px;
+    line-height: 82px;
+    margin-bottom: 39px;
+    color: #D1D7F4;
+    padding-top: 5rem;
+}

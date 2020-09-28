@@ -12,7 +12,7 @@
 @media (min-width: 500px) {
     .Logo {
         box-sizing: border-box;
-        padding: 20px;
+        /* padding: 20px; */
     }
     
     .Logo img {

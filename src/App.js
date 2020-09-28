@@ -7,6 +7,8 @@ import asyncLoader from "./hoc/AsyncLoader/asyncLoader";
 import Header from "./components/UI/Header/Header"
 import './styles/global.module.css';
 
+import './styles/main.scss';
+
 const lazyLoadedAbout = asyncLoader(() => {
     return import("./containers/About/About");
 })
