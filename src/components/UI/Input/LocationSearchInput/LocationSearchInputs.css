@@ -1,6 +1,5 @@
 :root {
     --reach-combobox: 1;
-    width: calc(100% - 26px);
   }
 
   [data-reach-combobox-input] {

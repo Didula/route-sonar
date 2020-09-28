@@ -1,0 +1,34 @@
+.SideHeader {
+    height: 8vh;
+    /* width: 400px; */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #eee;
+}
+
+.SideHeader > :first-child {
+    padding: 0 !important;
+}
+
+.SideHeader > * img{
+    height: 28px !important;
+}
+
+.SideHeader > :last-child {
+    display: flex;
+    align-items: center;
+}
+.SideHeader > :last-child button{
+    margin-right: 12px;
+}
+
+.userProfile{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #dbf3f9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

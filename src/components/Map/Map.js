@@ -1,6 +1,8 @@
 import React, {useCallback, useEffect, useState} from "react";
+import {connect} from 'react-redux';
 import {DirectionsRenderer, DirectionsService, GoogleMap, Marker} from "@react-google-maps/api";
 import mapStyles from './map-styles'
+import * as actions from '../../store/actions/index'
 
 
 const mapsContainerStyle = {
@@ -13,40 +15,24 @@ const mapOptions = {
     disableDefaultUI: true,
     zoomControl: true
 }
-export default function Map(props) {
+const Map = (props) => {
 
     const [currentDirection, setCurrentDirection] = useState(null);
-    const [currentLocation, setCurrentLocation] = useState(null);
-    // Save the route information obtained by API call to DirectionsService here
 
-/*    useEffect(() => {
-        const geolocationOptions = {
-            enableHighAccuracy: true,
-            timeout: 1000 * 60, // 1 min (1000 ms * 60 sec * 1 minute = 60 000ms)
-            maximumAge: 1000 * 3600 * 24 // 24 hour
-        };
-        if (navigator && navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(
-                (position) => {
-                    const currentLocation = {lat: 0, lng: 0};
-                    currentLocation.lat = position.coords.latitude;
-                    currentLocation.lng = position.coords.longitude;
-                    setCurrentLocation(currentLocation)
-                },
-                () => {
-                    console.log("Geolocation fetching error")
-                },
-                geolocationOptions)
-        }
-    }, [])*/
+    useEffect(() => {
+        props.onFetchingCurrentUserLocation();
+    },[]);
 
     const directionsCallback = useCallback((googleResponse) => {
         if (googleResponse) {
+            console.log(googleResponse)
+            props.onSuccessFullOptimization(true);
             if (currentDirection) {
                 if (googleResponse.status === "OK" &&
                     googleResponse.routes[0].overview_polyline !==
                     currentDirection.routes[0].overview_polyline) {
                     console.log("since the route is changed to update the state");
+
                     setCurrentDirection(googleResponse);
                 } else {
                     console.log("same as last time do not update state for route");
@@ -60,7 +46,7 @@ export default function Map(props) {
                 }
             }
         }
-    },[]);
+    },[currentDirection]);
 
     let directionService = null
 
@@ -71,6 +57,15 @@ export default function Map(props) {
         />
     }
 
+    let markerElements = null
+     markerElements = props.markers.map(marker => {
+         let markerArray = [];
+         if (marker.coordinates.lat !== '' && marker.coordinates.lng !== '') {
+             markerArray.push(<Marker key={marker.placeId} position={marker.coordinates}/>)
+         }
+         return markerArray;
+     })
+
     return (
         <div>
             <GoogleMap
@@ -80,16 +75,29 @@ export default function Map(props) {
                 options={mapOptions}
                 onClick={(event) => {
                 }}>
-                {props.markers.map(marker => {
-                    let markerArray = [];
-                    if (marker.coordinates.lat !== '' && marker.coordinates.lng !== '') {
-                        markerArray.push(<Marker key={marker.placeId} position={marker.coordinates}/>)
-                    }
-                    return markerArray;
-                })}
+                {!props.isOptimized && markerElements}
                 {directionService}
                 {currentDirection !== null && (<DirectionsRenderer options={{directions: currentDirection}}/>)}
             </GoogleMap>
         </div>
     );
 }
+
+const mapStateToProps = (state) => {
+    return {
+        currentLocation: state.map.currentLocation,
+        startLocation: state.map.startLocation,
+        markers: state.map.markers,
+        directionServiceOptions: state.map.directionServiceOptions,
+        isOptimized: state.map.isOptimized
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onFetchingCurrentUserLocation: () => dispatch(actions.fetchStartPoint()),
+        onSuccessFullOptimization: (value) => dispatch(actions.setIsOptimized(value))
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Map);
