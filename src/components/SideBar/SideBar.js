@@ -6,7 +6,7 @@ import SideHeader from './SideHeader/SideHeader';
 import SideContent from './SideContent/SideContent';
 import SideFooter from './SideFooter/SideFooter';
 import SideRoutePoints from "./SideRoutePoints/SideRoutePoints";
-import Login from '../login/login';
+import Login from '../Login/login';
 
 const SideBar = (props) => {
 
