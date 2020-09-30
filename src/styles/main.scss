@@ -314,3 +314,35 @@ summary:after {
 .featured {
     background: #f0151f;
 }
+
+// animations
+/* defines the animation */
+@keyframes fadeInUp {
+    from { 
+      opacity: 0;
+      -webkit-transform: translate3d(0, 100%, 0);
+      transform: translate3d(0, 100%, 0);
+    }
+  
+    to {
+      opacity: 1;
+      -webkit-transform: none;
+      transform: none;
+    }
+  }
+  
+  .txtPara {
+    opacity: 0; 
+    animation: fadeInUp 1s ease-in-out 0s forwards;
+  
+    // then define the animation delay in each class
+    .first-ele {
+      animation-delay: 0.4s;
+    }
+    .second-ele {
+      animation-delay: 0.8s;
+    }
+    .third-ele {
+      animation-delay: 1s;
+    }
+   }

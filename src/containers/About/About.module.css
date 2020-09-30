@@ -39,6 +39,9 @@
 
 .rsAbtSection {
     margin-top: 3rem;
+    height: 90vh;
+    background: #331c7a;
+    color: #FFF;
 }
 
 .rsHeading1{
@@ -49,11 +52,27 @@
     letter-spacing: 1px;
 }
 
+.aboutTxt{
+    margin-top: 20vh;
+}
+.aboutTxt h1{
+    font-size: 60px;
+    font-weight: 600;
+    opacity: 0.88
+}
+.aboutTxt h4{
+    font-size: 28px;
+    opacity: 0.66;
+}
+.aboutTxtSmall{
+    opacity: 0.66;
+}
+
 
 /* Pricing Section */
 .rsPricingSection {
     height: 100vh;
-    background: #fffcd3;
+    background: #f2f0f4;
 }
 
 /* Contact Section */
@@ -69,4 +88,34 @@
     margin-bottom: 39px;
     color: #D1D7F4;
     padding-top: 5rem;
+}
+
+.rsContact h4{
+    color: #D1D7F4;
+    opacity: 0.54;
+    margin-bottom: 2rem;
+}
+
+.rsContact h3{
+    color: #D1D7F4;
+}
+.rsContact svg{
+    margin-right: 1rem;
+}
+
+.btnLg{
+    border-radius: 24px;
+    background: #ff625a;
+    border: 1px solid #ff625a;
+}
+.btnLg:hover{
+    background: #ff625a;
+}
+.btnLgOutline{
+    border-radius: 24px;
+    background: transparent;
+    border: 1px solid #ff625a;
+}
+.btnLgOutline:hover{
+    background: #ff625a;
 }

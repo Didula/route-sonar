@@ -23,21 +23,29 @@
     }
     
     .NavLink a {
+        height: 100%;
+        line-height: 40px;
         color: black;
         text-decoration: none;
         border-bottom: 4px solid transparent;
-        padding: 5px 10px;
+        padding: 5px 16px;
         box-sizing: border-box;
         display:block;
     }
     
     .NavLink a:hover {
-        font-family: 'Hind Madurai', sans-serif;
+        text-decoration: none;
     }
     
     .NavLink a:active,
     .NavLink a.active {
-        color: black;
-        border-bottom: 2px solid #b60000;
+        color: #FFF;
+        background:#b60000;
+
+    }
+
+    .NavLink a.active:hover{
+        color: #e97272;
+        text-decoration: none;
     }
 }

@@ -13,13 +13,13 @@ const lazyLoadedAbout = asyncLoader(() => {
     return import("./containers/About/About");
 })
 const lazyLoadedPricing = asyncLoader(() => {
-    return import("./containers/Pricing/Pricing");
+    return import("./containers/About/About");
 })
 const lazyLoadedFAQs = asyncLoader(() => {
-    return import("./containers/FAQs/FAQs");
+    return import("./containers/About/About");
 })
 const lazyLoadedContact = asyncLoader(() => {
-    return import("./containers/Contact/Contact");
+    return import("./containers/About/About");
 })
 
 
