@@ -2,6 +2,7 @@ import React, { useRef, useEffect } from "react";
 import classes from './About.module.css';
 import Button from 'react-bootstrap/Button';
 import { useLocation } from 'react-router-dom';
+import {AnimatedOnScroll} from "react-animated-css-onscroll";
 
 // General scroll to element function
 
@@ -24,10 +25,10 @@ const About = () => {
         window.scrollTo(0, ref.current.offsetTop);
     }
 
-    const pricingRef = useRef(null);
-    const faqRef = useRef(null);
-    const contactRef = useRef(null);
-    const aboutRef = useRef(null);
+    const pricingRef = useRef(null),
+        faqRef = useRef(null),
+        contactRef = useRef(null),
+        aboutRef = useRef(null);
     const executeScrollToPricing = () => scrollToRef(pricingRef);
     const executeScrollToFAQ = () => scrollToRef(faqRef);
     const executeScrollToContact = () => scrollToRef(contactRef);
@@ -61,6 +62,7 @@ const About = () => {
                 </div>
             </section>
             <section className={classes.rsPricingSection} ref={pricingRef}>
+            <AnimatedOnScroll animationIn="fadeInUp">
                 <div className="container">
                     <div className="row">
                         <div className="col-md-12 mt-5 mb-5">
@@ -156,8 +158,11 @@ const About = () => {
                         </div>
                     </div>
                 </div>
+                </AnimatedOnScroll>
+
             </section>
             <section ref={faqRef}>
+                <AnimatedOnScroll animationIn="fadeInUp">
                 <div className="container my-5">
                     <div className="mb-5">
                         <span className="text-secondary text-uppercase">Questions?</span>
@@ -293,9 +298,11 @@ const About = () => {
                         </div>
                     </div>
                 </div>
+                </AnimatedOnScroll>
             </section>
             <section className={classes.rsContact} ref={contactRef}>
-                <div className="container">
+                <AnimatedOnScroll animationIn="fadeInUp">
+                    <div className="container">
                     <div className="row">
                         <div className="col-7">
                             <h2>Start moving your <br /> business</h2>
@@ -312,6 +319,7 @@ const About = () => {
 
                     </div>
                 </div>
+                </AnimatedOnScroll>
             </section>
         </div>
     );
