@@ -15,14 +15,14 @@ const LIBRARIES = ["places"];
 const Home = (props) => {
 
     // Toggle Route Toast Component
-    const [showToast, setShowToast] = React.useState(false);
+    const [showToast, setShowToast] = React.useState(true);
     const onClick = () => setShowToast(true);
 
     //todo This component should be a container. will be moved in the future.
     const [toggleBoxes, setToggleBoxes] = useState(false);
 
     const {isLoaded, loadError} = useLoadScript({
-        googleMapsApiKey: '',
+        googleMapsApiKey: 'AIzaSyDgHbb7ppWaPN3CoPq6zEUjy7TGX0d3QpY',
         libraries: LIBRARIES
     });
     if (loadError) return "Error Loading error";

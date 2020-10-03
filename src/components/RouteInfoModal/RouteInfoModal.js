@@ -35,16 +35,18 @@ const RouteInfoModal = ({show, onHide}) => {
                         </ul>
                     </div>
                     <div className = {`col-6`}>
-                        <Form.Group controlId="exampleForm.ControlSelect1">
-                            <Form.Label>Select Driver</Form.Label>
-                            <Form.Control as="select">
-                            <option>Driver 1</option>
-                            <option>Driver 2</option>
-                            <option>Driver 3</option>
-                            <option>Driver 4</option>
-                            <option>Driver 5</option>
-                            </Form.Control>
-                        </Form.Group>
+                    <Form.Group controlId="frmDriverName">
+                        <Form.Label>Driver address</Form.Label>
+                        <Form.Control type="input" placeholder="Enter name" />
+                    </Form.Group>
+                    <Form.Group controlId="frmVehicleNo">
+                        <Form.Label>Vehicle No.</Form.Label>
+                        <Form.Control type="input" placeholder="Enter vehicle no." />
+                    </Form.Group>
+                    <Form.Group controlId="frmDriverVontact">
+                        <Form.Label>Driver Mobile No.</Form.Label>
+                        <Form.Control type="input" placeholder="Enter mobile no." />
+                    </Form.Group>
                     </div>
                 </div>
                 <Button size="lg" className="col-12 mt-4 rsSendBtn" variant="primary" type="submit">
