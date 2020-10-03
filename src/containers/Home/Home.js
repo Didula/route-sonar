@@ -7,17 +7,22 @@ import SideBar from "../../components/SideBar/SideBar";
 import Auxi from "../../hoc/Auxi";
 import Header from "../../components/UI/Header/Header";
 import Map from "../../components/Map/Map";
+import RouteToast from "../../components/RouteToast/RouteToast";
 import * as actions from "../../store/actions";
 
 const LIBRARIES = ["places"];
 
 const Home = (props) => {
 
+    // Toggle Route Toast Component
+    const [showToast, setShowToast] = React.useState(false);
+    const onClick = () => setShowToast(true);
+
     //todo This component should be a container. will be moved in the future.
     const [toggleBoxes, setToggleBoxes] = useState(false);
 
     const {isLoaded, loadError} = useLoadScript({
-        googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+        googleMapsApiKey: 'AIzaSyDgHbb7ppWaPN3CoPq6zEUjy7TGX0d3QpY',
         libraries: LIBRARIES
     });
     if (loadError) return "Error Loading error";
@@ -50,6 +55,7 @@ const Home = (props) => {
             { !toggleBoxes ? <Header/>: null }
             {inputComponent}
             <Map/>
+            { showToast ? <RouteToast /> : null }
         </Auxi>
     );
 }

@@ -1,0 +1,10 @@
+.parentToast{
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    min-width: 60vw;
+}
+
+.parentToast h6{
+    margin-bottom: 0;
+}

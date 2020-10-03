@@ -1,13 +1,11 @@
 .Btn {
-    height: 50px;
-    /* width:170px; */
+    height: 48px;
+    width:100%;
     border-radius: 5px;
-    font-family: 'Hind Madurai', sans-serif;
 }
 
 .Btn:hover {
     cursor: pointer;
-    font-family: 'Hind Madurai', sans-serif;
     border-width: 2px;
 }
 
