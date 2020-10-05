@@ -26,6 +26,13 @@ export const addBlankWayPoint = () => {
     }
 }
 
+export const addWayPoint = (wayPoint) => {
+    return {
+        type: actionTypes.ADD_WAY_POINT,
+        wayPoint: wayPoint
+    }
+}
+
 export const updateWayPoint = (wayPoint, index) => {
     return {
         type: actionTypes.UPDATE_WAY_POINT,

@@ -5,5 +5,10 @@ export {
     addBlankWayPoint,
     updateWayPoint,
     prepareDirectionServiceOptions,
-    setIsOptimized
+    setIsOptimized,
+    addWayPoint
 } from './mapActions'
+
+export {
+    fetchPlaceId
+} from './sideContentActions'

@@ -4,7 +4,6 @@ import usePlacesAutocomplete, {getGeocode, getLatLng} from "use-places-autocompl
 import {Combobox, ComboboxInput, ComboboxList, ComboboxOption, ComboboxPopover,} from "@reach/combobox";
 
 import locClasses from './LocationSearchInputs.css';
-// import classes from "*.module.scss";
 
 const PlacesAutocomplete = (props) => {
     const [lat, setLat] = useState(0);
