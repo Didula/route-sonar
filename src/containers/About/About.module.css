@@ -79,11 +79,11 @@
 .rsContact{
     background: #5145c1;
     height: 60vh;
+    z-index: 999;
 }
 
 .rsContact h2{
     font-size: 80px;
-    letter-spacing: -2.8px;
     line-height: 82px;
     margin-bottom: 39px;
     color: #D1D7F4;
@@ -101,6 +101,23 @@
 }
 .rsContact svg{
     margin-right: 1rem;
+}
+.rsContact img{
+    width: 30vw;
+    margin-top: 5rem;
+}
+
+.rsFooter{
+    height: 8vh;
+    background: #331c7a;
+    color: #FFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.rsFooter span{
+    opacity: 0.7;
 }
 
 .btnLg{

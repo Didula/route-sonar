@@ -3,6 +3,7 @@ import classes from './About.module.css';
 import Button from 'react-bootstrap/Button';
 import { useLocation } from 'react-router-dom';
 import {AnimatedOnScroll} from "react-animated-css-onscroll";
+import ContactImg from '../../assets/drive.svg';
 
 // General scroll to element function
 
@@ -313,14 +314,17 @@ const About = () => {
                                 </svg>hello@routesonar.com</h3>
                         </div>
                         <div className="col-5">
+                            <img src = {ContactImg} />
                         </div>
                     </div>
                     <div className="row">
-
                     </div>
                 </div>
                 </AnimatedOnScroll>
             </section>
+            <footer className = {classes.rsFooter}>
+                <span>2020 &copy; RouteSonar Inc.</span>
+            </footer>
         </div>
     );
 }
