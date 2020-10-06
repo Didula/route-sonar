@@ -15,7 +15,7 @@ const LIBRARIES = ["places"];
 const Home = (props) => {
 
     // Toggle Route Toast Component
-    const [showToast, setShowToast] = React.useState(false);
+    const [showToast, setShowToast] = React.useState(true);
     const onClick = () => setShowToast(true);
 
     //todo This component should be a container. will be moved in the future.
@@ -47,6 +47,8 @@ const Home = (props) => {
             onStartPointSelect={props.onSelectingStartPoint}
             onAddRoutePoint={props.onAddingBlankRoutePoint}
             onOptimizeRoutes={props.onOptimizeRoutes}
+            showToast={showToast}
+            setShowToast={setShowToast}
             markers={props.markers}/>
     }
 

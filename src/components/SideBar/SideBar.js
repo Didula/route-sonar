@@ -31,7 +31,10 @@ const SideBar = (props) => {
                 show={modalShow}
                 onHide={() => setModalShow(false)}
             />
-            <SideFooter onOptimize={props.onOptimizeRoutes}/>
+            <SideFooter 
+                onOptimize={props.onOptimizeRoutes}
+                showToast={props.showToast}
+                setShowToast={props.setShowToast}/>
         </div>
     );
 };
