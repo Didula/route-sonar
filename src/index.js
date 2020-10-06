@@ -14,6 +14,7 @@ import mapReducer from "./store/reducers/mapReducer";
 import sideContentReducer from "./store/reducers/sideContentReducer";
 
 import {watchMap} from "./store/sagas";
+import {watchSideContent} from "./store/sagas";
 import './assets/Mina-Regular.ttf';
 import './assets/Mina-Bold.ttf';
 import {BrowserRouter} from "react-router-dom";
@@ -33,8 +34,7 @@ const store = createStore(
 );
 
 sagaMiddleware.run(watchMap);
-
-
+sagaMiddleware.run(watchSideContent);
 
 ReactDOM.render(
     <React.StrictMode>
