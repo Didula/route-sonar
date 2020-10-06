@@ -46,6 +46,12 @@ const addBlankWayPoint = (state, action) => {
     return updateObject(state, {markers: updatedMarkers, isOptimized: false})
 }
 
+const addWayPoint = (state, action) => {
+    let updatedMarkers = [...state.markers];
+    updatedMarkers.push(action.wayPoint);
+    return updateObject(state, {markers: updatedMarkers, isOptimized: false})
+}
+
 const updateWayPoint = (state, action) => {
     let updatedMarkers = [...state.markers];
     updatedMarkers[action.index] = action.wayPoint;
@@ -104,6 +110,8 @@ const mapReducer = (state = initialState, action) => {
             return setStartPoint(state, action);
         case actionTypes.ADD_BLANK_WAY_POINT:
             return addBlankWayPoint(state, action);
+        case actionTypes.ADD_WAY_POINT:
+            return addWayPoint(state, action);
         case actionTypes.UPDATE_WAY_POINT:
             return updateWayPoint(state, action);
         case actionTypes.SET_CURRENT_USER_LOCATION:

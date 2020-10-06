@@ -1,8 +1,9 @@
 import React from 'react';
+import {Switch, Redirect, Route} from "react-router-dom";
+import {Helmet} from 'react-helmet';
 
 import Home from './containers/Home/Home';
 import Auxi from './hoc/Auxi';
-import {Switch, Redirect, Route} from "react-router-dom";
 import asyncLoader from "./hoc/AsyncLoader/asyncLoader";
 import Header from "./components/UI/Header/Header"
 import './styles/global.module.css';
@@ -22,6 +23,7 @@ const lazyLoadedContact = asyncLoader(() => {
     return import("./containers/About/About");
 })
 
+const TITLE = 'Route Sonar'
 
 function App() {
     let routes = (
@@ -37,6 +39,9 @@ function App() {
 
     return (
         <Auxi>
+            <Helmet>
+                <title>{ TITLE }</title>
+            </Helmet>
             <Header/>
             {routes}
         </Auxi>
