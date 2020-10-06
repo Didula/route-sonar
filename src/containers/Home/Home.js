@@ -22,7 +22,7 @@ const Home = (props) => {
     const [toggleBoxes, setToggleBoxes] = useState(false);
 
     const {isLoaded, loadError} = useLoadScript({
-        googleMapsApiKey: 'AIzaSyDgHbb7ppWaPN3CoPq6zEUjy7TGX0d3QpY',
+        googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
         libraries: LIBRARIES
     });
     if (loadError) return "Error Loading error";

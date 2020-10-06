@@ -1,9 +1,9 @@
 import * as actionTypes from '../actions/actionTypes'
 
-export const fetchPlaceId = (point) => {
+export const fetchPlaceId = (pointAsString) => {
     return {
         type: actionTypes.FETCH_PLACE_ID,
-        point: point
+        pointAsString: pointAsString
     }
 }
 

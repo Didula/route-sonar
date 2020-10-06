@@ -1,4 +1,5 @@
 import {call, put} from 'redux-saga/effects';
+import axios from 'axios';
 import * as actions from "../actions/index";
 
 const geolocationOptions = {
@@ -14,6 +15,16 @@ export function* fetchCurrentUserLocationSaga() {
             let currentLocation = {lat: location.coords.latitude, lng: location.coords.longitude};
             yield put(actions.setCurrentLocationPoint(currentLocation));
         }
+    } catch (error) {
+        const response = yield call(getUserLocationUsingIp);
+        let currentLocation = {lat: response.data.lat, lng: response.data.lon};
+        yield put(actions.setCurrentLocationPoint(currentLocation))
+    }
+}
+
+const getUserLocationUsingIp = () => {
+    try {
+        return axios.get('http://ip-api.com/json')
     } catch (error) {
         console.log(error);
     }

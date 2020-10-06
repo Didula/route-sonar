@@ -12,38 +12,6 @@ import * as actions from "../../../store/actions";
 let autoComplete;
 const latLngRegex = /^[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?),\s*[-+]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))(\.\d+)?)$/g
 
-function handleScriptLoad(updateQuery, autoCompleteRef) {
-    autoComplete = new window.google.maps.places.Autocomplete(
-        autoCompleteRef.current,
-        {componentRestrictions: {country: "lk"}}
-    );
-    autoComplete.setFields(["name", "address_components", "formatted_address", "place_id"]);
-    autoComplete.addListener("place_changed", () =>
-        handlePlaceSelect(updateQuery)
-    );
-}
-
-async function handlePlaceSelect(updateQuery) {
-    const addressObject = autoComplete.getPlace();
-    const query = addressObject.formatted_address;
-    if (!query) {
-        let matchResult = addressObject.name.match(latLngRegex);
-        if (matchResult && matchResult.length > 0) {
-            // POST call to get place_id
-            // Find a way to minimize cost by fetching only the place_id
-            // https://maps.googleapis.com/maps/api/geocode/json?latlng=6.985149,80.280068&key=AIzaSyB_OjxFPgR42bOlSCfJp_S6rEJTqoJMsfI
-            updateQuery(matchResult[0]);
-        } else {
-            // if location is not selected from suggestions, reset the input.
-            updateQuery('');
-        }
-    } else {
-        updateQuery(query);
-    }
-    // console.log(addressObject);
-}
-
-
 const SideContent = (props) => {
 
     const [query, setQuery] = useState("");
@@ -54,13 +22,43 @@ const SideContent = (props) => {
         setQuery(event.target.value);
     }
 
+    function handleScriptLoad(updateQuery, autoCompleteRef) {
+        autoComplete = new window.google.maps.places.Autocomplete(
+            autoCompleteRef.current,
+            {componentRestrictions: {country: "lk"}}
+        );
+        autoComplete.setFields(["name", "address_components", "formatted_address", "place_id"]);
+        autoComplete.addListener("place_changed", () =>
+            handlePlaceSelect(updateQuery)
+        );
+    }
+
+    async function handlePlaceSelect(updateQuery) {
+        const addressObject = autoComplete.getPlace();
+        const query = addressObject.formatted_address;
+        if (!query) {
+            let matchResult = addressObject.name.match(latLngRegex);
+            if (matchResult && matchResult.length > 0) {
+                // POST call to get place_id
+                // todo Find a way to minimize cost by fetching only the place_id
+                props.onLatitudeLongitudeEntry(matchResult[0])
+                updateQuery(matchResult[0]);
+            } else {
+                // if location is not selected from suggestions, reset the input.
+                updateQuery('');
+            }
+        } else {
+            updateQuery(query);
+        }
+    }
+
     const handleReferenceInput = (event) => {
         setReference(event.target.value);
     }
 
     const addPointHandler = (event) => {
         event.preventDefault();
-        console.log(query,reference);
+        console.log(query,reference,props.currentPlaceId);
     }
 
 
@@ -104,14 +102,16 @@ const SideContent = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-        markers: state.map.markers
+        markers: state.map.markers,
+        currentPlaceId: state.sideContent.placeId
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onAddingRoutePoint: (point) => dispatch(actions.addWayPoint(point))
+        onAddingRoutePoint: (point) => dispatch(actions.addWayPoint(point)),
+        onLatitudeLongitudeEntry: (pointAsString) => dispatch(actions.fetchPlaceId(pointAsString))
     }
 }
 
-export default connect(mapStateToProps)(SideContent);
+export default connect(mapStateToProps,mapDispatchToProps)(SideContent);

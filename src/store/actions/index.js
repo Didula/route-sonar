@@ -10,5 +10,6 @@ export {
 } from './mapActions'
 
 export {
-    fetchPlaceId
+    fetchPlaceId,
+    setPlaceId
 } from './sideContentActions'
