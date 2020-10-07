@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import classes from './SideRoutePoint.module.css'
 import LocInput from '../../UI/Input/LocInput/LocInput';
 import * as actions from "../../../store/actions";
+import Form from 'react-bootstrap/Form'
 
 const sideRoutePoints = (props) => (
     <div className={classes.SideRoutePoints}>
@@ -13,16 +14,24 @@ const sideRoutePoints = (props) => (
                     // Remove 1st element from rendering because it is the starting point.
                     if (i !== 0) {
                         locationInputArray.push((
-                            <LocInput
-                                className={classes}
-                                key={i}
-                                data-letter={point.id}
-                                value={point.address}
-                                onSelectPoint={(location) => {
-                                    props.onSelectingLocation(location, i)
-                                    }
-                                }
-                                text="Route point"/>
+                            <div className="row mx-0 form-inline" key={i}>
+                                <div className={"col-4 pl-0 pr-1"}>
+                                    {point.reference}
+                                </div>
+                                <div className={"col-8 pl-0 pr-1"}>
+                                    <LocInput
+                                        className={classes}
+                                        data-letter={point.id}
+                                        value={point.address}
+                                        onSelectPoint={(location) => {
+                                            props.onSelectingLocation(location, i)
+                                        }
+                                        }
+                                        text="Route point"/>
+                                </div>
+
+                            </div>
+
                         ))
                     }
                     return locationInputArray;

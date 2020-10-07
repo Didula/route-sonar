@@ -17,10 +17,7 @@ const Home = (props) => {
     // Toggle Route Toast Component
     const [showToast, setShowToast] = React.useState(false);
     const onClick = () => setShowToast(true);
-
-    //todo This component should be a container. will be moved in the future.
     const [toggleBoxes, setToggleBoxes] = useState(false);
-
     const {isLoaded, loadError} = useLoadScript({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
         libraries: LIBRARIES
