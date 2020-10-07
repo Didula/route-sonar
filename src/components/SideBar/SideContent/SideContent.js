@@ -15,11 +15,14 @@ const latLngRegex = /^[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?),\s*[-+]?(180(\.0+)?|((1[
 const SideContent = (props) => {
 
     const [query, setQuery] = useState("");
-    const [reference, setReference] = useState("")
     const autoCompleteRef = useRef(null);
 
     const handleLocationInput = (event) => {
         setQuery(event.target.value);
+    }
+
+    const handleReferenceInput = (event) => {
+        props.setCurrentReference(event.target.value);
     }
 
     function handleScriptLoad(updateQuery, autoCompleteRef) {
@@ -27,7 +30,7 @@ const SideContent = (props) => {
             autoCompleteRef.current,
             {componentRestrictions: {country: "lk"}}
         );
-        autoComplete.setFields(["name", "address_components", "formatted_address", "place_id"]);
+        autoComplete.setFields(["formatted_address", "place_id", "geometry"]);
         autoComplete.addListener("place_changed", () =>
             handlePlaceSelect(updateQuery)
         );
@@ -42,23 +45,43 @@ const SideContent = (props) => {
                 // POST call to get place_id
                 // todo Find a way to minimize cost by fetching only the place_id
                 props.onLatitudeLongitudeEntry(matchResult[0])
+                // try to separate latitude and longitude from DD string.
+                let degreeDecimalLatLng = matchResult[0].split(',');
+                let location = {
+                    lat: degreeDecimalLatLng[0],
+                    lng: degreeDecimalLatLng[1]
+                }
+                props.setCurrentWayPoint(location);
                 updateQuery(matchResult[0]);
             } else {
                 // if location is not selected from suggestions, reset the input.
                 updateQuery('');
             }
         } else {
+            // successful google suggestion selection.
+            updateSideContentStore(addressObject.place_id, addressObject.geometry.location.toJSON(), query);
             updateQuery(query);
         }
     }
 
-    const handleReferenceInput = (event) => {
-        setReference(event.target.value);
+    const updateSideContentStore = (placeId, location, address) => {
+        props.setCurrentPlaceId(placeId);
+        props.setCurrentWayPoint(location);
+        props.setCurrentAddress(address);
     }
 
     const addPointHandler = (event) => {
         event.preventDefault();
-        console.log(query,reference,props.currentPlaceId);
+        let wayPoint = {
+            placeId: props.currentPlaceId,
+            coordinates: props.currentWayPoint,
+            address: props.currentAddress,
+            reference: props.currentReference
+        }
+        props.onAddingRoutePoint(wayPoint)
+        props.resetForm();
+        // setting query also empty separately since it is not managed through the store. will be moved in the future.
+        setQuery('');
     }
 
 
@@ -74,14 +97,28 @@ const SideContent = (props) => {
                     <span>Enter next destination and reference point</span>
                     <div className="row mx-0 form-inline">
                         <Form.Group className="col-3 pl-0 pr-1" controlId="fromDestinationReference">
-                            <Form.Control onChange={handleReferenceInput} value={reference} type="input"
-                                          placeholder="Reference" className="col-12"/>
+                            <Form.Control
+                                onChange={handleReferenceInput}
+                                value={props.currentReference}
+                                type="input"
+                                placeholder="Reference"
+                                className="col-12"/>
                         </Form.Group>
                         <Form.Group className="col-8 pl-0 pr-1" controlId="formDestination">
-                            <Form.Control ref={autoCompleteRef} onChange={handleLocationInput} value={query}
-                                          type="input" placeholder="Enter destination" className="col-12"/>
+                            <Form.Control
+                                ref={autoCompleteRef}
+                                onChange={handleLocationInput}
+                                value={query}
+                                type="input"
+                                placeholder="Enter destination"
+                                className="col-12"/>
                         </Form.Group>
-                        <Button className="col-1 pl-0 pr-1" variant="danger" type="submit">+</Button>
+                        <Button
+                            className="col-1 pl-0 pr-1"
+                            variant="danger"
+                            type="submit"
+                            disabled={props.currentReference === '' || props.currentPlaceId === ''}
+                        >+</Button>
                     </div>
                     {props.markers.length === 2 && <Form.Text className="text-muted">
                         {props.markers.length - 1} location added.
@@ -103,15 +140,28 @@ const SideContent = (props) => {
 const mapStateToProps = (state) => {
     return {
         markers: state.map.markers,
-        currentPlaceId: state.sideContent.placeId
+        currentPlaceId: state.sideContent.placeId,
+        currentReference: state.sideContent.reference,
+        currentWayPoint: state.sideContent.wayPoint,
+        currentAddress: state.sideContent.address,
+        wayPointForm: state.sideContent.wayPointForm
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onAddingRoutePoint: (point) => dispatch(actions.addWayPoint(point)),
-        onLatitudeLongitudeEntry: (pointAsString) => dispatch(actions.fetchPlaceId(pointAsString))
+        onAddingRoutePoint: (point) => {
+            dispatch(actions.addWayPoint(point));
+            dispatch(actions.setCurrentLocationPoint(point.coordinates))
+        },
+        onLatitudeLongitudeEntry: (pointAsString) => dispatch(actions.fetchPlaceId(pointAsString)),
+        onFormSubmit: (payload) => dispatch(actions.wayPointFormSubmit(payload)),
+        setCurrentPlaceId: (placeId) => dispatch(actions.setPlaceId(placeId)),
+        setCurrentWayPoint: (point) => dispatch(actions.setWayPoint(point)),
+        setCurrentAddress: (address) => dispatch(actions.setAddress(address)),
+        setCurrentReference: (reference) => dispatch(actions.setReference(reference)),
+        resetForm: () => dispatch(actions.resetForm())
     }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(SideContent);
+export default connect(mapStateToProps, mapDispatchToProps)(SideContent);

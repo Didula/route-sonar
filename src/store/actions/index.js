@@ -11,5 +11,10 @@ export {
 
 export {
     fetchPlaceId,
-    setPlaceId
+    setPlaceId,
+    setWayPoint,
+    setReference,
+    setAddress,
+    wayPointFormSubmit,
+    resetForm
 } from './sideContentActions'

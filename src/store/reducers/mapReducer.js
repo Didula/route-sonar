@@ -38,7 +38,8 @@ const addBlankWayPoint = (state, action) => {
     let blankWayPoint = {
         placeId: '',
         coordinates: {lat: '', lng: ''},
-        address: ''
+        address: '',
+        reference:''
     }
     // todo : prevent adding blank way points if previous one is also blank
     let updatedMarkers = [...state.markers];
