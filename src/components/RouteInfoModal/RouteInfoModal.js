@@ -1,10 +1,13 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import {useSelector} from "react-redux";
 import classes from './RouteInfoModal.module.css';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
 const RouteInfoModal = ({ show, onHide }) => {
+
+    const locationArray = useSelector(state => state.map.markers);
 
     let [driverDetails, setDriverDetails] = React.useState({
         name: '',
@@ -26,7 +29,7 @@ const RouteInfoModal = ({ show, onHide }) => {
     }
 
     return (
-        <Modal className={classes.RouteInfoModal} show={show} onHide={onHide} size="md" aria-labelledby="contained-modal-title-vcenter" centered>
+        <Modal className={classes.RouteInfoModal} show={show} onHide={onHide} size="lg" aria-labelledby="contained-modal-title-vcenter" centered>
             <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter">
                     Send to Driver
@@ -37,21 +40,11 @@ const RouteInfoModal = ({ show, onHide }) => {
                     <div className={`row`}>
                         <div className={`col-6`}>
                             <ul>
-                                <li>
-                                    <span> Location 1 </span> - <span>Ref</span>
-                                </li>
-                                <li>
-                                    <span> Location 1 </span> - <span>Ref</span>
-                                </li>
-                                <li>
-                                    <span> Location 1 </span> - <span>Ref</span>
-                                </li>
-                                <li>
-                                    <span> Location 1 </span> - <span>Ref</span>
-                                </li>
-                                <li>
-                                    <span> Location 1 </span> - <span>Ref</span>
-                                </li>
+                                {locationArray.map((location, index) => 
+                                    <li key={index}>
+                                        <span> {location.address} </span> - <span>Ref</span>
+                                    </li>
+                                )}
                             </ul>
                         </div>
                         <div className={`col-6`}>

@@ -1,5 +1,5 @@
-import React, {useState} from "react";
-import {connect} from "react-redux";
+import React, {useState, useEffect} from "react";
+import {connect, useSelector} from "react-redux";
 import {useLoadScript} from "@react-google-maps/api";
 
 import FBox from "../../components/FloatingBox/FloatingBox";
@@ -13,6 +13,14 @@ import * as actions from "../../store/actions";
 const LIBRARIES = ["places"];
 
 const Home = (props) => {
+
+    const isOptimized = useSelector(state => state.map.isOptimized);
+
+    useEffect(() => {
+        if (isOptimized){
+            setShowToast(true);
+        }
+    });
 
     // Toggle Route Toast Component
     const [showToast, setShowToast] = React.useState(false);

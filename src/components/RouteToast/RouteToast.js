@@ -28,7 +28,7 @@ const RouteToast = () => {
                     </div>
                 </Toast.Body>
             </Toast>
-            <RouteInfoModal show={showRouteModal} onHide={() => setShowRouteModal(false)}/>
+            {showRouteModal ? <RouteInfoModal show={showRouteModal} onHide={() => setShowRouteModal(false)}/> : ''}
         </div>
     )
 }
