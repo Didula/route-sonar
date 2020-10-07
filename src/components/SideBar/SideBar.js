@@ -6,7 +6,7 @@ import SideHeader from './SideHeader/SideHeader';
 import SideContent from './SideContent/SideContent';
 import SideFooter from './SideFooter/SideFooter';
 import SideRoutePoints from "./SideRoutePoints/SideRoutePoints";
-import Login from '../../components/Login/login';
+import Login from '../../components/login/login';
 
 const SideBar = (props) => {
 
@@ -31,7 +31,10 @@ const SideBar = (props) => {
                 show={modalShow}
                 onHide={() => setModalShow(false)}
             />
-            <SideFooter onOptimize={props.onOptimizeRoutes}/>
+            <SideFooter 
+                onOptimize={props.onOptimizeRoutes}
+                showToast={props.showToast}
+                setShowToast={props.setShowToast}/>
         </div>
     );
 };

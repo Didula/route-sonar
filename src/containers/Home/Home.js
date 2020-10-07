@@ -47,6 +47,8 @@ const Home = (props) => {
             onStartPointSelect={props.onSelectingStartPoint}
             onAddRoutePoint={props.onAddingBlankRoutePoint}
             onOptimizeRoutes={props.onOptimizeRoutes}
+            showToast={showToast}
+            setShowToast={setShowToast}
             markers={props.markers}/>
     }
 
