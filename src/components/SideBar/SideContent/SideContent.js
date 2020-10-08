@@ -93,7 +93,6 @@ const SideContent = (props) => {
         <div>
             <div className={classes.inputForm}>
                 <Form className="py-2" onSubmit={addPointHandler}>
-
                     <span>Enter next destination and reference point</span>
                     <div className="row mx-0 form-inline">
                         <Form.Group className="col-3 pl-0 pr-1" controlId="fromDestinationReference">
@@ -101,7 +100,7 @@ const SideContent = (props) => {
                                 onChange={handleReferenceInput}
                                 value={props.currentReference}
                                 type="input"
-                                placeholder="Reference"
+                                placeholder="Ref"
                                 className="col-12"/>
                         </Form.Group>
                         <Form.Group className="col-8 pl-0 pr-1" controlId="formDestination">

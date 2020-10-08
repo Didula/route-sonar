@@ -1,5 +1,5 @@
 .SideContent {
-    height: 17vh;
+    height: auto;
     overflow-y: auto;
     padding-right: 10px;
     margin: 10px auto auto !important;
@@ -10,6 +10,6 @@
 }
 
 .inputForm > form{
-    height: 5vh;
+    height: auto;
     border-bottom: 1px solid #d4d4d4;
 }

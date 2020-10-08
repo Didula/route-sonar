@@ -19,3 +19,16 @@
     margin-right: 8px;
     opacity: 0.4;
 }
+
+.Close {
+    visibility: hidden;
+    cursor: pointer;
+}
+
+.Close:hover {
+    opacity: 1;
+}
+
+.LocInput:hover .Close {
+    visibility: visible;
+}

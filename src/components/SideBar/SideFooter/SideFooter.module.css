@@ -3,16 +3,11 @@
     display: flex;
     flex-flow: row;
     justify-content: space-between;
+    align-self: flex-end;
 }
 
-.SideFooter :first-child{
+.SideFooter > * {
     height: 50px;
-    width: 55%;
-    background-color: #b60000;
-}
-
-.SideFooter :last-child{
-    height: 50px;
-    width: 43%;
+    width: 48%;
     background-color: #b60000;
 }
