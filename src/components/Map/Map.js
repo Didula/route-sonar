@@ -1,6 +1,6 @@
 import React, {useCallback, useEffect, useState} from "react";
 import {connect} from 'react-redux';
-import {DirectionsRenderer, DirectionsService, GoogleMap, Marker} from "@react-google-maps/api";
+import {DirectionsRenderer, DirectionsService, GoogleMap, InfoWindow, Marker} from "@react-google-maps/api";
 import mapStyles from './map-styles'
 import * as actions from '../../store/actions/index'
 
@@ -17,11 +17,16 @@ const mapOptions = {
 }
 const Map = (props) => {
 
+    const [selectedMarker, setSelectedMarker] = useState({});
     const [currentDirection, setCurrentDirection] = useState(null);
 
     useEffect(() => {
         props.onFetchingCurrentUserLocation();
-    },[]);
+    }, []);
+
+    const onSelect = marker => {
+        setSelectedMarker(marker)
+    }
 
     const directionsCallback = useCallback((googleResponse) => {
         if (googleResponse) {
@@ -46,7 +51,7 @@ const Map = (props) => {
                 }
             }
         }
-    },[currentDirection]);
+    }, [currentDirection]);
 
     let directionService = null
 
@@ -57,14 +62,36 @@ const Map = (props) => {
         />
     }
 
-    let markerElements = null
-     markerElements = props.markers.map(marker => {
-         let markerArray = [];
-         if (marker.coordinates.lat !== '' && marker.coordinates.lng !== '') {
-             markerArray.push(<Marker key={marker.placeId} position={marker.coordinates}/>)
-         }
-         return markerArray;
-     })
+    let markerElements = null;
+    markerElements = props.markers.map(marker => {
+        let markerArray = [];
+        if (marker.coordinates.lat !== '' && marker.coordinates.lng !== '') {
+            markerArray.push(
+                <Marker
+                    key={marker.placeId}
+                    position={marker.coordinates}
+                    onClick={() => onSelect(marker)}
+                ><InfoWindow clickable={false}>
+                    <div>{marker.reference}</div>
+                </InfoWindow>
+                </Marker>)
+        }
+        return markerArray;
+    })
+
+    let infoWindowElements = null;
+    infoWindowElements = props.markers.map(marker => {
+        let windowArray = [];
+        if (marker.coordinates.lat !== '' && marker.coordinates.lng !== '') {
+            windowArray.push(
+                <InfoWindow
+                    key={marker.placeId}
+                    position={marker.coordinates}
+                > {marker.reference && (<p>{marker.reference}</p>)}
+                </InfoWindow>)
+        }
+        return windowArray;
+    });
 
     return (
         <div>
@@ -100,4 +127,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(Map);
+export default connect(mapStateToProps, mapDispatchToProps)(Map);
