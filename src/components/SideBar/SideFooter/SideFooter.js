@@ -1,8 +1,6 @@
 import React from "react";
 import {Button} from 'react-bootstrap';
 
-import RouteInfoModal from "../../RouteInfoModal/RouteInfoModal";
-
 import classes from "./SideFooter.module.css";
 import {connect} from "react-redux";
 
@@ -11,9 +9,10 @@ const sideFooter = (props) => (
             <Button disabled={props.isOptimized} variant="danger" onClick={props.onOptimize}>Optimize</Button>
             {/*<Btn disabled={props.isOptimized} clicked={props.onOptimize} btnType='Main'>OPTIMIZE</Btn>*/}
             {/*<Btn disabled={props.isOptimized} clicked={props.onOptimize} btnType='Main'>OPTIMIZE</Btn>*/}
-            <Button disabled={!props.isOptimized} variant="danger" onClick={props.modalDisplay}>Send</Button>
+            <Button disabled={!props.isOptimized} variant="danger" onClick={sendClickHandler}>Send</Button>
         </div>
-);
+        );
+
 
 const mapStateToProps = (state) => {
     return {
