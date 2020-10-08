@@ -1,0 +1,13 @@
+.RouteInfoModal button{
+    background: #b60000;
+    border: 1px solid #b60000;
+}
+
+.RouteInfoModal button:hover{
+    background: #b60000;
+    border: 1px solid #b60000;
+}
+
+.RouteInfoModal ul{
+    list-style-type: disc;
+}

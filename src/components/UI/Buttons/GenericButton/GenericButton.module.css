@@ -1,0 +1,32 @@
+.Btn {
+    height: 48px;
+    width:100%;
+    border-radius: 5px;
+}
+
+.Btn:hover {
+    cursor: pointer;
+    border-width: 2px;
+}
+
+.Btn:focus {
+    outline: none;
+}
+
+.Main {
+    background-color: #b60000;
+    color: white;
+    border: transparent;
+}
+
+.Main:hover {
+    background-color: #920000;
+}
+
+.Secondary {
+    background-color: transparent;
+    color: #b60000;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #b60000;
+}

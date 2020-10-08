@@ -1,0 +1,18 @@
+:global .btn-outline{
+    border: 1px solid #d4d4d4;
+    font-size: 14px;
+    background: transparent;
+    color: #353535;
+}
+
+:global .btn-outline svg{
+    margin-right: 12px;
+}
+
+:global .btn-fill{
+    font-size: 14px;
+    background: #d00000;
+    color: #FFF;
+    border: none;
+    height: 34px;
+}

@@ -1,0 +1,51 @@
+.NavLink {
+    width: 100%;
+    margin: 10px 0;
+    box-sizing: border-box;
+    display: block;
+}
+
+.NavLink a {
+    color: black;
+    text-decoration: none;
+    box-sizing: border-box;
+    display:block;
+}
+
+@media (min-width:500px) {
+    .NavLink {
+        height: 100%;
+        width: auto;
+        margin: 0;
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+    }
+    
+    .NavLink a {
+        height: 100%;
+        line-height: 40px;
+        color: black;
+        text-decoration: none;
+        border-bottom: 4px solid transparent;
+        padding: 5px 16px;
+        box-sizing: border-box;
+        display:block;
+    }
+    
+    .NavLink a:hover {
+        text-decoration: none;
+    }
+    
+    .NavLink a:active,
+    .NavLink a.active {
+        color: #FFF;
+        background:#b60000;
+
+    }
+
+    .NavLink a.active:hover{
+        color: #e97272;
+        text-decoration: none;
+    }
+}

@@ -1,0 +1,13 @@
+.SideBar {
+    position: fixed;
+    z-index: 150;
+    width: 25vw;
+    height: 100vh;
+    background-color: white;
+    float: left;
+    padding: 0px 18px;
+}
+
+.SideBar > *:not(:first-child) {
+    margin: 10px auto;
+}

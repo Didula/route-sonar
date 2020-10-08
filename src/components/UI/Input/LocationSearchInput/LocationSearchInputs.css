@@ -1,0 +1,63 @@
+:root {
+    --reach-combobox: 1;
+  }
+
+  [data-reach-combobox] {
+    width: 100%;
+  }
+
+  [data-reach-combobox-input] {
+    width: 100%;
+    height: 50px;
+    border-radius: 5px;
+    line-height: 50px;
+    color: black;
+    background-color:transparent;
+    border: transparent;
+    font-family: 'Hind Madurai', sans-serif;
+    font-size: 14px;
+    outline: none;
+  }
+  
+  [data-reach-combobox-popover] {
+    /* border: solid 1px #C7C7C7; */
+    background: rgba(255, 255, 255, 0.9);
+    font-size: 85%;
+    color: black;
+    font-family: 'Hind Madurai', sans-serif;
+    z-index: 250;
+  }
+  
+  [data-reach-combobox-list] {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+  }
+  
+  [data-reach-combobox-option] {
+    cursor: pointer;
+    margin: 0;
+    padding: 0.25rem 0.5rem;
+  }
+  
+  [data-reach-combobox-option][aria-selected="true"] {
+    background: hsl(211, 10%, 95%);
+  }
+  
+  [data-reach-combobox-option]:hover {
+    background: hsl(211, 10%, 92%);
+  }
+  
+  [data-reach-combobox-option][aria-selected="true"]:hover {
+    background: hsl(211, 10%, 90%);
+  }
+  
+  [data-suggested-value] {
+    font-weight: bold;
+  }
+
+  locInput{
+    width: calc(100% - 26px);
+  }
+  
