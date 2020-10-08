@@ -1,0 +1,12 @@
+.OVContainer {
+    padding: 0;
+    margin: 20px 0;
+}
+
+.OVTile {
+    width: 310px;
+}
+
+.OVTile {
+    display: flex;
+}

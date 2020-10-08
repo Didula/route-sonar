@@ -1,0 +1,13 @@
+.Headers {
+    background-color: rgb(0, 123, 255);
+    color: white;
+}
+
+.Box {
+    padding:0;
+    margin-right: 30px;
+}
+
+.Contents {
+    margin-top: 50px;
+}

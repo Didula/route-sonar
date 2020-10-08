@@ -1,0 +1,16 @@
+.Period {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.Period > * {
+    padding-right: 20px;
+}
+
+.Search {
+    width: 300px;
+}
+
+.Entry {
+    cursor: pointer;
+}
