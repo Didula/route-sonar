@@ -1,4 +1,18 @@
 .SideFooter {
+    height: 100px;
     display: flex;
-    justify-content: space-evenly;
+    flex-flow: row;
+    justify-content: space-between;
+}
+
+.SideFooter :first-child{
+    height: 50px;
+    width: 55%;
+    background-color: #b60000;
+}
+
+.SideFooter :last-child{
+    height: 50px;
+    width: 43%;
+    background-color: #b60000;
 }

@@ -1,15 +1,18 @@
 import React from "react";
+import {Button} from 'react-bootstrap';
+
+import RouteInfoModal from "../../RouteInfoModal/RouteInfoModal";
 
 import classes from "./SideFooter.module.css";
-import Btn from '../../UI/Buttons/GenericButton/GenericButton';
 import {connect} from "react-redux";
 
 const sideFooter = (props) => (
-    <div className={classes.SideFooter}>
-        {/* <Btn clicked={() => {
-        }} btnType='Secondary'>Upload Locations</Btn> */}
-        <Btn disabled={props.isOptimized} clicked={props.onOptimize} btnType='Main'>OPTIMIZE</Btn>
-    </div>
+        <div className={classes.SideFooter}>
+            <Button disabled={props.isOptimized} variant="danger" onClick={props.onOptimize}>Optimize</Button>
+            {/*<Btn disabled={props.isOptimized} clicked={props.onOptimize} btnType='Main'>OPTIMIZE</Btn>*/}
+            {/*<Btn disabled={props.isOptimized} clicked={props.onOptimize} btnType='Main'>OPTIMIZE</Btn>*/}
+            <Button disabled={!props.isOptimized} variant="danger" onClick={props.modalDisplay}>Send</Button>
+        </div>
 );
 
 const mapStateToProps = (state) => {

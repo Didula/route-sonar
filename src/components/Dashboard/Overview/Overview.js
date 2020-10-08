@@ -5,7 +5,6 @@ import {
     Container, Row, Col,
     DropdownButton, Dropdown, Card, CardGroup, Nav} from "react-bootstrap";
 
-
 import Recent from '../Recent/Recent';
 
 import classes from './Overview.module.css';

@@ -1,7 +1,7 @@
 .parentToast{
     position: absolute;
-    left: 50%;
-    bottom: 0;
+    left: 40%;
+    bottom: 10px;
     min-width: 60vw;
 }
 
