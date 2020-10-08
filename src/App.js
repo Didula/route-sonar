@@ -22,6 +22,9 @@ const lazyLoadedFAQs = asyncLoader(() => {
 const lazyLoadedContact = asyncLoader(() => {
     return import("./containers/About/About");
 })
+const lazyLoadedDashboard = asyncLoader(() => {
+    return import("./containers/Dashboard/Dashboard");
+})
 
 const TITLE = 'Route Sonar'
 
@@ -32,6 +35,7 @@ function App() {
             <Route path="/pricing" component={lazyLoadedPricing}/>
             <Route path="/faq" component={lazyLoadedFAQs}/>
             <Route path="/contact" component={lazyLoadedContact}/>
+            <Route path="/dashboard" component={lazyLoadedDashboard}/>
             <Route path="/" component={Home}/>
             <Redirect to={"/"}/>
         </Switch>
