@@ -79,20 +79,6 @@ const Map = (props) => {
         return markerArray;
     })
 
-    let infoWindowElements = null;
-    infoWindowElements = props.markers.map(marker => {
-        let windowArray = [];
-        if (marker.coordinates.lat !== '' && marker.coordinates.lng !== '') {
-            windowArray.push(
-                <InfoWindow
-                    key={marker.placeId}
-                    position={marker.coordinates}
-                > {marker.reference && (<p>{marker.reference}</p>)}
-                </InfoWindow>)
-        }
-        return windowArray;
-    });
-
     return (
         <div>
             <GoogleMap

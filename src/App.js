@@ -46,7 +46,6 @@ function App() {
             <Helmet>
                 <title>{ TITLE }</title>
             </Helmet>
-            <Header/>
             {routes}
         </Auxi>
     );

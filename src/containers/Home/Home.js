@@ -59,7 +59,7 @@ const Home = (props) => {
 
     return (
         <Auxi>
-            { !toggleBoxes ? <Header/>: null }
+            { !toggleBoxes && <Header/>}
             {inputComponent}
             <Map/>
             { showToast ? <RouteToast /> : null }
