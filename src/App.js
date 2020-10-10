@@ -9,6 +9,8 @@ import Header from "./components/UI/Header/Header"
 import './styles/global.module.css';
 
 import './styles/main.scss';
+import * as actions from "./store/actions";
+import {connect} from "react-redux";
 
 const lazyLoadedAbout = asyncLoader(() => {
     return import("./containers/About/About");
@@ -28,7 +30,7 @@ const lazyLoadedDashboard = asyncLoader(() => {
 
 const TITLE = 'Route Sonar'
 
-function App() {
+function App(props) {
     let routes = (
         <Switch>
             <Route path="/about" component={lazyLoadedAbout}/>
@@ -46,9 +48,16 @@ function App() {
             <Helmet>
                 <title>{ TITLE }</title>
             </Helmet>
+            { !props.isSidePanelOpen && <Header/>}
             {routes}
         </Auxi>
     );
 }
 
-export default App;
+const mapStateToProps = (state) => {
+    return {
+        isSidePanelOpen: state.home.isSidePanelOpen
+    }
+}
+
+export default connect(mapStateToProps, null)(App);

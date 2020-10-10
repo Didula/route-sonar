@@ -12,6 +12,7 @@ import * as serviceWorker from './serviceWorker';
 import authReducer from "./store/reducers/authReducer";
 import mapReducer from "./store/reducers/mapReducer";
 import sideContentReducer from "./store/reducers/sideContentReducer";
+import homeReducer from "./store/reducers/homeReducer";
 
 import {watchMap} from "./store/sagas";
 import {watchSideContent} from "./store/sagas";
@@ -22,7 +23,8 @@ import {BrowserRouter} from "react-router-dom";
 const rootReducer = combineReducers({
     map: mapReducer,
     auth: authReducer,
-    sideContent: sideContentReducer
+    sideContent: sideContentReducer,
+    home: homeReducer
 })
 const composeEnhancers = process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : compose;
 const sagaMiddleware = createSagaMiddleware();

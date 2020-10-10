@@ -18,3 +18,7 @@ export {
     wayPointFormSubmit,
     resetForm
 } from './sideContentActions'
+
+export {
+    setSidePanelOpen
+} from './homeActions'
