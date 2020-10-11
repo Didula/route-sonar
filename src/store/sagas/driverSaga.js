@@ -19,6 +19,7 @@ function getAPI(driverDetails) {
 function* sendDrivers(action) {
     try{
         const response = yield call(getAPI(action.payload));
+        console.log('response', response, response.status);
         yield put({
             type: 'SEND_DRIVER_DETAILS_SUCCESS',
             list: response

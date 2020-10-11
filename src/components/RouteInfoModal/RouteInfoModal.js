@@ -14,7 +14,7 @@ const RouteInfoModal = (props) => {
 
     // dispatching action
     const submitData = () => {
-        dispatch(sendDriverDetails(driverDetails));
+        
     }
 
     // form state
@@ -22,27 +22,26 @@ const RouteInfoModal = (props) => {
         name: '',
         vehicleNo: '',
         mobileNo: '',
-        errors: []
     });
-
-    const hasError = (key) => {
-        return driverDetails.errors.indexOf(key) !== -1;
-      }
 
     // On change form inputs
     const handleChange = e => {
-        
-            setDriverDetails({
-                ...driverDetails,
-                [e.target.name]: e.target.value
-              });
+        setDriverDetails({
+            ...driverDetails,
+            [e.target.name]: e.target.value
+        });
     };
 
     // On submit the form
-    const onSubmit = (event) => {
+    const handleSubmit = (event) => {
         event.preventDefault();
-        console.log('submitted', driverDetails);
-        return false;
+        const form = event.currentTarget;
+        if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+            return false;
+        }
+        dispatch(sendDriverDetails(driverDetails));
     }
 
     return (
@@ -53,7 +52,7 @@ const RouteInfoModal = (props) => {
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <form onSubmit={onSubmit}>
+                <form onSubmit={handleSubmit}>
                     <div className={`row`}>
                         <div className={`col-6`}>
                             <ul>
@@ -82,7 +81,7 @@ const RouteInfoModal = (props) => {
                             </Form.Group>
                         </div>
                     </div>
-                    <Button size="lg" className="col-12 mt-4 rsSendBtn" variant="primary" type="submit" disabled={!driverDetails} onClick = {submitData}>
+                    <Button size="lg" className="col-12 mt-4 rsSendBtn" variant="primary" type="submit" disabled={!driverDetails}>
                         SEND
                     </Button>
                 </form>

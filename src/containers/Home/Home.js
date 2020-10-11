@@ -37,12 +37,12 @@ const Home = (props) => {
     // todo this also has to be taken to state management
     const addLocationClickHandler = () => {
         if (props.startLocation) {
-            setToggleBoxes(!toggleBoxes);
+            props.onClickingAddLocations(!props.isSidePanelOpen);
         }
     }
 
     let inputComponent;
-    if (!toggleBoxes) {
+    if (!props.isSidePanelOpen) {
         inputComponent = <FBox
             onStartPointSelect={props.onSelectingStartPoint}
             onAddLocationClick={addLocationClickHandler}/>
@@ -59,7 +59,6 @@ const Home = (props) => {
 
     return (
         <Auxi>
-            { !toggleBoxes && <Header/>}
             {inputComponent}
             <Map/>
             { showToast ? <RouteToast /> : null }
@@ -69,6 +68,7 @@ const Home = (props) => {
 
 const mapStateToProps = (state) => {
     return {
+        isSidePanelOpen: state.home.isSidePanelOpen,
         startLocation: state.map.startLocation,
         markers: state.map.markers
     }
@@ -81,7 +81,8 @@ const mapDispatchToProps = (dispatch) => {
             dispatch (actions.setCurrentLocationPoint(startPoint.coordinates));
         },
         onAddingBlankRoutePoint: () => dispatch(actions.addBlankWayPoint()),
-        onOptimizeRoutes: () => dispatch(actions.prepareDirectionServiceOptions())
+        onOptimizeRoutes: () => dispatch(actions.prepareDirectionServiceOptions()),
+        onClickingAddLocations: (value) => dispatch(actions.setSidePanelOpen(value))
     }
 }
 

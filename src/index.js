@@ -13,6 +13,7 @@ import authReducer from "./store/reducers/authReducer";
 import mapReducer from "./store/reducers/mapReducer";
 import sideContentReducer from "./store/reducers/sideContentReducer";
 import driverReducer from "./store/reducers/driverReducer";
+import homeReducer from "./store/reducers/homeReducer";
 
 import {watchMap} from "./store/sagas";
 import {watchSideContent} from "./store/sagas";
@@ -25,8 +26,10 @@ const rootReducer = combineReducers({
     map: mapReducer,
     auth: authReducer,
     sideContent: sideContentReducer,
+    home: homeReducer,
     driver: driverReducer
-})
+});
+
 const composeEnhancers = process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : compose;
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(

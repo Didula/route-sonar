@@ -26,7 +26,7 @@ const Login = ({show, onHide}) => {
                             Submit
                         </Button>
                     </div>
-                    <hr/>
+                    {/*<hr/>
                     <div className="text-center">Don't want to complete the form?</div>
                     <hr/>
                     <div className="row">
@@ -53,7 +53,7 @@ const Login = ({show, onHide}) => {
                                                                           target="_blank" rel="noopener noreferrer">Create an account</a></div>
                     <div className="text-center ternary-txt">This site is protected by reCAPTCHA and the Google Privacy
                         Policy and Terms of Service apply.
-                    </div>
+                    </div>*/}
                 </Form>
             </Modal.Body>
         </Modal>

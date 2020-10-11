@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 
 import classes from "./SideBar.module.css";
 
@@ -7,17 +7,21 @@ import SideContent from './SideContent/SideContent';
 import SideFooter from './SideFooter/SideFooter';
 import SideRoutePoints from "./SideRoutePoints/SideRoutePoints";
 import Login from '../../components/login/login';
+import * as actions from "../../store/actions";
+import {connect} from "react-redux";
 
 const SideBar = (props) => {
 
-    const [modalShow, setModalShow] = React.useState(false);
+    useEffect(() => {
+        return () => {
+            // on component destroy.
+            props.setSidePanelOpen(false);
+        }
+    },[])
 
     return (
         <div className={classes.SideBar}>
-            <SideHeader 
-                modalShow = {modalShow}
-                setModalShow = {setModalShow}
-            />
+            <SideHeader/>
             <SideContent
                 selectedStartPoint={props.selectedStartPoint}
                 onStartPointSelect={props.onStartPointSelect}/>
@@ -28,8 +32,8 @@ const SideBar = (props) => {
                 onLocationSelect={props.onLocationSelect}
                 markers={props.markers}/>
             <Login
-                show={modalShow}
-                onHide={() => setModalShow(false)}
+                show={props.isLoginModalOpen}
+                onHide={() => props.setLoginModalOpen(false)}
             />
             <SideFooter
                 onOptimize={props.onOptimizeRoutes}
@@ -39,4 +43,17 @@ const SideBar = (props) => {
     );
 };
 
-export default SideBar;
+const mapStateToProps = (state) => {
+    return {
+        isLoginModalOpen: state.auth.isLoginModalOpen
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        setSidePanelOpen: (value) => dispatch(actions.setSidePanelOpen(value)),
+        setLoginModalOpen: (value) => dispatch(actions.setLoginModalOpen(value))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SideBar);
