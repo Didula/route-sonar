@@ -12,10 +12,12 @@ import * as serviceWorker from './serviceWorker';
 import authReducer from "./store/reducers/authReducer";
 import mapReducer from "./store/reducers/mapReducer";
 import sideContentReducer from "./store/reducers/sideContentReducer";
+import driverReducer from "./store/reducers/driverReducer";
 import homeReducer from "./store/reducers/homeReducer";
 
 import {watchMap} from "./store/sagas";
 import {watchSideContent} from "./store/sagas";
+import rootSaga from "./store/sagas";
 import './assets/Mina-Regular.ttf';
 import './assets/Mina-Bold.ttf';
 import {BrowserRouter} from "react-router-dom";
@@ -24,8 +26,10 @@ const rootReducer = combineReducers({
     map: mapReducer,
     auth: authReducer,
     sideContent: sideContentReducer,
-    home: homeReducer
-})
+    home: homeReducer,
+    driver: driverReducer
+});
+
 const composeEnhancers = process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : compose;
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(
@@ -37,6 +41,7 @@ const store = createStore(
 
 sagaMiddleware.run(watchMap);
 sagaMiddleware.run(watchSideContent);
+sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(
     <React.StrictMode>

@@ -1,46 +1,62 @@
-import React, {useEffect} from 'react';
-import {useSelector} from "react-redux";
+import React from 'react';
+import {useDispatch} from 'react-redux';
+import {sendDriverDetails} from '../../store/actions/driverActions';
 import classes from './RouteInfoModal.module.css';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import { connect } from 'react-redux';
+import * as actions from "../../store/actions";
 
-const RouteInfoModal = ({ show, onHide }) => {
+const RouteInfoModal = (props) => {
 
-    const locationArray = useSelector(state => state.map.markers);
+    const dispatch = useDispatch();
 
+    // dispatching action
+    const submitData = () => {
+        
+    }
+
+    // form state
     let [driverDetails, setDriverDetails] = React.useState({
         name: '',
         vehicleNo: '',
-        mobileNo: ''
+        mobileNo: '',
     });
 
+    // On change form inputs
     const handleChange = e => {
         setDriverDetails({
-          ...driverDetails,
-          [e.target.name]: e.target.value
+            ...driverDetails,
+            [e.target.name]: e.target.value
         });
-      };
+    };
 
-    const onSubmit = (event) => {
+    // On submit the form
+    const handleSubmit = (event) => {
         event.preventDefault();
-        console.log('submitted', driverDetails);
-        return false;
+        const form = event.currentTarget;
+        if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+            return false;
+        }
+        dispatch(sendDriverDetails(driverDetails));
     }
 
     return (
-        <Modal className={classes.RouteInfoModal} show={show} onHide={onHide} size="lg" aria-labelledby="contained-modal-title-vcenter" centered>
+        <Modal className={classes.RouteInfoModal} show={props.show} onHide={props.onHide} size="lg" aria-labelledby="contained-modal-title-vcenter" centered>
             <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter">
                     Send to Driver
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <form onSubmit={onSubmit}>
+                <form onSubmit={handleSubmit}>
                     <div className={`row`}>
                         <div className={`col-6`}>
                             <ul>
-                                {locationArray.map((location, index) => 
+                                {props.locationArray.map((location, index) => 
                                     <li key={index}>
                                         <span> {location.address} </span> - <span>Ref</span>
                                     </li>
@@ -49,16 +65,19 @@ const RouteInfoModal = ({ show, onHide }) => {
                         </div>
                         <div className={`col-6`}>
                             <Form.Group controlId="frmDriverName">
-                                <Form.Label>Driver address</Form.Label>
-                                <Form.Control type="input" placeholder="Enter name" name = "name" value={driverDetails.name} onChange={handleChange} />
+                                <Form.Label>Driver Name</Form.Label>
+                                <Form.Control required type="input" placeholder="Enter name" name = "name" value={driverDetails.name} onChange={handleChange} />
+                                <Form.Control.Feedback type="invalid">Please provide a valid name.</Form.Control.Feedback>
                             </Form.Group>
                             <Form.Group controlId="frmVehicleNo">
                                 <Form.Label>Vehicle No.</Form.Label>
-                                <Form.Control type="input" placeholder="Enter vehicle no." name = "vehicleNo" value={driverDetails.vehicleNo} onChange={handleChange} />
+                                <Form.Control required type="input" placeholder="Enter vehicle no." name = "vehicleNo" value={driverDetails.vehicleNo} onChange={handleChange} />
+                                <Form.Control.Feedback type="invalid">Please provide a valid vehicle no.</Form.Control.Feedback>
                             </Form.Group>
                             <Form.Group controlId="frmDriverVontact">
                                 <Form.Label>Driver Mobile No.</Form.Label>
-                                <Form.Control type="input" placeholder="Enter mobile no." name = "mobileNo" value={driverDetails.mobileNo} onChange={handleChange} />
+                                <Form.Control required type="number" placeholder="Enter mobile no." name = "mobileNo" value={driverDetails.mobileNo} onChange={handleChange} />
+                                <Form.Control.Feedback type="invalid">Please provide a valid contact no.</Form.Control.Feedback>
                             </Form.Group>
                         </div>
                     </div>
@@ -71,4 +90,16 @@ const RouteInfoModal = ({ show, onHide }) => {
     )
 }
 
-export default RouteInfoModal;
+const mapStateToProps = (state, ownProps) => {
+    return {
+        locationArray: ownProps.show ? state.map.markers : ''
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onClickingSendButton: () => dispatch(actions.addBlankWayPoint())
+    }
+}
+
+export default connect(mapStateToProps)(RouteInfoModal);
