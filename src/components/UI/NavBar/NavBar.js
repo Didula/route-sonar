@@ -8,7 +8,7 @@ const navBar = (props) => (
     <ul className={classes.NavBar}>
         <NavLink link="/about" active>About</NavLink>
         <NavLink link="/pricing">Pricing</NavLink>
-        <NavLink link="/faq">F&Q</NavLink>
+        <NavLink link="/faq">FAQ</NavLink>
         <NavLink link="/contact">Contact</NavLink>
         <Login link='/' />
     </ul>

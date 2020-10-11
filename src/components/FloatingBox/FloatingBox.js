@@ -1,4 +1,6 @@
 import React from 'react';
+import {Button} from 'react-bootstrap';
+import {Link} from 'react-router-dom';
 
 import classes from './FloatingBox.module.css';
 import locPin from '../../assets/pin_icon.png';
@@ -15,12 +17,18 @@ const fBox = (props) => (
             <img src={locPin} alt='+'/>
             <p>Route Details</p>
        </div>
-       <div>
-            <Btn clicked={props.onAddLocationClick} btnType='Main'>Add Locations</Btn>
-            <Btn clicked={() => {}} btnType='Secondary'>Upload Locations</Btn>
+       <div className='row'>
+           <div className='col-6 pr-0 mx-0'>
+               <Button onClick={props.onAddLocationClick} variant="danger" size="md">Add Locations</Button>
+           </div>
+           <div className='col-6 pl-0 mx-0'>
+               <Button disabled={true} clicked={() => {}} variant="outline-danger" size="md">Upload Locations</Button>
+           </div>
+           {/*<Button clicked={props.onAddLocationClick} variant={"danger"}>Add Locations</Button>
+           <Button disabled={true} clicked={() => {}} variant={"outline-danger"}>Upload Locations</Button>*/}
        </div>
        <div>
-           <p>Need any assistance? <a href='/'>Visit F&Q Section</a></p>
+           <p>Need any assistance? <Link to={'/FAQ'}>Visit FAQ Section</Link></p>
        </div>
    </div>
 );
