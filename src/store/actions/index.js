@@ -22,3 +22,7 @@ export {
 export {
     setSidePanelOpen
 } from './homeActions'
+
+export {
+    setLoginModalOpen
+} from './authActions'

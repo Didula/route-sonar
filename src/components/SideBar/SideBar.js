@@ -19,14 +19,9 @@ const SideBar = (props) => {
         }
     },[])
 
-    const [modalShow, setModalShow] = React.useState(false);
-
     return (
         <div className={classes.SideBar}>
-            <SideHeader 
-                modalShow = {modalShow}
-                setModalShow = {setModalShow}
-            />
+            <SideHeader/>
             <SideContent
                 selectedStartPoint={props.selectedStartPoint}
                 onStartPointSelect={props.onStartPointSelect}/>
@@ -37,8 +32,8 @@ const SideBar = (props) => {
                 onLocationSelect={props.onLocationSelect}
                 markers={props.markers}/>
             <Login
-                show={modalShow}
-                onHide={() => setModalShow(false)}
+                show={props.isLoginModalOpen}
+                onHide={() => props.setLoginModalOpen(false)}
             />
             <SideFooter
                 onOptimize={props.onOptimizeRoutes}
@@ -48,10 +43,17 @@ const SideBar = (props) => {
     );
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapStateToProps = (state) => {
     return {
-        setSidePanelOpen: (value) => dispatch(actions.setSidePanelOpen(value))
+        isLoginModalOpen: state.auth.isLoginModalOpen
     }
 }
 
-export default connect(null, mapDispatchToProps)(SideBar);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        setSidePanelOpen: (value) => dispatch(actions.setSidePanelOpen(value)),
+        setLoginModalOpen: (value) => dispatch(actions.setLoginModalOpen(value))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SideBar);
