@@ -5,6 +5,7 @@ import classes from './NavBar.module.css';
 import Login from '../Buttons/Login/Login';
 import * as actions from "../../../store/actions";
 import {connect} from "react-redux";
+import {Link} from "react-router-dom";
 
 const navBar = (props) => (
     <ul className={classes.NavBar}>
@@ -13,6 +14,7 @@ const navBar = (props) => (
         <NavLink link="/faq">FAQ</NavLink>
         <NavLink link="/contact">Contact</NavLink>
         {props.userId !== null && <NavLink link="/dashboard">Dashboard</NavLink>}
+        {props.userId !== null && <span>Logout</span>}
         {props.userId === null && <Login loginClick={() => props.setLoginModalOpen(true)}/>}
     </ul>
 );
