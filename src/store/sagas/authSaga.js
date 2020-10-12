@@ -1,0 +1,28 @@
+import {delay, put, call} from 'redux-saga/effects';
+import * as actions from "../actions/authActions"
+import axios from "axios";
+
+const LOG_IN_END_POINT = 'userLogin'
+
+export function* authUserSaga(action) {
+    yield put(actions.authStart());
+    const authData = {
+        user_name: action.email,
+        password: action.password
+    }
+    let url = process.env.REACT_APP_API_URL + LOG_IN_END_POINT;
+    try {
+        axios.defaults.headers.post['Content-Type'] ='application/json';
+        axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
+        const response = yield axios.post(url, authData);
+        console.log(response);
+        yield localStorage.setItem('userId', response.data.user_id)
+        yield localStorage.setItem('customerId', response.data.customer_id)
+        yield localStorage.setItem('userType', response.data.user_type)
+        yield put(actions.authSuccess(response.data.user_id, response.data.customer_id, response.data.user_type));
+    } catch (error) {
+        console.log(error);
+        if(error && error.response)
+        yield put(actions.authFail(error.response.error));
+    }
+}

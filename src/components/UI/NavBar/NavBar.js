@@ -12,13 +12,15 @@ const navBar = (props) => (
         <NavLink link="/pricing">Pricing</NavLink>
         <NavLink link="/faq">FAQ</NavLink>
         <NavLink link="/contact">Contact</NavLink>
-        <Login loginClick={() => props.setLoginModalOpen(true)}/>
+        {props.userId !== null && <NavLink link="/dashboard">Dashboard</NavLink>}
+        {props.userId === null && <Login loginClick={() => props.setLoginModalOpen(true)}/>}
     </ul>
 );
 
 const mapStateToProps = (state) => {
     return {
-        isLoginModalOpen: state.auth.isLoginModalOpen
+        isLoginModalOpen: state.auth.isLoginModalOpen,
+        userId: state.auth.userId
     }
 }
 

@@ -18,7 +18,15 @@ export const WAY_POINT_FROM_SUBMIT = 'WAY_POINT_FROM_SUBMIT';
 export const SET_SIDE_PANEL_OPEN = 'SET_SIDE_PANEL_OPEN';
 export const SET_LOGIN_MODAL_OPEN = 'SET_LOGIN_MODAL_OPEN';
 
-// driver action types
+// Driver action types
 export const SEND_DRIVER_DETAILS = 'SEND_DRIVER_DETAILS';
 export const SEND_DRIVER_DETAILS_SUCCESS = 'SEND_DRIVER_DETAILS_SUCCESS';
 export const SEND_DRIVER_DETAILS_FAILURE = 'SEND_DRIVER_DETAILS_SUCCESS';
+
+// Auth action types
+export const AUTH_USER = 'AUTH_USER';
+export const AUTH_START = 'AUTH_START';
+export const AUTH_SUCCESS = 'AUTH_SUCCESS';
+export const AUTH_FAIL = 'AUTH_FAIL';
+export const AUTH_LOGOUT = 'AUTH_LOGOUT';
+export const AUTH_INITIATE_LOGOUT = 'AUTH_INITIATE_LOGOUT';
