@@ -24,5 +24,7 @@ export {
 } from './homeActions'
 
 export {
-    setLoginModalOpen
+    setLoginModalOpen,
+    authStart,
+    authUser
 } from './authActions'

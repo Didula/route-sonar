@@ -1,9 +1,10 @@
 import * as actionTypes from '../actions/actionTypes'
 
-export const sendDriverDetails = (driverData) => {
+export const sendDriverDetails = (driverData, customerID) => {
     return {
         type: actionTypes.SEND_DRIVER_DETAILS,
-        payload: driverData
+        payload: driverData,
+        customerIDPayload: customerID
     }
 }
 

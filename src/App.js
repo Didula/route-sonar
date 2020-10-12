@@ -11,6 +11,7 @@ import './styles/global.module.css';
 import './styles/main.scss';
 import * as actions from "./store/actions";
 import {connect} from "react-redux";
+import Login from "./components/Login/login";
 
 const lazyLoadedAbout = asyncLoader(() => {
     return import("./containers/About/About");
@@ -50,14 +51,25 @@ function App(props) {
             </Helmet>
             { !props.isSidePanelOpen && <Header/>}
             {routes}
+            <Login
+                show={props.isLoginModalOpen}
+                onHide={() => props.setLoginModalOpen(false)}
+            />
         </Auxi>
     );
 }
 
 const mapStateToProps = (state) => {
     return {
-        isSidePanelOpen: state.home.isSidePanelOpen
+        isSidePanelOpen: state.home.isSidePanelOpen,
+        isLoginModalOpen: state.auth.isLoginModalOpen
     }
 }
 
-export default connect(mapStateToProps, null)(App);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        setLoginModalOpen: (value) => dispatch(actions.setLoginModalOpen(value))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

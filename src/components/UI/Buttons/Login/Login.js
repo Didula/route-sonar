@@ -3,16 +3,19 @@ import React from 'react';
 import classes from './Login.module.css';
 
 const login = (props) => (
-    <div className={classes.Login}>
-        <a href='/'>
-        <div className={classes.Icon}>
-            <div className={classes.Head}>
+    <div onClick={props.loginClick} className={classes.Login}>
+        {/*
+        todo @thish1991 remove <a> tags.
+*/}
+        <a>
+            <div className={classes.Icon}>
+                <div className={classes.Head}>
+                </div>
+                <div className={classes.Body}>
+                </div>
             </div>
-            <div className={classes.Body}>
-            </div>
-        </div>
         </a>
-        <a href='/'>Login</a>
+        <a>Login</a>
     </div>
 );
 

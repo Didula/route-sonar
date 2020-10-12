@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {sendDriverDetails, clearDriverState} from '../../store/actions/driverActions';
 import classes from './RouteInfoModal.module.css';
 import Modal from 'react-bootstrap/Modal';
@@ -11,6 +11,7 @@ import * as actions from "../../store/actions";
 const RouteInfoModal = (props) => {
 
     const dispatch = useDispatch();
+    const customerId = useSelector(state => state.auth.isOptimized);
 
     useEffect(() => {
         dispatch(clearDriverState());
@@ -51,7 +52,6 @@ const RouteInfoModal = (props) => {
         //vehicle no
         const exprVehicleNo = /[0-9a-zA-Z]{2,3}-[0-9]{4}/;
         var validVehicleNo = exprVehicleNo.test(String(driverDetails.vehicleNo).toLowerCase());
-        console.log('valid vehicle', validVehicleNo);
         if (!validVehicleNo) {
             errors.push("vehicleNo");
         }
@@ -71,7 +71,7 @@ const RouteInfoModal = (props) => {
             setSubmitBtnEnabled(true);
             return false;
         } else {
-            dispatch(sendDriverDetails(driverDetails));
+            dispatch(sendDriverDetails(driverDetails, customerId));
             props.onHide(true);
         }
 

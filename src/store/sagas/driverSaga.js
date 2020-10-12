@@ -2,9 +2,9 @@ import { call, put, takeEvery } from 'redux-saga/effects';
 
 const apiUrl = "http://18.138.23.29:5000/driverAdd";
 
-function getAPI(driverDetails) {
+function getAPI(driverDetails, customerID) {
     const reqBody = {
-        "customer_id": 75,
+        "customer_id": customerID,
         "name": driverDetails.name,
         "address": driverDetails.vehicleNo,
         "tele": driverDetails.mobileNo
@@ -22,15 +22,13 @@ function getAPI(driverDetails) {
         return response;
     })
     .catch((error) => {
-        console.log('ert', error)
         throw error
     })
 }
 
 function* sendDrivers(action) {
     try{
-        const response = yield call(getAPI, action.payload);
-        console.log('response', response.text());
+        const response = yield call(getAPI, action.payload, action.customerIDPayload);
         if (response === 'ERROR: this driver already exists'){
             throw Error;
         }
@@ -40,7 +38,6 @@ function* sendDrivers(action) {
         })
     }
     catch(e){
-        console.log('ohh', e);
         yield put({
             type: 'SEND_DRIVER_DETAILS_FAILURE',
             error: e.message
@@ -51,7 +48,3 @@ function* sendDrivers(action) {
 export function* driverSaga(){
     yield takeEvery('SEND_DRIVER_DETAILS', sendDrivers)
 }
-
-// export function* clearDriverStateSaga(){
-//     yield takeEvery('SEND_DRIVER_DETAILS', sendDrivers)
-// }

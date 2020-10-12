@@ -17,6 +17,7 @@ import homeReducer from "./store/reducers/homeReducer";
 
 import {watchMap} from "./store/sagas";
 import {watchSideContent} from "./store/sagas";
+import {watchAuth} from "./store/sagas";
 import rootSaga from "./store/sagas";
 import './assets/Mina-Regular.ttf';
 import './assets/Mina-Bold.ttf';
@@ -41,6 +42,7 @@ const store = createStore(
 
 sagaMiddleware.run(watchMap);
 sagaMiddleware.run(watchSideContent);
+sagaMiddleware.run(watchAuth);
 sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(
