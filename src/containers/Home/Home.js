@@ -8,6 +8,7 @@ import Auxi from "../../hoc/Auxi";
 import Header from "../../components/UI/Header/Header";
 import Map from "../../components/Map/Map";
 import RouteToast from "../../components/RouteToast/RouteToast";
+import Notification from "../../components/Notification/Notification";
 import * as actions from "../../store/actions";
 
 const LIBRARIES = ["places"];
@@ -15,12 +16,20 @@ const LIBRARIES = ["places"];
 const Home = (props) => {
 
     const isOptimized = useSelector(state => state.map.isOptimized);
+    const driverDetailsSent = useSelector(state => state.driver.list);
 
     useEffect(() => {
+        setShowNotification(false);
         if (isOptimized){
             setShowToast(true);
         }
+        if (driverDetailsSent === 200){
+            setShowNotification(true);
+        }
     });
+
+    // Show hide notification after interacting with driver details pop-up
+    let [showNotification, setShowNotification] = React.useState(false);
 
     // Toggle Route Toast Component
     const [showToast, setShowToast] = React.useState(false);
@@ -61,7 +70,8 @@ const Home = (props) => {
         <Auxi>
             {inputComponent}
             <Map/>
-            { showToast ? <RouteToast /> : null }
+            {/* { showToast ? <RouteToast /> : null } */}
+            { showNotification ? <Notification />: ''}
         </Auxi>
     );
 }
@@ -70,7 +80,8 @@ const mapStateToProps = (state) => {
     return {
         isSidePanelOpen: state.home.isSidePanelOpen,
         startLocation: state.map.startLocation,
-        markers: state.map.markers
+        markers: state.map.markers,
+        
     }
 }
 

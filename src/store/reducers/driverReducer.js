@@ -2,7 +2,7 @@ import * as type from "../actions/actionTypes";
 
 
 const initialState = {
-    list: [],
+    list: '',
     loading: false,
     error: null
 }
@@ -17,14 +17,21 @@ export default function users(state= initialState, action){
         case type.SEND_DRIVER_DETAILS_SUCCESS:
             return {
                 ...state,
-                loading: false,
-                list: action.list
+                list: action.response.status,
+                loading: false
             }
         case type.SEND_DRIVER_DETAILS_FAILURE:
             return {
                 ...state,
                 loading: false,
                 error: action.error
+            }
+        case type.CLEAR_DRIVER_STATE:
+            return {
+                ...state,
+                list: '',
+                loading: false,
+                error: null
             }
         default:
             return state

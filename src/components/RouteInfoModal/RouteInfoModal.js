@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {useDispatch} from 'react-redux';
-import {sendDriverDetails} from '../../store/actions/driverActions';
+import {sendDriverDetails, clearDriverState} from '../../store/actions/driverActions';
 import classes from './RouteInfoModal.module.css';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
@@ -12,17 +12,20 @@ const RouteInfoModal = (props) => {
 
     const dispatch = useDispatch();
 
-    // dispatching action
-    const submitData = () => {
-        
-    }
+    useEffect(() => {
+        dispatch(clearDriverState());
+    }, [])
 
     // form state
     let [driverDetails, setDriverDetails] = React.useState({
         name: '',
         vehicleNo: '',
         mobileNo: '',
+        errors: []
     });
+
+    // submit button state
+    let [submitBtnEnabled, setSubmitBtnEnabled] = React.useState(true);
 
     // On change form inputs
     const handleChange = e => {
@@ -34,14 +37,55 @@ const RouteInfoModal = (props) => {
 
     // On submit the form
     const handleSubmit = (event) => {
+        setSubmitBtnEnabled(false);
         event.preventDefault();
-        const form = event.currentTarget;
-        if (form.checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation();
-            return false;
+
+        //VALIDATE
+        var errors = [];
+
+        //firstname
+        if (driverDetails.name === "" || driverDetails.name === undefined) {
+            errors.push("name");
         }
-        dispatch(sendDriverDetails(driverDetails));
+
+        //vehicle no
+        const exprVehicleNo = /[0-9a-zA-Z]{2,3}-[0-9]{4}/;
+        var validVehicleNo = exprVehicleNo.test(String(driverDetails.vehicleNo).toLowerCase());
+        console.log('valid vehicle', validVehicleNo);
+        if (!validVehicleNo) {
+            errors.push("vehicleNo");
+        }
+
+        //mobile no
+        const exprMobileNo = /[0-9]{9}/;
+        var validMobileNo = exprMobileNo.test(String(driverDetails.mobileNo).toLowerCase());
+        if (!validMobileNo) {
+            errors.push("mobileNo");
+        }
+
+        setDriverDetails({
+            errors: errors
+        });
+
+        if (errors.length > 0) {
+            setSubmitBtnEnabled(true);
+            return false;
+        } else {
+            dispatch(sendDriverDetails(driverDetails));
+            props.onHide(true);
+        }
+
+        // const form = event.currentTarget;
+        // if (form.checkValidity() === false) {
+        //     event.preventDefault();
+        //     event.stopPropagation();
+        //     return false;
+        // }
+        
+    }
+
+    const hasError = (key) => {
+        return driverDetails.errors.indexOf(key) !== -1;
     }
 
     return (
@@ -55,6 +99,23 @@ const RouteInfoModal = (props) => {
                 <form onSubmit={handleSubmit}>
                     <div className={`row`}>
                         <div className={`col-6`}>
+                            <Form.Group controlId="frmDriverName">
+                                <Form.Label>Driver Name</Form.Label>
+                                <Form.Control type="input" placeholder="Enter name" name = "name" value={driverDetails.name} onChange={handleChange} />
+                                <Form.Control.Feedback className={ hasError("name") ? "inline-errormsg" : "hidden"} type="invalid">Please provide a valid name.</Form.Control.Feedback>
+                            </Form.Group>
+                            <Form.Group controlId="frmVehicleNo">
+                                <Form.Label>Vehicle No.</Form.Label>
+                                <Form.Control type="input" placeholder="Enter vehicle no." name = "vehicleNo" value={driverDetails.vehicleNo} onChange={handleChange} />
+                                <Form.Control.Feedback className={ hasError("vehicleNo") ? "inline-errormsg" : "hidden"} type="invalid">Please provide a valid vehicle no.</Form.Control.Feedback>
+                            </Form.Group>
+                            <Form.Group controlId="frmDriverVontact">
+                                <Form.Label>Driver Mobile No.</Form.Label>
+                                <Form.Control type="number" placeholder="Enter mobile no." name = "mobileNo" value={driverDetails.mobileNo} onChange={handleChange} />
+                                <Form.Control.Feedback className={ hasError("mobileNo") ? "inline-errormsg" : "hidden"} type="invalid">Please provide a valid contact no.</Form.Control.Feedback>
+                            </Form.Group>
+                        </div>
+                        <div className={`col-6`}>
                             <ul>
                                 {props.locationArray.map((location, index) => 
                                     <li key={index}>
@@ -63,25 +124,8 @@ const RouteInfoModal = (props) => {
                                 )}
                             </ul>
                         </div>
-                        <div className={`col-6`}>
-                            <Form.Group controlId="frmDriverName">
-                                <Form.Label>Driver Name</Form.Label>
-                                <Form.Control required type="input" placeholder="Enter name" name = "name" value={driverDetails.name} onChange={handleChange} />
-                                <Form.Control.Feedback type="invalid">Please provide a valid name.</Form.Control.Feedback>
-                            </Form.Group>
-                            <Form.Group controlId="frmVehicleNo">
-                                <Form.Label>Vehicle No.</Form.Label>
-                                <Form.Control required type="input" placeholder="Enter vehicle no." name = "vehicleNo" value={driverDetails.vehicleNo} onChange={handleChange} />
-                                <Form.Control.Feedback type="invalid">Please provide a valid vehicle no.</Form.Control.Feedback>
-                            </Form.Group>
-                            <Form.Group controlId="frmDriverVontact">
-                                <Form.Label>Driver Mobile No.</Form.Label>
-                                <Form.Control required type="number" placeholder="Enter mobile no." name = "mobileNo" value={driverDetails.mobileNo} onChange={handleChange} />
-                                <Form.Control.Feedback type="invalid">Please provide a valid contact no.</Form.Control.Feedback>
-                            </Form.Group>
-                        </div>
                     </div>
-                    <Button size="lg" className="col-12 mt-4 rsSendBtn" variant="primary" type="submit" disabled={!driverDetails}>
+                    <Button size="md" className="col-2 mt-4 rsSendBtn" variant="primary" type="submit" disabled={!submitBtnEnabled}>
                         SEND
                     </Button>
                 </form>
