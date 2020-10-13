@@ -12,6 +12,7 @@ import * as actions from "../../../store/actions";
 let autoComplete;
 const latLngRegex = /^[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?),\s*[-+]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))(\.\d+)?)$/g
 
+const FREE_LOCATIONS_NUMBER = 6;
 const SideContent = (props) => {
 
     const [query, setQuery] = useState("");
@@ -70,8 +71,7 @@ const SideContent = (props) => {
         props.setCurrentAddress(address);
     }
 
-    const addPointHandler = (event) => {
-        event.preventDefault();
+    function addPoint() {
         let wayPoint = {
             placeId: props.currentPlaceId,
             coordinates: props.currentWayPoint,
@@ -82,6 +82,17 @@ const SideContent = (props) => {
         props.resetForm();
         // setting query also empty separately since it is not managed through the store. will be moved in the future.
         setQuery('');
+    }
+
+    const addPointHandler = (event) => {
+        event.preventDefault();
+        if (props.markers.length <= FREE_LOCATIONS_NUMBER) {
+            addPoint();
+        } else if (props.markers.length > FREE_LOCATIONS_NUMBER && props.isAuthenticated) {
+            addPoint();
+        } else {
+            props.setLoginModalOpen(true);
+        }
     }
 
 
@@ -119,6 +130,7 @@ const SideContent = (props) => {
                             disabled={props.currentReference === '' || props.currentPlaceId === ''}
                         >+</Button>
                     </div>
+                    {(!props.isAuthenticated && props.markers.length > FREE_LOCATIONS_NUMBER) && <span>Please Log in to enter more locations</span>}
                     {props.markers.length === 2 && <Form.Text className="text-muted">
                         {props.markers.length - 1} location added.
                     </Form.Text>}
@@ -130,8 +142,8 @@ const SideContent = (props) => {
             <div className={classes.SideContent}>
                 <LocInput value={props.selectedStartPoint} onSelectPoint={props.onStartPointSelect}
                           text="Starting point"/>
-                <hr/>
             </div>
+            <hr/>
         </div>
     )
 };
@@ -143,7 +155,8 @@ const mapStateToProps = (state) => {
         currentReference: state.sideContent.reference,
         currentWayPoint: state.sideContent.wayPoint,
         currentAddress: state.sideContent.address,
-        wayPointForm: state.sideContent.wayPointForm
+        wayPointForm: state.sideContent.wayPointForm,
+        isAuthenticated: state.auth.userId !== null
     }
 }
 
@@ -159,7 +172,8 @@ const mapDispatchToProps = (dispatch) => {
         setCurrentWayPoint: (point) => dispatch(actions.setWayPoint(point)),
         setCurrentAddress: (address) => dispatch(actions.setAddress(address)),
         setCurrentReference: (reference) => dispatch(actions.setReference(reference)),
-        resetForm: () => dispatch(actions.resetForm())
+        resetForm: () => dispatch(actions.resetForm()),
+        setLoginModalOpen: (value) => dispatch(actions.setLoginModalOpen(value))
     }
 }
 
