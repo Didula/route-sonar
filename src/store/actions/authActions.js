@@ -37,6 +37,12 @@ export const authFail = (error) => {
     }
 }
 
+export const logoutSucceed = () => {
+    return {
+        type: actionTypes.AUTH_LOGOUT
+    };
+};
+
 export const logout = () => {
     return {
         type: actionTypes.AUTH_INITIATE_LOGOUT

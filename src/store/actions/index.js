@@ -26,5 +26,7 @@ export {
 export {
     setLoginModalOpen,
     authStart,
-    authUser
+    authUser,
+    logout,
+    logoutSucceed
 } from './authActions'

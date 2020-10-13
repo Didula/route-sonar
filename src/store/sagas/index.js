@@ -4,7 +4,7 @@ import * as actionTypes from '../actions/actionTypes'
 import {fetchCurrentUserLocationSaga} from "./mapSaga";
 import {fetchPlaceIdSaga} from "./sideContentSaga";
 import {driverSaga} from "./driverSaga";
-import {authUserSaga} from "./authSaga"
+import {authUserSaga, logoutSaga} from "./authSaga"
 
 export function* watchMap(){
     yield takeEvery(actionTypes.FETCH_CURRENT_USER_LOCATION, fetchCurrentUserLocationSaga);
@@ -16,6 +16,7 @@ export function* watchSideContent() {
 
 export function* watchAuth() {
     yield takeLatest(actionTypes.AUTH_USER, authUserSaga);
+    yield takeEvery(actionTypes.AUTH_INITIATE_LOGOUT, logoutSaga);
 }
 
 // export function* watchDriverSend() {

@@ -4,6 +4,13 @@ import axios from "axios";
 
 const LOG_IN_END_POINT = 'userLogin'
 
+export function* logoutSaga(action) {
+    yield call([localStorage,"removeItem"],"userId");
+    yield call([localStorage,"removeItem"],"customerId");
+    yield call([localStorage,"removeItem"],"userType");
+    yield put(actions.logoutSucceed());
+}
+
 export function* authUserSaga(action) {
     yield put(actions.authStart());
     const authData = {

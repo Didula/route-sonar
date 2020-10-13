@@ -13,22 +13,23 @@ const navBar = (props) => (
         <NavLink link="/pricing">Pricing</NavLink>
         <NavLink link="/faq">FAQ</NavLink>
         <NavLink link="/contact">Contact</NavLink>
-        {props.userId !== null && <NavLink link="/dashboard">Dashboard</NavLink>}
-        {props.userId !== null && <span>Logout</span>}
-        {props.userId === null && <Login loginClick={() => props.setLoginModalOpen(true)}/>}
+        {props.isAuthenticated && <NavLink link="/dashboard">Dashboard</NavLink>}
+        {props.isAuthenticated && <span onClick={() => props.onLogout()}>Logout</span>}
+        {!props.isAuthenticated && <Login loginClick={() => props.setLoginModalOpen(true)}/>}
     </ul>
 );
 
 const mapStateToProps = (state) => {
     return {
         isLoginModalOpen: state.auth.isLoginModalOpen,
-        userId: state.auth.userId
+        isAuthenticated: state.auth.userId !== null
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        setLoginModalOpen: (value) => dispatch(actions.setLoginModalOpen(value))
+        setLoginModalOpen: (value) => dispatch(actions.setLoginModalOpen(value)),
+        onLogout: () => dispatch(actions.logout())
     }
 }
 
