@@ -23,6 +23,7 @@ const Map = (props) => {
         props.onFetchingCurrentUserLocation();
     }, []);
 
+    // Dynamic view width setting for map when side panel opens up.
     useEffect(() => {
         if(props.isSidePanelOpen){
             const updatedMapContainerStyle = {

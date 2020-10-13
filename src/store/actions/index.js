@@ -6,7 +6,8 @@ export {
     updateWayPoint,
     prepareDirectionServiceOptions,
     setIsOptimized,
-    addWayPoint
+    addWayPoint,
+    resetMap
 } from './mapActions'
 
 export {

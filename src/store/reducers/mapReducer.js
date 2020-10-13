@@ -41,7 +41,7 @@ const addBlankWayPoint = (state, action) => {
         placeId: '',
         coordinates: {lat: '', lng: ''},
         address: '',
-        reference:''
+        reference: ''
     }
     // todo : prevent adding blank way points if previous one is also blank
     let updatedMarkers = [...state.markers];
@@ -106,6 +106,16 @@ const setIsOptimized = (state, action) => {
     return updateObject(state, {isOptimized: action.value})
 }
 
+const resetMap = (state) => {
+    return updateObject(state, {
+        markers: [],
+        currentLocation: null,
+        directionServiceOptions: null,
+        startLocation: null,
+        loading: false,
+        isOptimized: false
+    })
+}
 
 const mapReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -123,6 +133,8 @@ const mapReducer = (state = initialState, action) => {
             return setDirectionServiceOptions(state, action);
         case actionTypes.SET_IS_OPTIMIZED:
             return setIsOptimized(state, action);
+        case actionTypes.RESET_MAP:
+            return resetMap(state);
         default:
             return state;
     }

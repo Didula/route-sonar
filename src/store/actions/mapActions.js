@@ -61,3 +61,9 @@ export const removeWayPoint = (wayPoint) => {
         wayPoint: wayPoint
     }
 }
+
+export const resetMap = () => {
+    return {
+        type: actionTypes.RESET_MAP
+    }
+}
