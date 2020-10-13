@@ -1,10 +1,10 @@
 import * as actionTypes from '../actions/actionTypes'
 
-export const sendDriverDetails = (driverData) => {
-    console.log('action');
+export const sendDriverDetails = (driverData, customerID) => {
     return {
         type: actionTypes.SEND_DRIVER_DETAILS,
-        payload: driverData
+        payload: driverData,
+        customerIDPayload: customerID
     }
 }
 
@@ -19,5 +19,23 @@ export const sendDriverDetailsFailure = (driverData) => {
     return {
         type: actionTypes.SEND_DRIVER_DETAILS_FAILURE,
         payload: driverData
+    }
+}
+
+export const clearDriverState = () => {
+    return {
+        type: actionTypes.CLEAR_DRIVER_STATE,
+    }
+}
+
+export const clearDriverStateSuccess = (driverData) => {
+    return {
+        type: actionTypes.CLEAR_DRIVER_STATE_SUCCESS,
+    }
+}
+
+export const clearDriverStateFailure = (driverData) => {
+    return {
+        type: actionTypes.CLEAR_DRIVER_STATE_FAILURE,
     }
 }

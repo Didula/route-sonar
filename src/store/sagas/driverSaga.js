@@ -2,7 +2,13 @@ import { call, put, takeEvery } from 'redux-saga/effects';
 
 const apiUrl = "http://18.138.23.29:5000/driverAdd";
 
-function getAPI(driverDetails) {
+function getAPI(driverDetails, customerID) {
+    const reqBody = {
+        "customer_id": customerID,
+        "name": driverDetails.name,
+        "address": driverDetails.vehicleNo,
+        "tele": driverDetails.mobileNo
+    }
     return fetch(
         apiUrl,
         {
@@ -10,19 +16,25 @@ function getAPI(driverDetails) {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({"customer_id":999,"name":"driver17676767","address":"address1hghh","tele":"telehhjghjhj"})
+            body: JSON.stringify(reqBody)
         }
-    ).then(response => response.json())
-    .catch((error) => {throw error})
+    ).then(response => {
+        return response;
+    })
+    .catch((error) => {
+        throw error
+    })
 }
 
 function* sendDrivers(action) {
     try{
-        const response = yield call(getAPI(action.payload));
-        console.log('response', response, response.status);
+        const response = yield call(getAPI, action.payload, action.customerIDPayload);
+        if (response === 'ERROR: this driver already exists'){
+            throw Error;
+        }
         yield put({
             type: 'SEND_DRIVER_DETAILS_SUCCESS',
-            list: response
+            response: response
         })
     }
     catch(e){
