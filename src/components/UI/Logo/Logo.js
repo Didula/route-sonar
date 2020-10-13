@@ -1,12 +1,20 @@
 import React from 'react';
+import {withRouter} from 'react-router-dom';
 
 import rsLogo from '../../../assets/site-header-logo.png';
 import classes from './Logo.module.css';
 
-const logo = () => (
-    <div className={classes.Logo}>
-        <img src={rsLogo} alt="RouteSONAR" />
-    </div>
-);
+const logo = (props) => {
 
-export default logo;
+    const onClickTravelToHome = () => {
+        props.history.push('/');
+    }
+
+    return (
+        <div className={classes.Logo}>
+            <img onClick={onClickTravelToHome} src={rsLogo} alt="RouteSONAR"/>
+        </div>
+    )
+};
+
+export default withRouter(logo);

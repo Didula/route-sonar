@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 import {Container , Button, Badge} from 'react-bootstrap';
 
 import classes from './SidePanel.module.css';
@@ -9,12 +10,17 @@ import settings from '../../../assets/settings.png';
 import add from '../../../assets/add.png';
 import {Link} from "react-router-dom";
 
-const sidePanel = () => {
+const sidePanel = (props) => {
+
+    const onClickTravelToHome = () => {
+        props.history.push('/');
+    }
+
     return (
         <Container fluid>
-            <img src={logo} alt="RouteSONAR" className="img-fluid"/>
+            <img onClick={onClickTravelToHome} src={logo} alt="RouteSONAR" className="img-fluid"/>
             <ul className={classes.Nav}>
-                <li><Button className={classes.AddNew}><img src={add} alt="+"/>Optimize a Route</Button></li>
+                <li><Button onClick={onClickTravelToHome}  className={classes.AddNew}><img src={add} alt="+"/>Optimize a Route</Button></li>
                 <br/><hr/>
                 <li><Link to={'/dashboard'} style={{textDecoration:"none"}}>
                     <Button variant="link" className={classes.NavItem}>
@@ -42,4 +48,4 @@ const sidePanel = () => {
     )
 }
 
-export default sidePanel;
+export default withRouter(sidePanel);
