@@ -4,12 +4,6 @@ import {DirectionsRenderer, DirectionsService, GoogleMap, InfoWindow, Marker} fr
 import mapStyles from './map-styles'
 import * as actions from '../../store/actions/index'
 
-
-const mapsContainerStyle = {
-    width: '100vw',
-    height: '100vh',
-    float: 'right'
-}
 const mapOptions = {
     styles: mapStyles,
     disableDefaultUI: true,
@@ -19,10 +13,34 @@ const Map = (props) => {
 
     const [selectedMarker, setSelectedMarker] = useState({});
     const [currentDirection, setCurrentDirection] = useState(null);
+    const [mapsContainerStyle, setMapsContainerStyle] = useState({
+        width: '100vw',
+        height: '100vh',
+        float: 'right'
+    });
 
     useEffect(() => {
         props.onFetchingCurrentUserLocation();
     }, []);
+
+    useEffect(() => {
+        if(props.isSidePanelOpen){
+            const updatedMapContainerStyle = {
+                width: (100 - props.sidePanelWidthPercentage) +'vw',
+                height: '100vh',
+                float: 'right'
+            }
+            setMapsContainerStyle(updatedMapContainerStyle);
+        } else {
+            setMapsContainerStyle(
+                {
+                    width: '100vw',
+                    height: '100vh',
+                    float: 'right'
+                }
+            );
+        }
+    },[props.isSidePanelOpen])
 
     const onSelect = marker => {
         setSelectedMarker(marker)
@@ -102,7 +120,9 @@ const mapStateToProps = (state) => {
         startLocation: state.map.startLocation,
         markers: state.map.markers,
         directionServiceOptions: state.map.directionServiceOptions,
-        isOptimized: state.map.isOptimized
+        isOptimized: state.map.isOptimized,
+        sidePanelWidthPercentage: state.sideContent.sidePanelWidthPercentage,
+        isSidePanelOpen: state.home.isSidePanelOpen
     }
 }
 

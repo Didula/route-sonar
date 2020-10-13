@@ -19,7 +19,7 @@ const SideBar = (props) => {
     }, [])
 
     return (
-        <div className={classes.SideBar}>
+        <div className={classes.SideBar} style={{width: props.sidePanelWidthPercentage}}>
             <SideHeader/>
             <SideContent
                 selectedStartPoint={props.selectedStartPoint}
@@ -38,10 +38,16 @@ const SideBar = (props) => {
     );
 };
 
+const mapStateToProps = (state) => {
+    return {
+        sidePanelWidthPercentage: state.sideContent.sidePanelWidthPercentage + 'vw'
+    }
+}
+
 const mapDispatchToProps = (dispatch) => {
     return {
         setSidePanelOpen: (value) => dispatch(actions.setSidePanelOpen(value))
     }
 }
 
-export default connect(null, mapDispatchToProps)(SideBar);
+export default connect(mapStateToProps, mapDispatchToProps)(SideBar);

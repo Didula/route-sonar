@@ -18,7 +18,8 @@ const initialState = {
             reference: '',
             location: '',
         }
-    }
+    },
+    sidePanelWidthPercentage: 25
 }
 
 const setPlaceId = (state, action) => {
