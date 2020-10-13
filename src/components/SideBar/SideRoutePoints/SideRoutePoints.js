@@ -18,13 +18,14 @@ const sideRoutePoints = (props) => (
                                 <Row>
                                     <Col sm={3} style={{
                                         lineHeight: "50px", overflow: "hidden",
-                                        'white-space': 'nowrap'
+                                        whiteSpace: 'nowrap'
                                     }}>
                                         {point.reference}
                                     </Col>
                                     <Col sm={9}>
                                         <LocInput
                                             hoverClose
+                                            onClose={() => props.onDeletePoint(point)}
                                             data-letter={point.id}
                                             value={point.address}
                                             onSelectPoint={(location) => {
@@ -52,7 +53,8 @@ const mapDispatchToProps = (dispatch) => {
         onSelectingLocation: (point, index) => {
             dispatch(actions.updateWayPoint(point, index));
             dispatch(actions.setCurrentLocationPoint(point.coordinates));
-        }
+        },
+        onDeletePoint: (point) => dispatch(actions.removeWayPoint(point))
     }
 }
 

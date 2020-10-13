@@ -121,6 +121,15 @@ const resetMap = (state) => {
     })
 }
 
+const removeWayPoint = (state, action) => {
+    console.log(action.wayPoint);
+    const updatedWayPoints = state.markers.filter(marker => marker.placeId !== action.wayPoint.placeId);
+    return updateObject(state, {
+        isOptimized: false,
+        markers: updatedWayPoints
+    })
+}
+
 const mapReducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.SET_START_POINT:
@@ -137,6 +146,8 @@ const mapReducer = (state = initialState, action) => {
             return setDirectionServiceOptions(state, action);
         case actionTypes.SET_IS_OPTIMIZED:
             return setIsOptimized(state, action);
+        case actionTypes.REMOVE_WAY_POINT:
+            return removeWayPoint(state, action);
         case actionTypes.RESET_MAP:
             return resetMap(state);
         default:
