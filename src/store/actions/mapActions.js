@@ -48,7 +48,6 @@ export const prepareDirectionServiceOptions = () => {
 }
 
 export const setIsOptimized = (value) => {
-    console.log('setting is optimized', value)
     return {
         type: actionTypes.SET_IS_OPTIMIZED,
         value: value

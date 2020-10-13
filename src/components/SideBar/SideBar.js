@@ -12,6 +12,7 @@ import {connect} from "react-redux";
 const SideBar = (props) => {
 
     useEffect(() => {
+        props.setIsOptimized(false);
         return () => {
             // on component destroy.
             props.setSidePanelOpen(false);
@@ -46,7 +47,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        setSidePanelOpen: (value) => dispatch(actions.setSidePanelOpen(value))
+        setSidePanelOpen: (value) => dispatch(actions.setSidePanelOpen(value)),
+        setIsOptimized: (value) => dispatch(actions.setIsOptimized(value))
     }
 }
 

@@ -22,7 +22,7 @@ const SideFooter = (props) => {
 
     return (
         <div className={classes.SideFooter}>
-            <Button disabled={props.isOptimized} variant="danger" onClick={props.onOptimize}>Optimize</Button>
+            <Button disabled={props.isOptimized || props.markers.length <= 1} variant="danger" onClick={props.onOptimize}>Optimize</Button>
             <Button disabled={!props.isOptimized} variant="danger" onClick={openRouteInfoModal}>Send</Button>
             {showRouteModal ? <RouteInfoModal show={showRouteModal} onHide={() => setShowRouteModal(false)}/> : ''}
         </div>
@@ -31,6 +31,7 @@ const SideFooter = (props) => {
 
 const mapStateToProps = (state) => {
     return {
+        markers: state.map.markers,
         isOptimized: state.map.isOptimized
     }
 }

@@ -62,43 +62,47 @@ const updateWayPoint = (state, action) => {
 }
 
 const setDirectionServiceOptions = (state, action) => {
-    let wayPoints = [...state.markers];
-    let wayPointCoordinates = [];
-    let destination;
+    if (state.markers.length > 1) {
+        let wayPoints = [...state.markers];
+        let wayPointCoordinates = [];
+        let destination;
 
-    if (wayPoints.length > 2) {
-        wayPoints.splice(0, 1);
-        wayPoints.pop();
-    }
+        if (wayPoints.length > 2) {
+            wayPoints.splice(0, 1);
+            wayPoints.pop();
+        }
 
-    wayPoints.filter(point => point.coordinates.lat !== '' && point.coordinates.lng !== '').map(point => (wayPointCoordinates.push(
-        {
-            location: point.coordinates,
-            stopover: true
-        }))
-    )
-    if (state.markers.length < 2) {
-        // Only start point is enabled.
-        destination = null;
+        wayPoints.filter(point => point.coordinates.lat !== '' && point.coordinates.lng !== '').map(point => (wayPointCoordinates.push(
+            {
+                location: point.coordinates,
+                stopover: true
+            }))
+        )
+        if (state.markers.length < 2) {
+            // Only start point is enabled.
+            destination = null;
+        } else {
+            // Only start point and end point input fields are enabled.
+            // Check destination input field is filled.
+            let markersClone = [...state.markers];
+            let lastFilledField = markersClone.reverse().find(point => (point.coordinates.lat !== '' && point.coordinates.lng !== ''))
+            destination = lastFilledField.coordinates;
+        }
+
+        if (state.markers.length >= 2) {
+            // Always replace the old value.
+            return updateObject(state, {
+                directionServiceOptions: {
+                    origin: state.markers[0].coordinates,
+                    destination: destination,
+                    travelMode: "DRIVING",
+                    optimizeWaypoints: true,
+                    waypoints: wayPointCoordinates
+                }
+            });
+        }
     } else {
-        // Only start point and end point input fields are enabled.
-        // Check destination input field is filled.
-        let markersClone = [...state.markers];
-        let lastFilledField = markersClone.reverse().find(point => (point.coordinates.lat !== '' && point.coordinates.lng !== ''))
-        destination = lastFilledField.coordinates;
-    }
-
-    if (state.markers.length >= 2) {
-        // Always replace the old value.
-        return updateObject(state, {
-            directionServiceOptions: {
-                origin: state.markers[0].coordinates,
-                destination: destination,
-                travelMode: "DRIVING",
-                optimizeWaypoints: true,
-                waypoints: wayPointCoordinates
-            }
-        });
+        return state;
     }
 }
 
