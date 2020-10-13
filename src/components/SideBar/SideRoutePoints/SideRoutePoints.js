@@ -1,11 +1,10 @@
 import React from "react";
-import {Container, Row, Col} from 'react-bootstrap';
+import {Col, Container, Row} from 'react-bootstrap';
 import {connect} from 'react-redux';
 
-import classes from './SideRoutePoint.module.css'
+import classes from './SideRoutePoints.module.css'
 import LocInput from '../../UI/Input/LocInput/LocInput';
 import * as actions from "../../../store/actions";
-import Form from 'react-bootstrap/Form'
 
 const sideRoutePoints = (props) => (
     <div className={classes.SideRoutePoints}>
@@ -17,7 +16,12 @@ const sideRoutePoints = (props) => (
                         locationInputArray.push((
                             <Container fluid key={i}>
                                 <Row>
-                                    <Col sm={3} style={{lineHeight:"50px"}}>{point.reference}</Col>
+                                    <Col sm={3} style={{
+                                        lineHeight: "50px", overflow: "hidden",
+                                        'white-space': 'nowrap'
+                                    }}>
+                                        {point.reference}
+                                    </Col>
                                     <Col sm={9}>
                                         <LocInput
                                             hoverClose
