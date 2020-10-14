@@ -1,5 +1,5 @@
-import React  from 'react';
-import {Button, Tab, Modal, Row, Col, ListGroup} from 'react-bootstrap';
+import React from 'react';
+import {Button, Col, ListGroup, Modal, Row, Tab} from 'react-bootstrap';
 
 import modalMap from '../../../assets/modal-map.jpg';
 import classes from './TripModal.module.css';

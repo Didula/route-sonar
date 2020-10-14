@@ -1,5 +1,5 @@
 import React from "react";
-import { withRouter } from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
 
 import classes from "./SideHeader.module.css";
 import Logo from '../../UI/Logo/Logo';

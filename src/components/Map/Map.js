@@ -12,7 +12,6 @@ const mapOptions = {
 const Map = (props) => {
 
     const [selectedMarker, setSelectedMarker] = useState({});
-    const [currentDirection, setCurrentDirection] = useState(null);
     const [mapsContainerStyle, setMapsContainerStyle] = useState({
         width: '100vw',
         height: '100vh',

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Container, Row, Col, Card, InputGroup, FormControl, Button} from "react-bootstrap";
+import {Button, Card, Col, Container, FormControl, InputGroup, Row} from "react-bootstrap";
 import {Doughnut} from "react-chartjs-2";
 
 import classes from './Settings.module.css';

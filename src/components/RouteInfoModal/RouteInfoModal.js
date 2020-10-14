@@ -1,11 +1,10 @@
 import React, {useEffect} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
-import {sendDriverDetails, clearDriverState} from '../../store/actions/driverActions';
+import {connect, useDispatch, useSelector} from 'react-redux';
+import {clearDriverState, sendDriverDetails} from '../../store/actions/driverActions';
 import classes from './RouteInfoModal.module.css';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { connect } from 'react-redux';
 import * as actions from "../../store/actions";
 
 const RouteInfoModal = (props) => {

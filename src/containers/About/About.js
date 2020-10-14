@@ -1,7 +1,7 @@
-import React, { useRef, useEffect } from "react";
+import React, {useEffect, useRef} from "react";
 import classes from './About.module.css';
 import Button from 'react-bootstrap/Button';
-import { useLocation } from 'react-router-dom';
+import {useLocation} from 'react-router-dom';
 import {AnimatedOnScroll} from "react-animated-css-onscroll";
 import ContactImg from '../../assets/drive.svg';
 
@@ -310,7 +310,7 @@ const About = () => {
                             <h4>Request a free trial or inquire for a package that best suit your operations</h4>
                             <h3>
                                 <svg width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-envelope-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555zM0 4.697v7.104l5.803-3.558L0 4.697zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757zm3.436-.586L16 11.801V4.697l-5.803 3.546z" />
+                                    <path fillRule="evenodd" d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555zM0 4.697v7.104l5.803-3.558L0 4.697zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757zm3.436-.586L16 11.801V4.697l-5.803 3.546z" />
                                 </svg>hello@routesonar.com</h3>
                         </div>
                         <div className="col-5">

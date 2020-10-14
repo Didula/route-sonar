@@ -1,5 +1,5 @@
 import React from 'react';
-import {Popover, OverlayTrigger, ListGroup} from "react-bootstrap";
+import {ListGroup, OverlayTrigger, Popover} from "react-bootstrap";
 
 import propic from '../../../assets/propic.jpg';
 import classes from './AccIcon.module.css';

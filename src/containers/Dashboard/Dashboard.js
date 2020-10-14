@@ -1,6 +1,6 @@
 import React from 'react';
-import {Container , Row , Col } from 'react-bootstrap';
-import { Route, Switch } from 'react-router-dom';
+import {Col, Container, Row} from 'react-bootstrap';
+import {Route, Switch} from 'react-router-dom';
 
 import SidePanel from '../../components/Dashboard/SidePanel/SidePanel';
 import AccIcon from '../../components/Dashboard/AccIcon/AccIcon';

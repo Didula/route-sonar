@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Container, Card, Button} from 'react-bootstrap';
+import {Button, Card, Container} from 'react-bootstrap';
 
 import tileImage from '../../../assets/tile-sample.jpg';
 import classes from './RecentTile.module.css';

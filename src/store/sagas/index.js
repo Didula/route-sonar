@@ -1,4 +1,4 @@
-import {takeEvery,takeLatest, all} from 'redux-saga/effects';
+import {all, takeEvery, takeLatest} from 'redux-saga/effects';
 
 import * as actionTypes from '../actions/actionTypes'
 import {fetchCurrentUserLocationSaga} from "./mapSaga";

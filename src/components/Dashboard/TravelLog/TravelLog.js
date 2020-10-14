@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
-import {
-    Container, Row, Table, DropdownButton, Dropdown, Nav, InputGroup, FormControl, Button
-} from "react-bootstrap";
+import {Button, Container, Dropdown, DropdownButton, FormControl, InputGroup, Nav, Row, Table} from "react-bootstrap";
 
 import classes from './TravelLog.module.css';
 import TripModal from "../TripModal/TripModal";

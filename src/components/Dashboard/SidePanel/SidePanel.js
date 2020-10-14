@@ -1,6 +1,6 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
-import {Container , Button, Badge} from 'react-bootstrap';
+import {Link, withRouter} from 'react-router-dom';
+import {Badge, Button, Container} from 'react-bootstrap';
 
 import classes from './SidePanel.module.css';
 import logo from '../../../assets/70px-Logo.png';
@@ -8,7 +8,6 @@ import overview from '../../../assets/overview.png';
 import log from '../../../assets/log.png';
 import settings from '../../../assets/settings.png';
 import add from '../../../assets/add.png';
-import {Link} from "react-router-dom";
 
 const sidePanel = (props) => {
 

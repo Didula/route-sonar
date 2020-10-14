@@ -1,4 +1,4 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
+import {call, put, takeEvery} from 'redux-saga/effects';
 
 const apiUrl = "http://18.138.23.29:5000/driverAdd";
 

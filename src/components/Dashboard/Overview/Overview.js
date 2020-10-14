@@ -1,9 +1,7 @@
 import React from 'react';
 import {Bar} from 'react-chartjs-2';
 import CountUp from 'react-countup';
-import {
-    Container, Row, Col,
-    DropdownButton, Dropdown, Card, CardGroup, Nav} from "react-bootstrap";
+import {Card, CardGroup, Col, Container, Dropdown, DropdownButton, Nav, Row} from "react-bootstrap";
 
 import Recent from '../Recent/Recent';
 

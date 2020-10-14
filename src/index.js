@@ -15,10 +15,7 @@ import sideContentReducer from "./store/reducers/sideContentReducer";
 import driverReducer from "./store/reducers/driverReducer";
 import homeReducer from "./store/reducers/homeReducer";
 
-import {watchMap} from "./store/sagas";
-import {watchSideContent} from "./store/sagas";
-import {watchAuth} from "./store/sagas";
-import rootSaga from "./store/sagas";
+import rootSaga, {watchAuth, watchMap, watchSideContent} from "./store/sagas";
 import './assets/Mina-Regular.ttf';
 import './assets/Mina-Bold.ttf';
 import {BrowserRouter} from "react-router-dom";

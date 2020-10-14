@@ -1,5 +1,5 @@
 import React from 'react';
-import {Switch, Redirect, Route, withRouter} from "react-router-dom";
+import {Redirect, Route, Switch, withRouter} from "react-router-dom";
 import {Helmet} from 'react-helmet';
 
 import Home from './containers/Home/Home';
