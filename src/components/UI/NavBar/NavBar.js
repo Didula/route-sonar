@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
 
 import NavLink from '../NavLink/NavLink';
 import classes from './NavBar.module.css';
@@ -37,7 +37,10 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         setLoginModalOpen: (value) => dispatch(actions.setLoginModalOpen(value)),
-        onLogout: () => dispatch(actions.logout())
+        onLogout: () => {
+            dispatch(actions.logout());
+            dispatch(actions.resetMap());
+        }
     }
 }
 
