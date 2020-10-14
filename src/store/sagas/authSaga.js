@@ -22,14 +22,13 @@ export function* authUserSaga(action) {
         axios.defaults.headers.post['Content-Type'] = 'application/json';
         axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
         const response = yield axios.post(url, authData);
-        console.log(response);
         yield localStorage.setItem('userId', response.data.user_id)
         yield localStorage.setItem('customerId', response.data.customer_id)
         yield localStorage.setItem('userType', response.data.user_type)
         yield put(actions.authSuccess(response.data.user_id, response.data.customer_id, response.data.user_type));
     } catch (error) {
         console.log(error);
-        if (error && error.response)
-            yield put(actions.authFail(error.response.error));
+        if (error)
+            yield put(actions.authFail(error));
     }
 }

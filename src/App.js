@@ -1,5 +1,5 @@
 import React from 'react';
-import {Switch, Redirect, Route} from "react-router-dom";
+import {Switch, Redirect, Route, withRouter} from "react-router-dom";
 import {Helmet} from 'react-helmet';
 
 import Home from './containers/Home/Home';
@@ -72,4 +72,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

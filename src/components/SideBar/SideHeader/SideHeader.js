@@ -48,7 +48,6 @@ const sideHeader = (props) => {
 };
 
 
-
 const mapStateToProps = (state) => {
     return {
         isLoginModalOpen: state.auth.isLoginModalOpen,

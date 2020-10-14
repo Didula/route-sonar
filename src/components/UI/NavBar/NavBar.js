@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 
 import NavLink from '../NavLink/NavLink';
 import classes from './NavBar.module.css';
@@ -6,17 +7,25 @@ import Login from '../Buttons/Login/Login';
 import * as actions from "../../../store/actions";
 import {connect} from "react-redux";
 
-const navBar = (props) => (
-    <ul className={classes.NavBar}>
-        <NavLink link="/about" active>About</NavLink>
-        <NavLink link="/pricing">Pricing</NavLink>
-        <NavLink link="/faq">FAQ</NavLink>
-        <NavLink link="/contact">Contact</NavLink>
-        {props.isAuthenticated && <NavLink link="/dashboard">Dashboard</NavLink>}
-        {props.isAuthenticated && <span onClick={() => props.onLogout()}>Logout</span>}
-        {!props.isAuthenticated && <Login loginClick={() => props.setLoginModalOpen(true)}/>}
-    </ul>
-);
+const navBar = (props) => {
+
+    const handleLogout = () => {
+        props.onLogout();
+        props.history.replace('/')
+    }
+
+    return (
+        <ul className={classes.NavBar}>
+            <NavLink link="/about" active>About</NavLink>
+            <NavLink link="/pricing">Pricing</NavLink>
+            <NavLink link="/faq">FAQ</NavLink>
+            <NavLink link="/contact">Contact</NavLink>
+            {props.isAuthenticated && <NavLink link="/dashboard">Dashboard</NavLink>}
+            {props.isAuthenticated && <span onClick={handleLogout}>Logout</span>}
+            {!props.isAuthenticated && <Login loginClick={() => props.setLoginModalOpen(true)}/>}
+        </ul>
+    )
+};
 
 const mapStateToProps = (state) => {
     return {
@@ -32,4 +41,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(navBar);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(navBar));
