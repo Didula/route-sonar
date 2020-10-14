@@ -66,3 +66,10 @@ export const resetMap = () => {
         type: actionTypes.RESET_MAP
     }
 }
+
+export const setCurrentDirection = (direction) => {
+    return {
+        type: actionTypes.SET_CURRENT_DIRECTION,
+        direction: direction
+    }
+}

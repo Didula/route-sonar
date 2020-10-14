@@ -51,26 +51,26 @@ const Map = (props) => {
         if (googleResponse) {
             console.log(googleResponse)
             props.onSuccessFullOptimization(true);
-            if (currentDirection) {
+            if (props.currentDirection) {
                 if (googleResponse.status === "OK" &&
                     googleResponse.routes[0].overview_polyline !==
-                    currentDirection.routes[0].overview_polyline) {
+                    props.currentDirection.routes[0].overview_polyline) {
                     console.log("since the route is changed to update the state");
 
-                    setCurrentDirection(googleResponse);
+                    props.onDirectionCallBack(googleResponse);
                 } else {
                     console.log("same as last time do not update state for route");
                 }
             } else {
                 if (googleResponse.status === "OK") {
                     console.log("first time for a route is set, updates the state");
-                    setCurrentDirection(googleResponse);
+                    props.onDirectionCallBack(googleResponse);
                 } else {
                     console.log("not update the state for the same route as the previous");
                 }
             }
         }
-    }, [currentDirection]);
+    }, []);
 
     let directionService = null
 
@@ -109,7 +109,7 @@ const Map = (props) => {
                 }}>
                 {!props.isOptimized && markerElements}
                 {directionService}
-                {currentDirection !== null && (<DirectionsRenderer options={{directions: currentDirection}}/>)}
+                {props.currentDirection !== null && (<DirectionsRenderer options={{directions: props.currentDirection}}/>)}
             </GoogleMap>
         </div>
     );
@@ -123,14 +123,16 @@ const mapStateToProps = (state) => {
         directionServiceOptions: state.map.directionServiceOptions,
         isOptimized: state.map.isOptimized,
         sidePanelWidthPercentage: state.sideContent.sidePanelWidthPercentage,
-        isSidePanelOpen: state.home.isSidePanelOpen
+        isSidePanelOpen: state.home.isSidePanelOpen,
+        currentDirection: state.map.currentDirection
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
         onFetchingCurrentUserLocation: () => dispatch(actions.fetchStartPoint()),
-        onSuccessFullOptimization: (value) => dispatch(actions.setIsOptimized(value))
+        onSuccessFullOptimization: (value) => dispatch(actions.setIsOptimized(value)),
+        onDirectionCallBack: (direction) => dispatch(actions.setCurrentDirection(direction)),
     }
 }
 

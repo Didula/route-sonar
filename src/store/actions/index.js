@@ -8,7 +8,8 @@ export {
     setIsOptimized,
     addWayPoint,
     resetMap,
-    removeWayPoint
+    removeWayPoint,
+    setCurrentDirection
 } from './mapActions'
 
 export {
