@@ -9,7 +9,8 @@ export {
     addWayPoint,
     resetMap,
     removeWayPoint,
-    setCurrentDirection
+    setCurrentDirection,
+    prepareWayPointTraversalOrder
 } from './mapActions'
 
 export {

@@ -116,13 +116,15 @@ const RouteInfoModal = (props) => {
                             </Form.Group>
                         </div>
                         <div className={`col-6`}>
+                            <span>Start: {props.originPoint.address}</span>
                             <ul>
-                                {props.locationArray.map((location, index) => 
+                                {props.wayPointTraversalOrder.map((location, index) =>
                                     <li key={index}>
-                                        <span> {location.address} </span> - <span>Ref</span>
+                                        <span> {location.address} </span> - <span>{location.reference}</span>
                                     </li>
                                 )}
                             </ul>
+                            <span>End: {props.destinationPoint.address}</span>
                         </div>
                     </div>
                     <Button size="md" className="col-2 mt-4 rsSendBtn" variant="primary" type="submit" disabled={!submitBtnEnabled}>
@@ -136,7 +138,10 @@ const RouteInfoModal = (props) => {
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        locationArray: ownProps.show ? state.map.markers : ''
+        locationArray: ownProps.show ? state.map.markers : '',
+        wayPointTraversalOrder: state.map.wayPointTraversalOrder,
+        originPoint: state.map.startLocation,
+        destinationPoint: state.map.endLocation
     }
 }
 

@@ -73,3 +73,9 @@ export const setCurrentDirection = (direction) => {
         direction: direction
     }
 }
+
+export const prepareWayPointTraversalOrder = () => {
+    return {
+        type: actionTypes.PREPARE_WAYPOINT_TRAVERSAL_ORDER
+    }
+}

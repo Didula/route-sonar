@@ -30,7 +30,7 @@ const accIcon = () => {
     return (
             <div className={classes.Icon}>
                 <OverlayTrigger rootClose={true} trigger="click" placement="bottom" overlay={popover}>
-                    <img src={propic} alt="Profile Picture" />
+                    <img src={propic} alt="Profile" />
                 </OverlayTrigger>
             </div>
     )

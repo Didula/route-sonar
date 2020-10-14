@@ -5,7 +5,6 @@ import classes from './NavBar.module.css';
 import Login from '../Buttons/Login/Login';
 import * as actions from "../../../store/actions";
 import {connect} from "react-redux";
-import {Link} from "react-router-dom";
 
 const navBar = (props) => (
     <ul className={classes.NavBar}>

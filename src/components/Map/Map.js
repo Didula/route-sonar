@@ -49,24 +49,23 @@ const Map = (props) => {
 
     const directionsCallback = useCallback((googleResponse) => {
         if (googleResponse) {
-            console.log(googleResponse)
+            // console.log(googleResponse)
             props.onSuccessFullOptimization(true);
             if (props.currentDirection) {
                 if (googleResponse.status === "OK" &&
                     googleResponse.routes[0].overview_polyline !==
                     props.currentDirection.routes[0].overview_polyline) {
-                    console.log("since the route is changed to update the state");
-
+                    // console.log("since the route is changed to update the state");
                     props.onDirectionCallBack(googleResponse);
                 } else {
-                    console.log("same as last time do not update state for route");
+                    // console.log("same as last time do not update state for route");
                 }
             } else {
                 if (googleResponse.status === "OK") {
-                    console.log("first time for a route is set, updates the state");
+                    // console.log("first time for a route is set, updates the state");
                     props.onDirectionCallBack(googleResponse);
                 } else {
-                    console.log("not update the state for the same route as the previous");
+                    // console.log("not update the state for the same route as the previous");
                 }
             }
         }
@@ -132,7 +131,10 @@ const mapDispatchToProps = (dispatch) => {
     return {
         onFetchingCurrentUserLocation: () => dispatch(actions.fetchStartPoint()),
         onSuccessFullOptimization: (value) => dispatch(actions.setIsOptimized(value)),
-        onDirectionCallBack: (direction) => dispatch(actions.setCurrentDirection(direction)),
+        onDirectionCallBack: (direction) => {
+            dispatch(actions.setCurrentDirection(direction));
+            dispatch(actions.prepareWayPointTraversalOrder());
+        },
     }
 }
 

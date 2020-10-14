@@ -6,9 +6,11 @@ const initialState = {
     currentLocation: null,
     directionServiceOptions: null,
     startLocation: null,
+    endLocation: null,
     loading: false,
     isOptimized: false,
-    currentDirection: null
+    currentDirection: null,
+    wayPointTraversalOrder: []
 }
 
 
@@ -63,6 +65,7 @@ const updateWayPoint = (state, action) => {
 }
 
 const setDirectionServiceOptions = (state, action) => {
+    let endLocation;
     if (state.markers.length > 1) {
         let wayPoints = [...state.markers];
         let wayPointCoordinates = [];
@@ -87,6 +90,7 @@ const setDirectionServiceOptions = (state, action) => {
             // Check destination input field is filled.
             let markersClone = [...state.markers];
             let lastFilledField = markersClone.reverse().find(point => (point.coordinates.lat !== '' && point.coordinates.lng !== ''))
+            endLocation = lastFilledField;
             destination = lastFilledField.coordinates;
         }
 
@@ -99,7 +103,8 @@ const setDirectionServiceOptions = (state, action) => {
                     travelMode: "DRIVING",
                     optimizeWaypoints: true,
                     waypoints: wayPointCoordinates
-                }
+                },
+                endLocation: endLocation
             });
         }
     } else {
@@ -134,6 +139,23 @@ const removeWayPoint = (state, action) => {
     })
 }
 
+const setWayPointTraversalOrder = (state) => {
+    let shuffledWayPointOrder = [];
+    let updatedWayPointTraversalOrder = [];
+    if(state.currentDirection){
+        let wayPoints = [...state.markers];
+        // remove origin and destination.
+        wayPoints.splice(0,1);
+        wayPoints.pop();
+
+        shuffledWayPointOrder = state.currentDirection.routes[0].waypoint_order;
+        shuffledWayPointOrder.forEach(wayPointIndex => {
+            updatedWayPointTraversalOrder.push(wayPoints[wayPointIndex]);
+        })
+    }
+    return updateObject(state, {wayPointTraversalOrder : updatedWayPointTraversalOrder})
+}
+
 const mapReducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.SET_START_POINT:
@@ -156,6 +178,8 @@ const mapReducer = (state = initialState, action) => {
             return removeWayPoint(state, action);
         case actionTypes.RESET_MAP:
             return resetMap(state);
+        case actionTypes.PREPARE_WAYPOINT_TRAVERSAL_ORDER:
+            return setWayPointTraversalOrder(state);
         default:
             return state;
     }
