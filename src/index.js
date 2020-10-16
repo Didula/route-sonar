@@ -14,6 +14,8 @@ import mapReducer from "./store/reducers/mapReducer";
 import sideContentReducer from "./store/reducers/sideContentReducer";
 import driverReducer from "./store/reducers/driverReducer";
 import homeReducer from "./store/reducers/homeReducer";
+import dashboardSummaryReducer from "./store/reducers/dashboardSummaryReducer";
+import travelLogReducer from "./store/reducers/travelLogReducer";
 
 import rootSaga, {watchAuth, watchMap, watchSideContent} from "./store/sagas";
 import './assets/Mina-Regular.ttf';
@@ -25,7 +27,9 @@ const rootReducer = combineReducers({
     auth: authReducer,
     sideContent: sideContentReducer,
     home: homeReducer,
-    driver: driverReducer
+    driver: driverReducer,
+    dashboardSummary: dashboardSummaryReducer,
+    travelLog: travelLogReducer
 });
 
 const composeEnhancers = process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : compose;

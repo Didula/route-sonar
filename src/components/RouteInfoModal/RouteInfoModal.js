@@ -10,7 +10,7 @@ import * as actions from "../../store/actions";
 const RouteInfoModal = (props) => {
 
     const dispatch = useDispatch();
-    const customerId = useSelector(state => state.auth.isOptimized);
+    const customerId = useSelector(state => state.auth.customerId);
 
     useEffect(() => {
         dispatch(clearDriverState());
@@ -97,7 +97,7 @@ const RouteInfoModal = (props) => {
             <Modal.Body>
                 <form onSubmit={handleSubmit}>
                     <div className={`row`}>
-                        <div className={`col-6`}>
+                        <div className={`col-4`}>
                             <Form.Group controlId="frmDriverName">
                                 <Form.Label>Driver Name</Form.Label>
                                 <Form.Control type="input" placeholder="Enter name" name = "name" value={driverDetails.name} onChange={handleChange} />
@@ -114,7 +114,8 @@ const RouteInfoModal = (props) => {
                                 <Form.Control.Feedback className={ hasError("mobileNo") ? "inline-errormsg" : "hidden"} type="invalid">Please provide a valid contact no.</Form.Control.Feedback>
                             </Form.Group>
                         </div>
-                        <div className={`col-6`}>
+                        <div className={`col-1`}></div>
+                        <div className={`col-7`}>
                             <span>Start: {props.originPoint.address}</span>
                             <ul>
                                 {props.wayPointTraversalOrder.map((location, index) =>

@@ -1,13 +1,21 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import {connect, useDispatch, useSelector} from 'react-redux';
 import {Bar} from 'react-chartjs-2';
 import CountUp from 'react-countup';
 import {Card, CardGroup, Col, Container, Dropdown, DropdownButton, Nav, Row} from "react-bootstrap";
+import * as actions from "../../../store/actions";
 
 import Recent from '../Recent/Recent';
 
 import classes from './Overview.module.css';
 
-const overview = () => {
+const Overview = (props) => {
+
+    const customerId = useSelector(state => state.auth.customerId);
+
+    useEffect(() => {
+        props.dispatchGetDashboardSummart();
+    }, []);
 
     const data = {
         labels: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
@@ -77,7 +85,7 @@ const overview = () => {
                                 <Card.Title>Number of<br/>Locations</Card.Title>
                             </Card>
                             <Card bg='info' text='light'>
-                                <Card.Title><strong><CountUp end={2595}/></strong></Card.Title>
+                                <Card.Title><strong><CountUp end={Number(props.totalLocations)}/></strong></Card.Title>
                             </Card>
                         </CardGroup>
                     </Row>
@@ -87,7 +95,7 @@ const overview = () => {
                                 <Card.Title>Avg Locations<br/>per Route</Card.Title>
                             </Card>
                             <Card bg='info' text='light'>
-                                <Card.Title><strong><CountUp end={25}/></strong></Card.Title>
+                                <Card.Title><strong><CountUp end={Number(props.totalTrips)}/></strong></Card.Title>
                             </Card>
                         </CardGroup>
                     </Row>
@@ -110,4 +118,17 @@ const overview = () => {
     )
 }
 
-export default overview;
+const mapStateToProps = (state) => {
+    return {
+        totalLocations: state.dashboardSummary.totalLocations,
+        totalTrips: state.dashboardSummary.totalTrips,
+    }
+}
+
+const mapDispatchToProps = (dispatch, props) => {
+    return {
+        dispatchGetDashboardSummart: () => dispatch(actions.dashboardSummaryRequest(props.customerId))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Overview);

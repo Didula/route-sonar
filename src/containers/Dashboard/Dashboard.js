@@ -10,7 +10,8 @@ import Settings from '../../components/Dashboard/Settings/Settings';
 
 import classes from './Dashboard.module.css';
 
-const dashboard = () => {
+const Dashboard = () => {
+    
     return (
         <Container fluid>
             <Row>
@@ -29,4 +30,4 @@ const dashboard = () => {
 }
 
 
-export default dashboard;
+export default Dashboard;

@@ -5,6 +5,8 @@ import {fetchCurrentUserLocationSaga} from "./mapSaga";
 import {fetchPlaceIdSaga} from "./sideContentSaga";
 import {driverSaga} from "./driverSaga";
 import {authUserSaga, logoutSaga} from "./authSaga"
+import { dashboardSummarySaga } from './dashboardSummarySaga';
+import { travelLogSaga } from './travelLogSaga';
 
 export function* watchMap(){
     yield takeEvery(actionTypes.FETCH_CURRENT_USER_LOCATION, fetchCurrentUserLocationSaga);
@@ -25,6 +27,8 @@ export function* watchAuth() {
 
 export default function* rootSaga() {
     yield all([
-        driverSaga()
+        driverSaga(),
+        dashboardSummarySaga(),
+        travelLogSaga()
     ])
 }
