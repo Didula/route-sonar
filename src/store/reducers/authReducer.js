@@ -22,7 +22,7 @@ const authStart = (state, action) => {
 const authSuccess = (state, action) => {
     return updateObject(state, {
         userId: action.userId,
-        customerId: action.userId,
+        customerId: action.customerId,
         userType: action.userType,
         error: null,
         loading: false,

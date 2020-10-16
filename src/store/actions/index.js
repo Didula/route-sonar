@@ -47,3 +47,14 @@ export {
     travelLogSuccess,
     travelLogFailure
 } from './travelLogActions';
+
+export {
+    changePassword,
+    startChangePassword,
+    setChangePasswordSuccess,
+    setChangePasswordFail,
+    fetchAggregatedQuota,
+    startFetchingAggregatedQuota,
+    setAggregatedQuotaFetchSuccess,
+    setAggregatedQuotaFetchFail
+} from './dashBoardSettingsActions'
