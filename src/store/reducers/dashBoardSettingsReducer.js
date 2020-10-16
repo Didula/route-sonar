@@ -35,6 +35,31 @@ const setQuotaFetchingError = (state, action) => {
     )
 }
 
+const setChangePasswordLoading = (state) => {
+    return updateObject(state,
+        {
+            changePasswordLoading: true
+        }
+    )
+}
+
+const setChangePasswordSuccessStatus = (state) => {
+    return updateObject(state,
+        {
+            changePasswordLoading: false
+        }
+    )
+}
+
+const setChangePasswordErrorStatus = (state, action) => {
+    return updateObject(state,
+        {
+            changePasswordLoading: false,
+            changePasswordError: action.error
+        }
+    )
+}
+
 const dashBoardSettingsReducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.START_FETCHING_AGGREGATED_QUOTA:
@@ -43,6 +68,12 @@ const dashBoardSettingsReducer = (state = initialState, action) => {
             return setQuotaData(state, action)
         case actionTypes.AGGREGATED_QUOTA_FETCH_FAIL:
             return setQuotaFetchingError(state, action)
+        case actionTypes.START_CHANGE_PASSWORD:
+            return setChangePasswordLoading(state)
+        case actionTypes.CHANGE_PASSWORD_SUCCESS:
+            return setChangePasswordSuccessStatus(state, action)
+        case actionTypes.CHANGE_PASSWORD_FAIL:
+            return setChangePasswordErrorStatus(state, action)
         default:
             return state
     }

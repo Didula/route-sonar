@@ -30,10 +30,12 @@ export const setAggregatedQuotaFetchFail = (error) => {
     }
 }
 
-export const changePassword = (formData) => {
+export const changePassword = (userId,password,newPassword) => {
     return {
         type: actionTypes.CHANGE_PASSWORD,
-        data: formData
+        userId,
+        password,
+        newPassword
     }
 }
 

@@ -21,6 +21,7 @@ export function* authUserSaga(action) {
     try {
         axios.defaults.headers.post['Content-Type'] = 'application/json';
         const response = yield axios.post(url, authData);
+        yield localStorage.setItem('userName', authData.user_name)
         yield localStorage.setItem('userId', response.data.user_id)
         yield localStorage.setItem('customerId', response.data.customer_id)
         yield localStorage.setItem('userType', response.data.user_type)

@@ -32,7 +32,7 @@ const Settings = (props) => {
     };
 
     const onSubmit = (values) => {
-        console.log(values)
+        props.onChangePassword(props.userId, values.currentPassword, values.newPassword);
     }
 
     const onReset = () => {
@@ -97,8 +97,9 @@ const Settings = (props) => {
                                 <br/>
                                 <Button
                                     className="mr-2"
-                                    type="submit">
-                                    Change Password
+                                    type="submit"
+                                    disabled={props.changePasswordLoading}>
+                                    {props.changePasswordLoading ? 'Changing...' : 'Change Password'}
                                 </Button>
                                 <Button
                                     onClick={onReset}
@@ -126,13 +127,16 @@ const mapStateToProps = (state) => {
     return {
         usedQuota: state.dashboardSettings.usedQuota,
         remainingQuota: state.dashboardSettings.remainingQuota,
-        customerId: state.auth.customerId
+        customerId: state.auth.customerId,
+        userId: state.auth.userId,
+        changePasswordLoading: state.dashboardSettings.changePasswordLoading
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onFetchingQuotaUsage: (customerId) => dispatch(actions.fetchAggregatedQuota(customerId))
+        onFetchingQuotaUsage: (customerId) => dispatch(actions.fetchAggregatedQuota(customerId)),
+        onChangePassword: (userId, password, newPassword) => dispatch(actions.changePassword(userId, password, newPassword))
     }
 }
 
