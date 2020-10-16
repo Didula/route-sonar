@@ -24,7 +24,7 @@ const Dashboard = () => {
                     </Switch>
                 </Col>
             </Row>
-            <AccIcon/>
+           {/* <AccIcon/>*/}
         </Container>
     )
 }
