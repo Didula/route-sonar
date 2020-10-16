@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Redirect, Route, Switch, withRouter} from "react-router-dom";
 import {Helmet} from 'react-helmet';
 
@@ -32,24 +32,40 @@ const lazyLoadedDashboard = asyncLoader(() => {
 const TITLE = 'Route Sonar'
 
 function App(props) {
+
+    useEffect(() => {
+
+    }, []);
+
     let routes = (
         <Switch>
             <Route path="/about" component={lazyLoadedAbout}/>
             <Route path="/pricing" component={lazyLoadedPricing}/>
             <Route path="/faq" component={lazyLoadedFAQs}/>
             <Route path="/contact" component={lazyLoadedContact}/>
-            <Route path="/dashboard" component={lazyLoadedDashboard}/>
             <Route path="/" component={Home}/>
             <Redirect to={"/"}/>
         </Switch>
     );
+    if (props.isAuthenticated) {
+        routes = (
+            <Switch>
+                <Route path="/about" component={lazyLoadedAbout}/>
+                <Route path="/pricing" component={lazyLoadedPricing}/>
+                <Route path="/faq" component={lazyLoadedFAQs}/>
+                <Route path="/contact" component={lazyLoadedContact}/>
+                <Route path="/dashboard" component={lazyLoadedDashboard}/>
+                <Route path="/" component={Home}/>
+                <Redirect to={"/"}/>
+            </Switch>)
+    }
 
     return (
         <Auxi>
             <Helmet>
-                <title>{ TITLE }</title>
+                <title>{TITLE}</title>
             </Helmet>
-            { !props.isSidePanelOpen && <Header/>}
+            {!props.isSidePanelOpen && <Header/>}
             {routes}
             <Login
                 show={props.isLoginModalOpen}
@@ -62,7 +78,8 @@ function App(props) {
 const mapStateToProps = (state) => {
     return {
         isSidePanelOpen: state.home.isSidePanelOpen,
-        isLoginModalOpen: state.auth.isLoginModalOpen
+        isLoginModalOpen: state.auth.isLoginModalOpen,
+        isAuthenticated: state.auth.userId !== null
     }
 }
 

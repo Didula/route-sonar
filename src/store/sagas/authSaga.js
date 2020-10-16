@@ -20,7 +20,6 @@ export function* authUserSaga(action) {
     let url = process.env.REACT_APP_API_URL + LOG_IN_END_POINT;
     try {
         axios.defaults.headers.post['Content-Type'] = 'application/json';
-        axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
         const response = yield axios.post(url, authData);
         yield localStorage.setItem('userId', response.data.user_id)
         yield localStorage.setItem('customerId', response.data.customer_id)
