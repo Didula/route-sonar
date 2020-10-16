@@ -79,3 +79,10 @@ export const prepareWayPointTraversalOrder = () => {
         type: actionTypes.PREPARE_WAYPOINT_TRAVERSAL_ORDER
     }
 }
+
+export const setLoading = (value) => {
+    return {
+        type: actionTypes.SET_LOADING,
+        value: value
+    }
+}

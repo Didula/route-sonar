@@ -12,6 +12,7 @@ export const SET_IS_OPTIMIZED = 'SET_IS_OPTIMIZED';
 export const RESET_MAP = 'RESET_MAP';
 export const SET_CURRENT_DIRECTION = 'SET_CURRENT_DIRECTION';
 export const PREPARE_WAYPOINT_TRAVERSAL_ORDER = 'PREPARE_WAYPOINT_TRAVERSAL_ORDER';
+export const SET_LOADING = 'SET_LOAD';
 
 // SideContent action types.
 export const FETCH_PLACE_ID = 'FETCH_PLACE_ID';

@@ -7,7 +7,7 @@ const initialState = {
     directionServiceOptions: null,
     startLocation: null,
     endLocation: null,
-    loading: false,
+    loading: true,
     isOptimized: false,
     currentDirection: null,
     wayPointTraversalOrder: []
@@ -126,7 +126,7 @@ const resetMap = (state) => {
         currentLocation: null,
         directionServiceOptions: null,
         startLocation: null,
-        loading: false,
+        loading: state.loading,
         isOptimized: false
     })
 }
@@ -156,6 +156,10 @@ const setWayPointTraversalOrder = (state) => {
     return updateObject(state, {wayPointTraversalOrder : updatedWayPointTraversalOrder})
 }
 
+const setLoading = (state, action) => {
+    return updateObject(state, {loading: action.value})
+}
+
 const mapReducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.SET_START_POINT:
@@ -180,6 +184,8 @@ const mapReducer = (state = initialState, action) => {
             return resetMap(state);
         case actionTypes.PREPARE_WAYPOINT_TRAVERSAL_ORDER:
             return setWayPointTraversalOrder(state);
+        case actionTypes.SET_LOADING:
+            return setLoading(state, action);
         default:
             return state;
     }

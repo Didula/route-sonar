@@ -104,7 +104,8 @@ const Map = (props) => {
                 center={props.currentLocation}
                 options={mapOptions}
                 onClick={(event) => {
-                }}>
+                }}
+                onUnmount={() => props.onUnmount()}>
                 {!props.isOptimized && markerElements}
                 {directionService}
                 {props.currentDirection !== null && (<DirectionsRenderer options={{directions: props.currentDirection}}/>)}
@@ -134,6 +135,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setCurrentDirection(direction));
             dispatch(actions.prepareWayPointTraversalOrder());
         },
+        onUnmount: () => dispatch(actions.resetMap())
     }
 }
 
