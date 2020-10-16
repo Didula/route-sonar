@@ -33,10 +33,6 @@ const TITLE = 'Route Sonar'
 
 function App(props) {
 
-    useEffect(() => {
-
-    }, []);
-
     let routes = (
         <Switch>
             <Route path="/about" component={lazyLoadedAbout}/>
