@@ -1,8 +1,7 @@
 .SideContent {
     height: auto;
     overflow-y: auto;
-    padding-right: 10px;
-    margin: 10px auto auto !important;
+    /* margin: 10px auto auto !important; */
 }
 
 .SideContent > * {
@@ -12,4 +11,15 @@
 .inputForm > form{
     height: auto;
     border-bottom: 1px solid #d4d4d4;
+}
+
+.inputForm span{
+    font-size: 15px;
+    margin: 12px 0 8px 0;
+    display: block;
+}
+
+.inputFormWrapper{
+    max-height: 254px;
+    min-height: 232px;
 }

@@ -101,11 +101,11 @@ const SideContent = (props) => {
     }, []);
 
     return (
-        <div>
+        <div className={classes.inputFormWrapper}>
             <div className={classes.inputForm}>
                 <Form className="py-2" onSubmit={addPointHandler}>
                     <span>Enter next destination and reference point</span>
-                    <div className="row mx-0 form-inline">
+                    <div className="row mx-0 mb-2 form-inline">
                         <Form.Group className="col-3 pl-0 pr-1" controlId="fromDestinationReference">
                             <Form.Control
                                 onChange={handleReferenceInput}
@@ -124,19 +124,18 @@ const SideContent = (props) => {
                                 className="col-12"/>
                         </Form.Group>
                         <Button
-                            className="col-1 pl-0 pr-1"
+                            className="col-1 pl-0 pr-0"
                             variant="danger"
                             type="submit"
                             disabled={props.currentReference === '' || props.currentPlaceId === ''}
                         >+</Button>
                     </div>
-                    {(!props.isAuthenticated && props.markers.length > FREE_LOCATIONS_NUMBER) && <span>Please Log in to enter more locations</span>}
-                    {props.markers.length === 2 && <Form.Text className="text-muted">
-                        {props.markers.length - 1} location added.
-                    </Form.Text>}
-                    {props.markers.length > 2 && <Form.Text className="text-muted">
-                        {props.markers.length - 1} locations added.
-                    </Form.Text>}
+                    <div className="d-flex rs-lbl-wrapper">
+                        {(!props.isAuthenticated && props.markers.length > FREE_LOCATIONS_NUMBER) && <span>Please Log in to add more</span>}
+                        {props.markers.length === 2 && <Form.Text className="text-muted">
+                            {props.markers.length - 1} location added.
+                        </Form.Text>}
+                    </div>
                 </Form>
             </div>
             <div className={classes.SideContent}>

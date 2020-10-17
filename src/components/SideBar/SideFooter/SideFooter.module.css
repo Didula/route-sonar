@@ -1,6 +1,7 @@
 .SideFooter {
-    height: 100px;
+    height: 60px;
     display: flex;
+    align-items: center;
     flex-flow: row;
     justify-content: space-between;
     align-self: flex-end;
