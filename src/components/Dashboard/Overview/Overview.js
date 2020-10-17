@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {connect, useDispatch, useSelector} from 'react-redux';
+import {connect, useSelector} from 'react-redux';
 import {Bar} from 'react-chartjs-2';
 import CountUp from 'react-countup';
 import {Card, CardGroup, Col, Container, Dropdown, DropdownButton, Nav, Row} from "react-bootstrap";
@@ -12,9 +12,12 @@ import classes from './Overview.module.css';
 const Overview = (props) => {
 
     const customerId = useSelector(state => state.auth.customerId);
+    let todayDate = new Date();
+    let startDate = new Date(todayDate.setDate(todayDate.getDate()-1));
+    let endDate = new Date();
 
     useEffect(() => {
-        props.dispatchGetDashboardSummart();
+        props.dispatchGetDashboardSummart(customerId, startDate.toLocaleDateString('en-CA'), endDate.toLocaleDateString('en-CA'));
     }, []);
 
     const data = {
@@ -41,6 +44,36 @@ const Overview = (props) => {
     const month = ["January", "February", "March", "April", "May", "June",
         "July", "August", "September", "October", "November", "December"]
 
+    const getDateRange = (input) =>{
+        const currentDate = new Date();
+        switch (input){
+            case 'today':
+                startDate = new Date();
+                startDate = new Date(startDate.setDate(startDate.getDate()-1));
+                endDate = currentDate;
+                props.dispatchGetDashboardSummart(customerId, startDate.toLocaleDateString('en-CA'), endDate.toLocaleDateString('en-CA'));
+                break;
+            case '7':
+                startDate = new Date();
+                startDate = new Date(startDate.setDate(startDate.getDate()-7));
+                endDate = currentDate;
+                props.dispatchGetDashboardSummart(customerId, startDate.toLocaleDateString('en-CA'), endDate.toLocaleDateString('en-CA'));
+                break;
+            case '28':
+                startDate = new Date();
+                startDate = new Date(startDate.setDate(startDate.getDate()-28));
+                endDate = currentDate;
+                props.dispatchGetDashboardSummart(customerId, startDate.toLocaleDateString('en-CA'), endDate.toLocaleDateString('en-CA'));
+                break;
+            case 'year':
+                startDate = new Date(new Date().getFullYear() - 1, 0, 1);
+                endDate = new Date(startDate.getFullYear(), 11, 31);
+                props.dispatchGetDashboardSummart(customerId, startDate.toLocaleDateString('en-CA'), endDate.toLocaleDateString('en-CA'));
+                break;
+            default:
+                break;
+        }
+    }
 
     return (
         <Container fluid className={classes.Overview}>
@@ -49,16 +82,16 @@ const Overview = (props) => {
             </Row>
             <Row className={classes.Period}>
                 <Nav variant="pills" defaultActiveKey="today" >
-                    <Nav.Item>
-                        <Nav.Link eventKey="today" href="/">Today</Nav.Link>
+                    <Nav.Item onClick = {() => { getDateRange('today')}}>
+                        <Nav.Link eventKey="today">Today</Nav.Link>
                     </Nav.Item>
-                    <Nav.Item>
+                    <Nav.Item onClick = {() => { getDateRange('7')}}>
                         <Nav.Link eventKey="7-days">Last 7 days</Nav.Link>
                     </Nav.Item>
-                    <Nav.Item>
+                    <Nav.Item  onClick = {() => { getDateRange('28')}}>
                         <Nav.Link eventKey="28-days">Last 28 days</Nav.Link>
                     </Nav.Item>
-                    <Nav.Item>
+                    <Nav.Item onClick = {() => { getDateRange('year')}}>
                         <Nav.Link eventKey="year">Last Year</Nav.Link>
                     </Nav.Item>
                 </Nav>
@@ -75,7 +108,7 @@ const Overview = (props) => {
                                 <Card.Title>Distance<br/>Covered</Card.Title>
                             </Card>
                             <Card bg='info' text='light'>
-                                <Card.Title><strong><CountUp end={275}/></strong> &nbsp;km</Card.Title>
+                                <Card.Title><strong><CountUp end={Number(props.distanceCovered)}/></strong> &nbsp;km</Card.Title>
                             </Card>
                         </CardGroup>
                     </Row>
@@ -122,12 +155,13 @@ const mapStateToProps = (state) => {
     return {
         totalLocations: state.dashboardSummary.totalLocations,
         totalTrips: state.dashboardSummary.totalTrips,
+        distanceCovered: state.dashboardSummary.distanceCovered
     }
 }
 
 const mapDispatchToProps = (dispatch, props) => {
     return {
-        dispatchGetDashboardSummart: () => dispatch(actions.dashboardSummaryRequest(props.customerId))
+        dispatchGetDashboardSummart: (customerId, startDate, endDate) => dispatch(actions.dashboardSummaryRequest(customerId, startDate, endDate))
     }
 }
 

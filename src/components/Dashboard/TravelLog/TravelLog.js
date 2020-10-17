@@ -1,5 +1,5 @@
 import React, { Component, useEffect } from 'react';
-import {connect, useDispatch, useSelector} from 'react-redux';
+import { connect, useDispatch, useSelector } from 'react-redux';
 import { Button, Container, Dropdown, DropdownButton, FormControl, InputGroup, Nav, Row, Table } from "react-bootstrap";
 
 import classes from './TravelLog.module.css';
@@ -7,6 +7,11 @@ import TripModal from "../TripModal/TripModal";
 import * as actions from "../../../store/actions";
 
 const TravelLog = (props) => {
+
+    const customerId = useSelector(state => state.auth.customerId);
+    let todayDate = new Date();
+    let startDate = new Date(todayDate.setDate(todayDate.getDate()-1));
+    let endDate = new Date();
 
     let [show, setShow] = React.useState(false);
 
@@ -25,6 +30,37 @@ const TravelLog = (props) => {
     const month = ["January", "February", "March", "April", "May", "June",
         "July", "August", "September", "October", "November", "December"]
 
+    const getDateRange = (input) => {
+        const currentDate = new Date();
+        switch (input) {
+            case 'today':
+                startDate = new Date();
+                startDate = new Date(startDate.setDate(startDate.getDate() - 1));
+                endDate = currentDate;
+                props.dispatchTravelLogRequest(customerId, startDate.toLocaleDateString('en-CA'), endDate.toLocaleDateString('en-CA'));
+                break;
+            case '7':
+                startDate = new Date();
+                startDate = new Date(startDate.setDate(startDate.getDate() - 7));
+                endDate = currentDate;
+                props.dispatchTravelLogRequest(customerId, startDate.toLocaleDateString('en-CA'), endDate.toLocaleDateString('en-CA'));
+                break;
+            case '28':
+                startDate = new Date();
+                startDate = new Date(startDate.setDate(startDate.getDate() - 28));
+                endDate = currentDate;
+                props.dispatchTravelLogRequest(customerId, startDate.toLocaleDateString('en-CA'), endDate.toLocaleDateString('en-CA'));
+                break;
+            case 'year':
+                startDate = new Date(new Date().getFullYear() - 1, 0, 1);
+                endDate = new Date(startDate.getFullYear(), 11, 31);
+                props.dispatchTravelLogRequest(customerId, startDate.toLocaleDateString('en-CA'), endDate.toLocaleDateString('en-CA'));
+                break;
+            default:
+                break;
+        }
+    }
+
     return (
         <Container fluid>
             <Row>
@@ -32,16 +68,16 @@ const TravelLog = (props) => {
             </Row>
             <Row className={classes.Period}>
                 <Nav variant="pills" defaultActiveKey="today" >
-                    <Nav.Item>
+                    <Nav.Item onClick = {() => { getDateRange('today')}}>
                         <Nav.Link eventKey="today" href="#">Today</Nav.Link>
                     </Nav.Item>
-                    <Nav.Item>
+                    <Nav.Item onClick = {() => { getDateRange('today')}}>
                         <Nav.Link eventKey="7-days">Last 7 days</Nav.Link>
                     </Nav.Item>
-                    <Nav.Item>
+                    <Nav.Item onClick = {() => { getDateRange('today')}}>
                         <Nav.Link eventKey="28-days">Last 28 days</Nav.Link>
                     </Nav.Item>
-                    <Nav.Item>
+                    <Nav.Item onClick = {() => { getDateRange('today')}}>
                         <Nav.Link eventKey="year">Last Year</Nav.Link>
                     </Nav.Item>
                 </Nav>
@@ -69,12 +105,12 @@ const TravelLog = (props) => {
                         </tr>
                     </thead>
                     <tbody className={classes.Entry}>
-                        {props.logList.map((oneEntry, index) => (
+                        {props.logList.map((logItem, index) => (
                             <tr key={index} onClick={handleShow}>
-                                <td>{oneEntry.ref}</td>
-                                <td>{oneEntry.date}</td>
-                                <td>{oneEntry.sTime}</td>
-                                <td>{oneEntry.driver}</td>
+                                <td>{logItem.tripID}</td>
+                                <td>{logItem.dateTime}</td>
+                                <td>{logItem.driver_id}</td>
+                                <td>{logItem.name}</td>
                             </tr>
                         ))
                         }
@@ -94,7 +130,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch, props) => {
     return {
-        dispatchTravelLogRequest: () => dispatch(actions.travelLogRequest(5))
+        dispatchTravelLogRequest: (customerId, startDate, endDate) => dispatch(actions.travelLogRequest(customerId, startDate, endDate))
     }
 }
 

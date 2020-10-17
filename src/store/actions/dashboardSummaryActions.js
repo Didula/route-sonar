@@ -1,9 +1,11 @@
 import * as actionTypes from '../actions/actionTypes'
 
-export const dashboardSummaryRequest = (customerID) => {
+export const dashboardSummaryRequest = (customerID, startDate, endDate) => {
     return {
         type: actionTypes.DASHBOARD_SUMMARY_REQUEST,
-        customerIDPayload: customerID
+        customerIDPayload: customerID,
+        startDate: startDate,
+        endDate: endDate
     }
 }
 

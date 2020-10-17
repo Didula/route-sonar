@@ -14,7 +14,7 @@ export default function travelLogReducer(state= initialState, action){
                 loading: true
             }
         case type.TRAVEL_LOG_SUCCESS:
-            console.log('success', action.payload);
+            state.list = [];
             return {
                 ...state,
                 list: state.list.concat(action.payload),

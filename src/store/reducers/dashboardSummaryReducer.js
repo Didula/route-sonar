@@ -3,6 +3,7 @@ import * as type from "../actions/actionTypes";
 
 const initialState = {
     totalLocations: '',
+    distanceCovered: '',
     totalTrips: '',
     loading: false,
     error: null
@@ -18,8 +19,9 @@ export default function dashboardSummary(state= initialState, action){
         case type.DASHBOARD_SUMMARY_SUCCESS:
             return {
                 ...state,
-                totalLocations: action.data[0].total_locations,
-                totalTrips: action.data[0].total_trips,
+                totalLocations: action.data.countLocations,
+                distanceCovered: action.data.distanceCovered,
+                totalTrips: action.data.totalTrips,
                 loading: false
             }
         case type.DASHBOARD_SUMMARY_FAILURE:

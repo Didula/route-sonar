@@ -2,15 +2,14 @@ import {call, put, takeEvery} from 'redux-saga/effects';
 import axios from "axios";
 
 function* getDashboardSummaryData(action) {
-    const reqBody = {
-        "level": 'agg_customer',
-        "customer_id": '10'
-    }
-    const apiUrl = "http://18.138.23.29:5000/getOpt";
+    const customerID = 9;
+    const startDate = action.startDate;
+    const endDate = action.endDate;
+    const apiUrl = `http://18.138.23.29:5000/getSummary?customerID=${customerID}&startDate=${startDate}&endDate=${endDate}`;
     try {
         axios.defaults.headers.post['Content-Type'] = 'application/json';
         axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
-        const response = yield axios.post(apiUrl, reqBody);
+        const response = yield axios.get(apiUrl);
         if (response.status === 200){
             yield put({
                 type: 'DASHBOARD_SUMMARY_SUCCESS',
