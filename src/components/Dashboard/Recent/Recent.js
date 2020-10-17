@@ -7,8 +7,14 @@ import RecentTile from "../RecentTile/RecentTile";
 import * as actions from "../../../store/actions";
 
 const Recent = (props) => {
+
+    const fetchLimit = process.env.REACT_APP_RECENT_ROUTES_FETCH_LIMIT;
+    const endDate = new Date();
+    const startDate = new Date();
+    startDate.setDate(startDate.getDate() - process.env.REACT_APP_RECENT_ROUTES_DATE_FRAME);
+
     useEffect(() => {
-        props.onFetchRecentRoutes(props.customerId,'2020-10-11','2020-10-31',5);
+        props.onFetchRecentRoutes(props.customerId, startDate.toLocaleDateString('en-CA'), endDate.toLocaleDateString('en-CA'), fetchLimit);
     }, []);
     return (
         <Row>
