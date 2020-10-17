@@ -13,7 +13,9 @@ const Recent = (props) => {
     return (
         <Row>
             {props.recentRoutes.map((route, index) => (
-                <Col className={classes.RecentTile} key={route.tripID}><RecentTile title={route.dateTime}/></Col>
+                <Col className={classes.RecentTile} key={route.tripID}>
+                    <RecentTile title={route.dateTime} tripID = {route.tripID}/>
+                </Col>
             ))
             }
         </Row>

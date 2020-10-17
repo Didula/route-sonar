@@ -53,3 +53,25 @@ export const setFetchRecentRoutesFail = (error) => {
         error
     }
 }
+
+export const fetchSpecificRouteRequest = (tripID) => {
+    console.log('tripId', tripID);
+    return {
+        type: actionTypes.FETCH_SPECIFIC_ROUTE_REQUEST,
+        tripIDPayload: tripID
+    }
+}
+
+export const fetchSpecificRouteSuccess = (response) => {
+    return {
+        type: actionTypes.FETCH_SPECIFIC_ROUTE_SUCCESS,
+        payload: response
+    }
+}
+
+export const fetchSpecificRouteFail = (response) => {
+    return {
+        type: actionTypes.FETCH_SPECIFIC_ROUTE_FAIL,
+        error: response
+    }
+}

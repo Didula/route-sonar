@@ -29,9 +29,9 @@ class RecentTile extends Component {
                             {/*<Button variant="info">Use Again</Button>*/}
                     </Card.Body>
                 </Card>
-
-                <TripModal showing={this.state.show} close={this.handleClose} title={this.props.title}/>
-
+                {this.state.show &&
+                    <TripModal showing={this.state.show} close={this.handleClose} title={this.props.title} tripID={this.props.tripID}/>
+                }
             </Container>
         )
     }

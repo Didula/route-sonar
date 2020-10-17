@@ -10,7 +10,10 @@ const initialState = {
     error: null,
     recentRoutes: [],
     recentRoutesLoading: false,
-    recentRoutesError: null
+    recentRoutesError: null,
+    specificRoute: [],
+    specificRouteLoading: false,
+    specificRouteError: null
 }
 
 const setRecentRoutesLoading = (state, action) => {
@@ -21,6 +24,16 @@ const setRecentRoutesSuccess = (state, action) => {
 }
 const setRecentRoutesFail = (state, action) => {
     return updateObject(state, {recentRoutesError: action.error, recentRoutesLoading: false})
+}
+
+const fetchSpecificRouteLoading = (state, action) => {
+    return updateObject(state, {specificRouteLoading: true})
+}
+const fetchSpecificRouteSuccess = (state, action) => {
+    return updateObject(state, {specificRoute: action.payload.data, specificRouteLoading: false})
+}
+const fetchSpecificRouteFail = (state, action) => {
+    return updateObject(state, {specificRouteError: action.error, specificRouteLoading: false})
 }
 
 export default function dashboardSummary(state = initialState, action) {
@@ -50,6 +63,12 @@ export default function dashboardSummary(state = initialState, action) {
             return setRecentRoutesSuccess(state, action);
         case type.FETCH_RECENT_ROUTES_FAIL:
             return setRecentRoutesFail(state, action);
+        case type.FETCH_SPECIFIC_ROUTE_REQUEST:
+            return fetchSpecificRouteLoading(state, action);
+        case type.FETCH_SPECIFIC_ROUTE_SUCCESS:
+            return fetchSpecificRouteSuccess(state, action);
+        case type.FETCH_SPECIFIC_ROUTE_FAIL:
+            return fetchSpecificRouteFail(state, action);
         default:
             return state;
     }

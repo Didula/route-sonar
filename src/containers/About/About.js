@@ -306,7 +306,7 @@ const About = () => {
                     <div className="container">
                     <div className="row">
                         <div className="col-7">
-                            <h2>Start moving your <br /> business</h2>
+                            <h2>Start moving your business</h2>
                             <h4>Request a free trial or inquire for a package that best suit your operations</h4>
                             <h3>
                                 <svg width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-envelope-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">

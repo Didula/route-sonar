@@ -43,7 +43,10 @@ export {
     fetchRecentRoutes,
     startFetchRecentRoutes,
     setFetchRecentRoutesSuccess,
-    setFetchRecentRoutesFail
+    setFetchRecentRoutesFail,
+    fetchSpecificRouteRequest,
+    fetchSpecificRouteSuccess,
+    fetchSpecificRouteFail,
 } from './dashboardSummaryActions';
 
 export {

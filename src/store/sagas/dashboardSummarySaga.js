@@ -51,7 +51,22 @@ export function* fetchRecentRoutesSaga(action) {
     }
 }
 
+export function* fetchSpecificRouteSaga(action) {
+    let url = process.env.REACT_APP_API_URL + 'route?tripID=' + action.tripIDPayload;
+    try {
+        const response = yield axios.get(url);
+        console.log('trip', response);
+        yield put(actions.fetchSpecificRouteSuccess(response));
+    } catch (error) {
+        if (error) {
+            console.log(error);
+            yield put(actions.fetchSpecificRouteFail(error));
+        }
+    }
+}
+
 export function* dashboardSummarySaga() {
-    yield takeEvery('DASHBOARD_SUMMARY_REQUEST', getDashboardSummaryData);
+    yield takeEvery(actionTypes.DASHBOARD_SUMMARY_REQUEST, getDashboardSummaryData)
     yield takeEvery(actionTypes.FETCH_RECENT_ROUTES, fetchRecentRoutesSaga)
+    yield takeEvery(actionTypes.FETCH_SPECIFIC_ROUTE_REQUEST, fetchSpecificRouteSaga)
 }
