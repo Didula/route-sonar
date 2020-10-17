@@ -14,8 +14,8 @@ const sideRoutePoints = (props) => (
                     // Remove 1st element from rendering because it is the starting point.
                     if (i !== 0) {
                         locationInputArray.push((
-                            <Container fluid key={i}>
-                                <Row>
+                            
+                                <Row key={i}>
                                     <Col sm={3} style={{
                                         lineHeight: "50px", overflow: "hidden",
                                         whiteSpace: 'nowrap'
@@ -35,7 +35,6 @@ const sideRoutePoints = (props) => (
                                             text="Route point"/>
                                     </Col>
                                 </Row>
-                            </Container>
 
                         ))
                     }

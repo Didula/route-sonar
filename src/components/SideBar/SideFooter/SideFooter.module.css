@@ -5,6 +5,9 @@
     flex-flow: row;
     justify-content: space-between;
     align-self: flex-end;
+    position: absolute;
+    width: 91%;
+    bottom: 12px;
 }
 
 .SideFooter > * {

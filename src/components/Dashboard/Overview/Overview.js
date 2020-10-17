@@ -43,36 +43,36 @@ const Overview = (props) => {
 
     const month = ["January", "February", "March", "April", "May", "June",
         "July", "August", "September", "October", "November", "December"]
+    const currentMonth = todayDate.getMonth();
+    const filteredMonths = month.slice(0,currentMonth+1);
 
     const getDateRange = (input) =>{
-        const currentDate = new Date();
+        startDate = new Date();
+        endDate = new Date();
         switch (input){
             case 'today':
-                startDate = new Date();
                 startDate = new Date(startDate.setDate(startDate.getDate()-1));
-                endDate = currentDate;
-                props.dispatchGetDashboardSummart(customerId, startDate.toLocaleDateString('en-CA'), endDate.toLocaleDateString('en-CA'));
                 break;
             case '7':
-                startDate = new Date();
                 startDate = new Date(startDate.setDate(startDate.getDate()-7));
-                endDate = currentDate;
-                props.dispatchGetDashboardSummart(customerId, startDate.toLocaleDateString('en-CA'), endDate.toLocaleDateString('en-CA'));
                 break;
             case '28':
-                startDate = new Date();
                 startDate = new Date(startDate.setDate(startDate.getDate()-28));
-                endDate = currentDate;
-                props.dispatchGetDashboardSummart(customerId, startDate.toLocaleDateString('en-CA'), endDate.toLocaleDateString('en-CA'));
                 break;
             case 'year':
                 startDate = new Date(new Date().getFullYear() - 1, 0, 1);
                 endDate = new Date(startDate.getFullYear(), 11, 31);
-                props.dispatchGetDashboardSummart(customerId, startDate.toLocaleDateString('en-CA'), endDate.toLocaleDateString('en-CA'));
                 break;
             default:
                 break;
         }
+        props.dispatchGetDashboardSummart(customerId, startDate.toLocaleDateString('en-CA'), endDate.toLocaleDateString('en-CA'));
+    }
+
+    const getDateRangeForMonth = (monthIndex) => {
+        const firstDay = new Date(todayDate.getFullYear(), monthIndex.index, 1);
+        const lastDay = new Date(todayDate.getFullYear(), monthIndex.index + 1, 0);
+        props.dispatchGetDashboardSummart(customerId, firstDay.toLocaleDateString('en-CA'), lastDay.toLocaleDateString('en-CA'));
     }
 
     return (
@@ -96,8 +96,8 @@ const Overview = (props) => {
                     </Nav.Item>
                 </Nav>
                 <DropdownButton id="Select Month" title="Select Month">
-                    {month.map((month, index) => (
-                        <Dropdown.Item href="#/action-2" key={index}>{month}</Dropdown.Item>))}
+                    {filteredMonths.map((month, index) => (
+                        <Dropdown.Item href="#/action-2" key={index} onClick = {() => { getDateRangeForMonth({index})}}>{month}</Dropdown.Item>))}
                 </DropdownButton>
             </Row>
             <Row className={classes.Data}>

@@ -20,6 +20,5 @@
 }
 
 .inputFormWrapper{
-    max-height: 254px;
-    min-height: 232px;
+    height: 232px;
 }

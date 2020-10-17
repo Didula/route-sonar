@@ -2,10 +2,11 @@ import {call, put, takeEvery} from 'redux-saga/effects';
 import axios from "axios";
 
 function* getDashboardSummaryData(action) {
-    const customerID = 9;
+    const customerID = action.customerID;
     const startDate = action.startDate;
     const endDate = action.endDate;
-    const apiUrl = `http://18.138.23.29:5000/getSummary?customerID=${customerID}&startDate=${startDate}&endDate=${endDate}`;
+
+    const apiUrl = process.env.REACT_APP_API_URL + `getSummary?customerID=${customerID}&startDate=${startDate}&endDate=${endDate}`;
     try {
         axios.defaults.headers.post['Content-Type'] = 'application/json';
         axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';

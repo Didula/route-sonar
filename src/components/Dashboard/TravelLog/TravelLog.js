@@ -1,5 +1,5 @@
-import React, { Component, useEffect } from 'react';
-import { connect, useDispatch, useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { connect, useSelector } from 'react-redux';
 import { Button, Container, Dropdown, DropdownButton, FormControl, InputGroup, Nav, Row, Table } from "react-bootstrap";
 
 import classes from './TravelLog.module.css';
@@ -16,7 +16,7 @@ const TravelLog = (props) => {
     let [show, setShow] = React.useState(false);
 
     useEffect(() => {
-        props.dispatchTravelLogRequest();
+        props.dispatchTravelLogRequest(customerId, startDate.toLocaleDateString('en-CA'), endDate.toLocaleDateString('en-CA'));
     }, []);
 
     const handleShow = () => {
@@ -28,37 +28,37 @@ const TravelLog = (props) => {
     }
 
     const month = ["January", "February", "March", "April", "May", "June",
-        "July", "August", "September", "October", "November", "December"]
+        "July", "August", "September", "October", "November", "December"];
+    const currentMonth = todayDate.getMonth();
+    const filteredMonths = month.slice(0,currentMonth+1);
 
     const getDateRange = (input) => {
-        const currentDate = new Date();
+        startDate = new Date();
+        endDate = new Date();
         switch (input) {
             case 'today':
-                startDate = new Date();
                 startDate = new Date(startDate.setDate(startDate.getDate() - 1));
-                endDate = currentDate;
-                props.dispatchTravelLogRequest(customerId, startDate.toLocaleDateString('en-CA'), endDate.toLocaleDateString('en-CA'));
                 break;
             case '7':
-                startDate = new Date();
                 startDate = new Date(startDate.setDate(startDate.getDate() - 7));
-                endDate = currentDate;
-                props.dispatchTravelLogRequest(customerId, startDate.toLocaleDateString('en-CA'), endDate.toLocaleDateString('en-CA'));
                 break;
             case '28':
-                startDate = new Date();
                 startDate = new Date(startDate.setDate(startDate.getDate() - 28));
-                endDate = currentDate;
-                props.dispatchTravelLogRequest(customerId, startDate.toLocaleDateString('en-CA'), endDate.toLocaleDateString('en-CA'));
                 break;
             case 'year':
                 startDate = new Date(new Date().getFullYear() - 1, 0, 1);
                 endDate = new Date(startDate.getFullYear(), 11, 31);
-                props.dispatchTravelLogRequest(customerId, startDate.toLocaleDateString('en-CA'), endDate.toLocaleDateString('en-CA'));
                 break;
             default:
                 break;
         }
+        props.dispatchTravelLogRequest(customerId, startDate.toLocaleDateString('en-CA'), endDate.toLocaleDateString('en-CA'));
+    }
+
+    const getDateRangeForMonth = (monthIndex) => {
+        const firstDay = new Date(todayDate.getFullYear(), monthIndex.index, 1);
+        const lastDay = new Date(todayDate.getFullYear(), monthIndex.index + 1, 0);
+        props.dispatchTravelLogRequest(customerId, firstDay.toLocaleDateString('en-CA'), lastDay.toLocaleDateString('en-CA'));
     }
 
     return (
@@ -71,19 +71,19 @@ const TravelLog = (props) => {
                     <Nav.Item onClick = {() => { getDateRange('today')}}>
                         <Nav.Link eventKey="today" href="#">Today</Nav.Link>
                     </Nav.Item>
-                    <Nav.Item onClick = {() => { getDateRange('today')}}>
+                    <Nav.Item onClick = {() => { getDateRange('7')}}>
                         <Nav.Link eventKey="7-days">Last 7 days</Nav.Link>
                     </Nav.Item>
-                    <Nav.Item onClick = {() => { getDateRange('today')}}>
+                    <Nav.Item onClick = {() => { getDateRange('28')}}>
                         <Nav.Link eventKey="28-days">Last 28 days</Nav.Link>
                     </Nav.Item>
-                    <Nav.Item onClick = {() => { getDateRange('today')}}>
+                    <Nav.Item onClick = {() => { getDateRange('year')}}>
                         <Nav.Link eventKey="year">Last Year</Nav.Link>
                     </Nav.Item>
                 </Nav>
                 <DropdownButton id="Select Month" title="Select Month">
-                    {month.map((month, index) => (
-                        <Dropdown.Item href="#/action-2" key={index}>{month}</Dropdown.Item>))}
+                    {filteredMonths.map((month, index) => (
+                        <Dropdown.Item href="#/action-2" key={index} onClick = {() => { getDateRangeForMonth({index})}}>{month}</Dropdown.Item>))}
                 </DropdownButton>
                 <InputGroup className={classes.Search}>
                     <FormControl
@@ -108,8 +108,8 @@ const TravelLog = (props) => {
                         {props.logList.map((logItem, index) => (
                             <tr key={index} onClick={handleShow}>
                                 <td>{logItem.tripID}</td>
-                                <td>{logItem.dateTime}</td>
-                                <td>{logItem.driver_id}</td>
+                                <td>{logItem.date}</td>
+                                <td>{logItem.time}</td>
                                 <td>{logItem.name}</td>
                             </tr>
                         ))

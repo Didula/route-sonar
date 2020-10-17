@@ -1,9 +1,11 @@
 import * as actionTypes from '../actions/actionTypes'
 
-export const travelLogRequest = (customerID) => {
+export const travelLogRequest = (customerID, startDate, endDate) => {
     return {
         type: actionTypes.TRAVEL_LOG_REQUEST,
-        customerIDPayload: customerID
+        customerIDPayload: customerID,
+        startDate: startDate,
+        endDate: endDate
     }
 }
 
