@@ -10,7 +10,8 @@ export {
     resetMap,
     removeWayPoint,
     setCurrentDirection,
-    prepareWayPointTraversalOrder
+    prepareWayPointTraversalOrder,
+    setLoading
 } from './mapActions'
 
 export {
@@ -46,3 +47,14 @@ export {
     travelLogSuccess,
     travelLogFailure
 } from './travelLogActions';
+
+export {
+    changePassword,
+    startChangePassword,
+    setChangePasswordSuccess,
+    setChangePasswordFail,
+    fetchAggregatedQuota,
+    startFetchingAggregatedQuota,
+    setAggregatedQuotaFetchSuccess,
+    setAggregatedQuotaFetchFail
+} from './dashBoardSettingsActions'
