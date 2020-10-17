@@ -39,7 +39,11 @@ export {
 export {
     dashboardSummaryRequest,
     dashboardSummarySuccess,
-    dashboardSummaryFailure
+    dashboardSummaryFailure,
+    fetchRecentRoutes,
+    startFetchRecentRoutes,
+    setFetchRecentRoutesSuccess,
+    setFetchRecentRoutesFail
 } from './dashboardSummaryActions';
 
 export {

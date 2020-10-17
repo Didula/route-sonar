@@ -1,5 +1,9 @@
-import {call, put, takeEvery} from 'redux-saga/effects';
+import {put, takeEvery} from 'redux-saga/effects';
 import axios from "axios";
+import * as actions from "../actions";
+import * as actionTypes from '../actions/actionTypes'
+
+const FETCH_RECENT_ROUTES_END_POINT = 'recentRoutes'
 
 function* getDashboardSummaryData(action) {
     const customerID = action.customerID;
@@ -11,13 +15,12 @@ function* getDashboardSummaryData(action) {
         axios.defaults.headers.post['Content-Type'] = 'application/json';
         axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
         const response = yield axios.get(apiUrl);
-        if (response.status === 200){
+        if (response.status === 200) {
             yield put({
                 type: 'DASHBOARD_SUMMARY_SUCCESS',
                 data: response.data
             })
-        }
-        else{
+        } else {
             throw Error;
         }
     } catch (error) {
@@ -29,6 +32,26 @@ function* getDashboardSummaryData(action) {
     }
 }
 
-export function* dashboardSummarySaga(){
-    yield takeEvery('DASHBOARD_SUMMARY_REQUEST', getDashboardSummaryData)
+export function* fetchRecentRoutesSaga(action) {
+    yield put(actions.startFetchRecentRoutes(true))
+    const queryParams = '?customerID=' + action.customerId + '&startDate=' + action.startDate + '&endDate=' + action.endDate + '&limit=' + action.limit;
+    let url = process.env.REACT_APP_API_URL + FETCH_RECENT_ROUTES_END_POINT;
+    try {
+        const recentRoutes = [];
+        const response = yield axios.get(url + queryParams);
+        response.data.map(route => {
+            recentRoutes.push(route);
+        })
+        yield put(actions.setFetchRecentRoutesSuccess(recentRoutes));
+    } catch (error) {
+        if (error) {
+            console.log(error);
+            yield put(actions.setFetchRecentRoutesFail(error));
+        }
+    }
+}
+
+export function* dashboardSummarySaga() {
+    yield takeEvery('DASHBOARD_SUMMARY_REQUEST', getDashboardSummaryData);
+    yield takeEvery(actionTypes.FETCH_RECENT_ROUTES, fetchRecentRoutesSaga)
 }

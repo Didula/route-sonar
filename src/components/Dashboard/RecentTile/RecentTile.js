@@ -22,14 +22,11 @@ class RecentTile extends Component {
         return (
             <Container fluid className={classes.OVContainer}>
                 <Card className={classes.OVTile}>
-                    <Card.Img variant="top" src={tileImage}/>
+                    {/*<Card.Img variant="top" src={tileImage}/>*/}
                     <Card.Body>
                         <Card.Title>{this.props.title}</Card.Title>
-                        <Card.Text>
-                            on <strong>08th Dec 2020</strong> at 1.30PM
-                        </Card.Text>
                             <Button variant="primary" onClick={this.handleShow}>Route Details</Button>&nbsp;
-                            <Button variant="info">Use Again</Button>
+                            {/*<Button variant="info">Use Again</Button>*/}
                     </Card.Body>
                 </Card>
 
