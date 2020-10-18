@@ -142,7 +142,7 @@ const SideContent = (props) => {
                 <LocInput value={props.selectedStartPoint} onSelectPoint={props.onStartPointSelect}
                           text="Starting point"/>
             </div>
-            <hr/>
+            
         </div>
     )
 };

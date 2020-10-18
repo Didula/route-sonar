@@ -8,7 +8,7 @@ import * as actions from "../../../store/actions";
 
 const TravelLog = (props) => {
 
-    const customerId = useSelector(state => state.auth.customerId);
+    // const customerId = useSelector(state => state.auth.customerId);
     let todayDate = new Date();
     let startDate = new Date(todayDate.setDate(todayDate.getDate()-1));
     let endDate = new Date();
@@ -16,7 +16,7 @@ const TravelLog = (props) => {
     let [show, setShow] = React.useState(false);
 
     useEffect(() => {
-        props.dispatchTravelLogRequest(customerId, startDate.toLocaleDateString('en-CA'), endDate.toLocaleDateString('en-CA'));
+        props.dispatchTravelLogRequest(props.customerId, startDate.toLocaleDateString('en-CA'), endDate.toLocaleDateString('en-CA'));
     }, []);
 
     const handleShow = () => {
@@ -52,13 +52,13 @@ const TravelLog = (props) => {
             default:
                 break;
         }
-        props.dispatchTravelLogRequest(customerId, startDate.toLocaleDateString('en-CA'), endDate.toLocaleDateString('en-CA'));
+        props.dispatchTravelLogRequest(props.customerId, startDate.toLocaleDateString('en-CA'), endDate.toLocaleDateString('en-CA'));
     }
 
     const getDateRangeForMonth = (monthIndex) => {
         const firstDay = new Date(todayDate.getFullYear(), monthIndex.index, 1);
         const lastDay = new Date(todayDate.getFullYear(), monthIndex.index + 1, 0);
-        props.dispatchTravelLogRequest(customerId, firstDay.toLocaleDateString('en-CA'), lastDay.toLocaleDateString('en-CA'));
+        props.dispatchTravelLogRequest(props.customerId, firstDay.toLocaleDateString('en-CA'), lastDay.toLocaleDateString('en-CA'));
     }
 
     return (
@@ -125,6 +125,7 @@ const TravelLog = (props) => {
 const mapStateToProps = (state) => {
     return {
         logList: state.travelLog.list,
+        customerId: state.auth.customerId
     }
 }
 

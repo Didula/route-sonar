@@ -2,7 +2,7 @@ import {call, put, takeEvery} from 'redux-saga/effects';
 import axios from "axios";
 
 function* getTravelLogData(action) {
-    const customerID = action.customerID;
+    const customerID = action.customerIDPayload;
     const startDate = action.startDate;
     const endDate = action.endDate;
 

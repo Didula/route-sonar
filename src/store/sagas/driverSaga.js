@@ -7,7 +7,7 @@ function getAPI(driverDetails, customerID) {
         "customer_id": customerID,
         "name": driverDetails.name,
         "address": driverDetails.vehicleNo,
-        "tele": driverDetails.mobileNo
+        "tele": '94' + driverDetails.mobileNo
     }
     return fetch(
         apiUrl,

@@ -1,19 +1,15 @@
 import React, {useEffect} from 'react';
-import {connect, useDispatch, useSelector} from 'react-redux';
+import {connect, useDispatch} from 'react-redux';
 import {clearDriverState, sendDriverDetails} from '../../store/actions/driverActions';
 import classes from './RouteInfoModal.module.css';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import * as actions from "../../store/actions";
 
 const RouteInfoModal = (props) => {
 
-    const dispatch = useDispatch();
-    const customerId = useSelector(state => state.auth.customerId);
-
     useEffect(() => {
-        dispatch(clearDriverState());
+        props.onLoadClearDriverState();
     }, [])
 
     // form state
@@ -42,6 +38,10 @@ const RouteInfoModal = (props) => {
 
         //VALIDATE
         var errors = [];
+        setDriverDetails({
+            ...driverDetails,
+            errors: []
+        });
 
         //firstname
         if (driverDetails.name === "" || driverDetails.name === undefined) {
@@ -63,6 +63,7 @@ const RouteInfoModal = (props) => {
         }
 
         setDriverDetails({
+            ...driverDetails,
             errors: errors
         });
 
@@ -70,16 +71,9 @@ const RouteInfoModal = (props) => {
             setSubmitBtnEnabled(true);
             return false;
         } else {
-            dispatch(sendDriverDetails(driverDetails, customerId));
+            props.onClickingSendButton(driverDetails, props.customerId);
             props.onHide(true);
         }
-
-        // const form = event.currentTarget;
-        // if (form.checkValidity() === false) {
-        //     event.preventDefault();
-        //     event.stopPropagation();
-        //     return false;
-        // }
         
     }
 
@@ -141,14 +135,16 @@ const mapStateToProps = (state, ownProps) => {
         locationArray: ownProps.show ? state.map.markers : '',
         wayPointTraversalOrder: state.map.wayPointTraversalOrder,
         originPoint: state.map.startLocation,
-        destinationPoint: state.map.endLocation
+        destinationPoint: state.map.endLocation,
+        customerId: state.auth.customerId
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onClickingSendButton: () => dispatch(actions.addBlankWayPoint())
+        onClickingSendButton: (driverDetails, customerId) => dispatch(sendDriverDetails(driverDetails, customerId)),
+        onLoadClearDriverState: () => dispatch(clearDriverState())
     }
 }
 
-export default connect(mapStateToProps)(RouteInfoModal);
+export default connect(mapStateToProps, mapDispatchToProps)(RouteInfoModal);
