@@ -7,3 +7,12 @@ export const setSidePanelOpen = (value) => {
     }
 }
 
+export const saveApiConsumption = (customerId, placesNumber, geoCodeNumber, directionsNumber) => {
+    return {
+        type: actionTypes.SAVE_API_CONSUMPTION_USAGE,
+        customerId,
+        placesNumber,
+        geoCodeNumber,
+        directionsNumber
+    }
+}

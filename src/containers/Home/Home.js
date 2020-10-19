@@ -47,6 +47,12 @@ const Home = (props) => {
         }
     }
 
+    const handleOptimizationClick = () => {
+        props.onOptimizeRoutes();
+        if (props.isAuthenticated)
+            props.onSaveApiConsumption(props.customerId, props.markers.length - 1, props.markers.length, 1);
+    }
+
     let inputComponent;
     if (!props.isSidePanelOpen) {
         inputComponent = <FBox
@@ -57,7 +63,7 @@ const Home = (props) => {
             selectedStartPoint={props.startLocation.address}
             onStartPointSelect={props.onSelectingStartPoint}
             onAddRoutePoint={props.onAddingBlankRoutePoint}
-            onOptimizeRoutes={props.onOptimizeRoutes}
+            onOptimizeRoutes={handleOptimizationClick}
             showToast={showToast}
             setShowToast={setShowToast}
             markers={props.markers}/>
@@ -77,7 +83,9 @@ const mapStateToProps = (state) => {
     return {
         isSidePanelOpen: state.home.isSidePanelOpen,
         startLocation: state.map.startLocation,
-        markers: state.map.markers
+        markers: state.map.markers,
+        customerId: state.auth.customerId,
+        isAuthenticated: state.auth.userId !== null
     }
 }
 
@@ -89,6 +97,7 @@ const mapDispatchToProps = (dispatch) => {
         },
         onAddingBlankRoutePoint: () => dispatch(actions.addBlankWayPoint()),
         onOptimizeRoutes: () => dispatch(actions.prepareDirectionServiceOptions()),
+        onSaveApiConsumption: (customerId, placesNumber, geoCodeNumber, directionsNumber) => dispatch(actions.saveApiConsumption(customerId, placesNumber, geoCodeNumber, directionsNumber)),
         onClickingAddLocations: (value) => dispatch(actions.setSidePanelOpen(value))
     }
 }

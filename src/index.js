@@ -18,7 +18,7 @@ import dashboardSummaryReducer from "./store/reducers/dashboardSummaryReducer";
 import travelLogReducer from "./store/reducers/travelLogReducer";
 import dashBoardSettingsReducer from "./store/reducers/dashBoardSettingsReducer"
 
-import rootSaga, {watchAuth, watchDashboardSettings, watchMap, watchSideContent} from "./store/sagas";
+import rootSaga, {watchAuth, watchDashboardSettings, watchHome, watchMap, watchSideContent} from "./store/sagas";
 import './assets/Mina-Regular.ttf';
 import './assets/Mina-Bold.ttf';
 import {BrowserRouter} from "react-router-dom";
@@ -46,7 +46,8 @@ const store = createStore(
 sagaMiddleware.run(watchMap);
 sagaMiddleware.run(watchSideContent);
 sagaMiddleware.run(watchAuth);
-sagaMiddleware.run(watchDashboardSettings)
+sagaMiddleware.run(watchDashboardSettings);
+sagaMiddleware.run(watchHome);
 sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(

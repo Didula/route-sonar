@@ -26,6 +26,7 @@ export const WAY_POINT_FROM_SUBMIT = 'WAY_POINT_FROM_SUBMIT';
 // Home action types.
 export const SET_SIDE_PANEL_OPEN = 'SET_SIDE_PANEL_OPEN';
 export const SET_LOGIN_MODAL_OPEN = 'SET_LOGIN_MODAL_OPEN';
+export const SAVE_API_CONSUMPTION_USAGE = 'SAVE_API_CONSUMPTION_USAGE';
 
 // Driver action types.
 export const SEND_DRIVER_DETAILS = 'SEND_DRIVER_DETAILS';
