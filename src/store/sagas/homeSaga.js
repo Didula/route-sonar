@@ -43,7 +43,6 @@ export function* saveOptimizedRouteSaga(action) {
         "optLocations": []
     }
     getDataFromDirection(action.direction,routeSaveRequest)
-    console.log(routeSaveRequest);
     let url = process.env.REACT_APP_API_URL + CONSUMPTION_SAVE_END_POINT;
     try {
         axios.defaults.headers.post['Content-Type'] = 'application/json';
