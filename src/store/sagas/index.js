@@ -8,6 +8,7 @@ import {authUserSaga, logoutSaga} from "./authSaga"
 import {dashboardSummarySaga} from './dashboardSummarySaga';
 import {travelLogSaga} from './travelLogSaga';
 import {fetchAggregatedQuotaSaga, changePasswordSaga} from "./dashBoardSettingsSaga";
+import {saveApiConsumptionSaga, saveOptimizedRouteSaga} from "./homeSaga";
 
 export function* watchMap() {
     yield takeEvery(actionTypes.FETCH_CURRENT_USER_LOCATION, fetchCurrentUserLocationSaga);
@@ -25,6 +26,11 @@ export function* watchAuth() {
 export function* watchDashboardSettings() {
     yield takeEvery(actionTypes.FETCH_AGGREGATED_QUOTA, fetchAggregatedQuotaSaga);
     yield takeLatest(actionTypes.CHANGE_PASSWORD,changePasswordSaga)
+}
+
+export function* watchHome() {
+    yield takeLatest(actionTypes.SAVE_API_CONSUMPTION_USAGE, saveApiConsumptionSaga);
+    yield takeLatest(actionTypes.SAVE_OPTIMIZED_ROUTE,saveOptimizedRouteSaga);
 }
 
 // export function* watchDriverSend() {

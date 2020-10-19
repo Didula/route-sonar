@@ -25,7 +25,9 @@ export {
 } from './sideContentActions'
 
 export {
-    setSidePanelOpen
+    setSidePanelOpen,
+    saveApiConsumption,
+    saveOptimizedRoute
 } from './homeActions'
 
 export {

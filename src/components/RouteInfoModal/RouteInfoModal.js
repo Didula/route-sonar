@@ -1,5 +1,7 @@
 import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
+
+import * as actions from '../../store/actions/index'
 import {clearDriverState, sendDriverDetails} from '../../store/actions/driverActions';
 import classes from './RouteInfoModal.module.css';
 import Modal from 'react-bootstrap/Modal';
@@ -71,8 +73,10 @@ const RouteInfoModal = (props) => {
             setSubmitBtnEnabled(true);
             return false;
         } else {
-            props.onClickingSendButton(driverDetails, props.customerId);
-            props.onHide(true);
+            if (props.isAuthenticated) {
+                props.onClickingSendButton(driverDetails, props.customerId, props.userId, props.direction, props.locationArray);
+                props.onHide(true);
+            }
         }
         
     }
@@ -111,19 +115,22 @@ const RouteInfoModal = (props) => {
                         <div className={`col-1`}></div>
                         <div className={`col-7`}>
                             <span>Start: {props.originPoint.address}</span>
-                            <ul>
+                            <ol>
                                 {props.wayPointTraversalOrder.map((location, index) =>
                                     <li key={index}>
                                         <span> {location.address} </span> - <span>{location.reference}</span>
                                     </li>
                                 )}
-                            </ul>
+                            </ol>
                             <span>End: {props.destinationPoint.address}</span>
                         </div>
                     </div>
-                    <Button size="md" className="col-2 mt-4 rsSendBtn" variant="primary" type="submit" disabled={!submitBtnEnabled}>
+                    <Button disabled={!props.isAuthenticated  ||  !submitBtnEnabled} size="md" className="col-2 mt-4 rsSendBtn" variant="primary" type="submit" >
                         SEND
                     </Button>
+                    {!props.isAuthenticated && <Form.Text className="text-error">
+                        You must be logged in to send.
+                    </Form.Text>}
                 </form>
             </Modal.Body>
         </Modal>
@@ -136,13 +143,19 @@ const mapStateToProps = (state, ownProps) => {
         wayPointTraversalOrder: state.map.wayPointTraversalOrder,
         originPoint: state.map.startLocation,
         destinationPoint: state.map.endLocation,
-        customerId: state.auth.customerId
+        customerId: state.auth.customerId,
+        userId: state.auth.userId,
+        isAuthenticated: state.auth.userId !== null,
+        direction: state.map.currentDirection
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onClickingSendButton: (driverDetails, customerId) => dispatch(sendDriverDetails(driverDetails, customerId)),
+        onClickingSendButton: (driverDetails, customerId, userId, direction,locationArray) => {
+            dispatch(sendDriverDetails(driverDetails, customerId));
+            dispatch(actions.saveOptimizedRoute(userId, customerId, driverDetails.mobileNo, driverDetails.vehicleNo, direction,locationArray));
+        },
         onLoadClearDriverState: () => dispatch(clearDriverState())
     }
 }
