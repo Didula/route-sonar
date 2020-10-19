@@ -128,6 +128,9 @@ const RouteInfoModal = (props) => {
                     <Button disabled={!props.isAuthenticated  ||  !submitBtnEnabled} size="md" className="col-2 mt-4 rsSendBtn" variant="primary" type="submit" >
                         SEND
                     </Button>
+                    {!props.isAuthenticated && <Form.Text className="text-error">
+                        You must be logged in to send.
+                    </Form.Text>}
                 </form>
             </Modal.Body>
         </Modal>
