@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import { connect, useSelector } from 'react-redux';
-import { Button, Container, Dropdown, DropdownButton, FormControl, InputGroup, Nav, Row, Table } from "react-bootstrap";
+import { connect } from 'react-redux';
+import { Container, Dropdown, DropdownButton, Nav, Row, Table } from "react-bootstrap";
 
 import classes from './TravelLog.module.css';
 import TripModal from "../TripModal/TripModal";
@@ -12,14 +12,16 @@ const TravelLog = (props) => {
     let todayDate = new Date();
     let startDate = new Date(todayDate.setDate(todayDate.getDate()-1));
     let endDate = new Date();
-
+    let [tripID, setTripID] = React.useState('');
     let [show, setShow] = React.useState(false);
 
     useEffect(() => {
         props.dispatchTravelLogRequest(props.customerId, startDate.toLocaleDateString('en-CA'), endDate.toLocaleDateString('en-CA'));
     }, []);
 
-    const handleShow = () => {
+    const handleShow = (index) => {
+        setTripID(index);
+        console.log('yo', index, tripID);
         setShow(true);
     }
 
@@ -85,14 +87,14 @@ const TravelLog = (props) => {
                     {filteredMonths.map((month, index) => (
                         <Dropdown.Item href="#/action-2" key={index} onClick = {() => { getDateRangeForMonth({index})}}>{month}</Dropdown.Item>))}
                 </DropdownButton>
-                <InputGroup className={classes.Search}>
+                {/* <InputGroup className={classes.Search}>
                     <FormControl
                         placeholder="Search"
                     />
                     <InputGroup.Append>
                         <Button variant="info">Go</Button>
                     </InputGroup.Append>
-                </InputGroup>
+                </InputGroup> */}
             </Row>
             <Row>
                 <Table striped responsive hover>
@@ -106,7 +108,7 @@ const TravelLog = (props) => {
                     </thead>
                     <tbody className={classes.Entry}>
                         {props.logList.map((logItem, index) => (
-                            <tr key={index} onClick={handleShow}>
+                            <tr key={index} onClick={() => handleShow(logItem.tripID)}>
                                 <td>{logItem.tripID}</td>
                                 <td>{logItem.date}</td>
                                 <td>{logItem.time}</td>
@@ -117,7 +119,7 @@ const TravelLog = (props) => {
                     </tbody>
                 </Table>
             </Row>
-            <TripModal showing={show} close={handleClose} />
+            {show && <TripModal tripID = {tripID} showing={show} close={handleClose} />}
         </Container>
     )
 }

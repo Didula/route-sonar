@@ -13,7 +13,10 @@ const initialState = {
     recentRoutesError: null,
     specificRoute: [],
     specificRouteLoading: false,
-    specificRouteError: null
+    specificRouteError: null,
+    weeklySummaryLoading: false,
+    weeklySummary: [],
+    weeklySummaryFail: null
 }
 
 const setRecentRoutesLoading = (state, action) => {
@@ -34,6 +37,16 @@ const fetchSpecificRouteSuccess = (state, action) => {
 }
 const fetchSpecificRouteFail = (state, action) => {
     return updateObject(state, {specificRouteError: action.error, specificRouteLoading: false})
+}
+
+const fetchWeeklySummaryRequest = (state, action) => {
+    return updateObject(state, {weeklySummaryLoading: true})
+}
+const fetchWeeklySummarySuccess = (state, action) => {
+    return updateObject(state, {weeklySummary: action.payload, weeklySummaryLoading: false})
+}
+const fetchWeeklySummaryFail = (state, action) => {
+    return updateObject(state, {weeklySummaryFail: action.error, weeklySummaryLoading: false})
 }
 
 export default function dashboardSummary(state = initialState, action) {
@@ -69,6 +82,12 @@ export default function dashboardSummary(state = initialState, action) {
             return fetchSpecificRouteSuccess(state, action);
         case type.FETCH_SPECIFIC_ROUTE_FAIL:
             return fetchSpecificRouteFail(state, action);
+        case type.FETCH_WEEKLY_SUMMARY_REQUEST:
+            return fetchWeeklySummaryRequest(state, action);
+        case type.FETCH_WEEKLY_SUMMARY_SUCCESS:
+            return fetchWeeklySummarySuccess(state, action);
+        case type.FETCH_WEEKLY_SUMMARY_FAIL:
+            return fetchWeeklySummaryFail(state, action);
         default:
             return state;
     }

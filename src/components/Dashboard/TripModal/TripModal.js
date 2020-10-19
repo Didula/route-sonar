@@ -2,7 +2,6 @@ import React, {useEffect} from "react";
 import {connect} from "react-redux";
 import {Button, Col, ListGroup, Modal, Row, Tab} from 'react-bootstrap';
 
-import modalMap from '../../../assets/modal-map.jpg';
 import classes from './TripModal.module.css';
 import * as actions from "../../../store/actions";
 
@@ -22,7 +21,7 @@ const TripModal = (props) => {
                         <img src={modalMap} alt="Route" /></a><br/><br/> */}
                         <Tab.Container id="list-group-tabs-example" defaultActiveKey="#route">
                         {props.specificRoute.map((route, index) => (
-                            <Row>
+                            <Row key={index}>
                                 <Col sm={3}>
                                     <ListGroup>
                                         <ListGroup.Item action href="#route">

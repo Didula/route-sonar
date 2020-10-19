@@ -55,7 +55,6 @@ export const setFetchRecentRoutesFail = (error) => {
 }
 
 export const fetchSpecificRouteRequest = (tripID) => {
-    console.log('tripId', tripID);
     return {
         type: actionTypes.FETCH_SPECIFIC_ROUTE_REQUEST,
         tripIDPayload: tripID
@@ -72,6 +71,27 @@ export const fetchSpecificRouteSuccess = (response) => {
 export const fetchSpecificRouteFail = (response) => {
     return {
         type: actionTypes.FETCH_SPECIFIC_ROUTE_FAIL,
+        error: response
+    }
+}
+
+export const fetchWeeklySummaryRequest = (response) => {
+    return {
+        type: actionTypes.FETCH_WEEKLY_SUMMARY_REQUEST,
+        payload: response
+    }
+}
+
+export const fetchWeeklySummarySuccess = (response) => {
+    return {
+        type: actionTypes.FETCH_WEEKLY_SUMMARY_SUCCESS,
+        payload: response
+    }
+}
+
+export const fetchWeeklySummaryFail = (response) => {
+    return {
+        type: actionTypes.FETCH_WEEKLY_SUMMARY_FAIL,
         error: response
     }
 }

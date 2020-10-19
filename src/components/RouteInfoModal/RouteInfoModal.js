@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {connect, useDispatch} from 'react-redux';
+import {connect} from 'react-redux';
 import {clearDriverState, sendDriverDetails} from '../../store/actions/driverActions';
 import classes from './RouteInfoModal.module.css';
 import Modal from 'react-bootstrap/Modal';
