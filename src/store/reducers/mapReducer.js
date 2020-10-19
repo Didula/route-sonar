@@ -127,7 +127,9 @@ const resetMap = (state) => {
         directionServiceOptions: null,
         startLocation: null,
         loading: state.loading,
-        isOptimized: false
+        isOptimized: false,
+        currentDirection: null,
+        wayPointTraversalOrder: []
     })
 }
 
