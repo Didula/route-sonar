@@ -5,7 +5,6 @@ import usePlacesAutocomplete, {getGeocode, getLatLng} from "use-places-autocompl
 import {Combobox, ComboboxInput, ComboboxList, ComboboxOption, ComboboxPopover,} from "@reach/combobox";
 
 import locClasses from './LocationSearchInputs.css';
-import * as actions from "../../../../store/actions/index";
 
 const PlacesAutocomplete = (props) => {
     const {
@@ -18,14 +17,8 @@ const PlacesAutocomplete = (props) => {
         requestOptions: {
             location: {lat: () => props.currentLocation.lat, lng: () => props.currentLocation.lng},
             radius: 100 * 1000
-        },
-        debounce: 500
+        }
     });
-
-    useEffect(() => {
-        if(ready && props.isAuthenticated)
-        props.savePlacesApiUsage(props.customerId)
-    },[data])
 
     useEffect(() => {
         setValue(props.value, false);
@@ -78,16 +71,8 @@ const PlacesAutocomplete = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-        currentLocation: state.map.currentLocation,
-        isAuthenticated: state.auth.userId !== null,
-        customerId: state.auth.customerId
+        currentLocation: state.map.currentLocation
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        savePlacesApiUsage: (customerId) => dispatch(actions.savePlacesApiUsage(customerId))
-    }
-}
-
-export default connect(mapStateToProps,mapDispatchToProps)(PlacesAutocomplete);
+export default connect(mapStateToProps)(PlacesAutocomplete);

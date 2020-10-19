@@ -65,7 +65,3 @@ export {
     setAggregatedQuotaFetchSuccess,
     setAggregatedQuotaFetchFail
 } from './dashBoardSettingsActions'
-
-export {
-    savePlacesApiUsage
-} from './locationSearchInputActions'

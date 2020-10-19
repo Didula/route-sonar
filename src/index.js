@@ -17,15 +17,8 @@ import homeReducer from "./store/reducers/homeReducer";
 import dashboardSummaryReducer from "./store/reducers/dashboardSummaryReducer";
 import travelLogReducer from "./store/reducers/travelLogReducer";
 import dashBoardSettingsReducer from "./store/reducers/dashBoardSettingsReducer"
-import locationSearchInputReducer from "./store/reducers/locationSearchInputReducer";
 
-import rootSaga, {
-    watchAuth,
-    watchDashboardSettings,
-    watchLocationSearchInput,
-    watchMap,
-    watchSideContent
-} from "./store/sagas";
+import rootSaga, {watchAuth, watchDashboardSettings, watchMap, watchSideContent} from "./store/sagas";
 import './assets/Mina-Regular.ttf';
 import './assets/Mina-Bold.ttf';
 import {BrowserRouter} from "react-router-dom";
@@ -38,8 +31,7 @@ const rootReducer = combineReducers({
     driver: driverReducer,
     dashboardSummary: dashboardSummaryReducer,
     travelLog: travelLogReducer,
-    dashboardSettings: dashBoardSettingsReducer,
-    locationSearchInput: locationSearchInputReducer
+    dashboardSettings: dashBoardSettingsReducer
 });
 
 const composeEnhancers = process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : compose;
@@ -54,8 +46,7 @@ const store = createStore(
 sagaMiddleware.run(watchMap);
 sagaMiddleware.run(watchSideContent);
 sagaMiddleware.run(watchAuth);
-sagaMiddleware.run(watchDashboardSettings);
-sagaMiddleware.run(watchLocationSearchInput);
+sagaMiddleware.run(watchDashboardSettings)
 sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(
