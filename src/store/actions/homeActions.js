@@ -16,3 +16,15 @@ export const saveApiConsumption = (customerId, placesNumber, geoCodeNumber, dire
         directionsNumber
     }
 }
+
+export const saveOptimizedRoute = (userId, customerId, driverId, vehicleId, direction,locationArray) => {
+    return {
+        type: actionTypes.SAVE_OPTIMIZED_ROUTE,
+        userId,
+        customerId,
+        driverId,
+        vehicleId,
+        direction,
+        locationArray
+    }
+}
