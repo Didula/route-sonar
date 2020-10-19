@@ -25,11 +25,11 @@ const setCurrentLocationPoint = (state, action) => {
  */
 const setStartPoint = (state, action) => {
     let updatedMarkers
+    action.startPoint.reference = 'Start';
     if (state.markers.length === 0) {
         // Adding start point as the first element of markers.
         updatedMarkers = [...state.markers];
         // injecting start point reference.
-        action.startPoint.reference = 'Start';
         updatedMarkers.push(action.startPoint);
     } else {
         // updating first element.
