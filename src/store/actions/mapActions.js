@@ -48,7 +48,6 @@ export const prepareDirectionServiceOptions = () => {
 }
 
 export const setIsOptimized = (value) => {
-    console.log('setting is optimized', value)
     return {
         type: actionTypes.SET_IS_OPTIMIZED,
         value: value
@@ -59,5 +58,31 @@ export const removeWayPoint = (wayPoint) => {
     return {
         type: actionTypes.REMOVE_WAY_POINT,
         wayPoint: wayPoint
+    }
+}
+
+export const resetMap = () => {
+    return {
+        type: actionTypes.RESET_MAP
+    }
+}
+
+export const setCurrentDirection = (direction) => {
+    return {
+        type: actionTypes.SET_CURRENT_DIRECTION,
+        direction: direction
+    }
+}
+
+export const prepareWayPointTraversalOrder = () => {
+    return {
+        type: actionTypes.PREPARE_WAYPOINT_TRAVERSAL_ORDER
+    }
+}
+
+export const setLoading = (value) => {
+    return {
+        type: actionTypes.SET_LOADING,
+        value: value
     }
 }

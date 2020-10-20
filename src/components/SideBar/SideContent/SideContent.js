@@ -12,6 +12,7 @@ import * as actions from "../../../store/actions";
 let autoComplete;
 const latLngRegex = /^[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?),\s*[-+]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))(\.\d+)?)$/g
 
+const FREE_LOCATIONS_NUMBER = 6;
 const SideContent = (props) => {
 
     const [query, setQuery] = useState("");
@@ -70,8 +71,7 @@ const SideContent = (props) => {
         props.setCurrentAddress(address);
     }
 
-    const addPointHandler = (event) => {
-        event.preventDefault();
+    function addPoint() {
         let wayPoint = {
             placeId: props.currentPlaceId,
             coordinates: props.currentWayPoint,
@@ -84,24 +84,34 @@ const SideContent = (props) => {
         setQuery('');
     }
 
+    const addPointHandler = (event) => {
+        event.preventDefault();
+        if (props.markers.length <= FREE_LOCATIONS_NUMBER) {
+            addPoint();
+        } else if (props.markers.length > FREE_LOCATIONS_NUMBER && props.isAuthenticated) {
+            addPoint();
+        } else {
+            props.setLoginModalOpen(true);
+        }
+    }
+
 
     useEffect(() => {
         handleScriptLoad(setQuery, autoCompleteRef);
     }, []);
 
     return (
-        <div>
+        <div className={classes.inputFormWrapper}>
             <div className={classes.inputForm}>
                 <Form className="py-2" onSubmit={addPointHandler}>
-
                     <span>Enter next destination and reference point</span>
-                    <div className="row mx-0 form-inline">
+                    <div className="row mx-0 mb-2 form-inline">
                         <Form.Group className="col-3 pl-0 pr-1" controlId="fromDestinationReference">
                             <Form.Control
                                 onChange={handleReferenceInput}
                                 value={props.currentReference}
                                 type="input"
-                                placeholder="Reference"
+                                placeholder="Ref"
                                 className="col-12"/>
                         </Form.Group>
                         <Form.Group className="col-8 pl-0 pr-1" controlId="formDestination">
@@ -114,25 +124,25 @@ const SideContent = (props) => {
                                 className="col-12"/>
                         </Form.Group>
                         <Button
-                            className="col-1 pl-0 pr-1"
+                            className="col-1 pl-0 pr-0"
                             variant="danger"
                             type="submit"
                             disabled={props.currentReference === '' || props.currentPlaceId === ''}
                         >+</Button>
                     </div>
-                    {props.markers.length === 2 && <Form.Text className="text-muted">
-                        {props.markers.length - 1} location added.
-                    </Form.Text>}
-                    {props.markers.length > 2 && <Form.Text className="text-muted">
-                        {props.markers.length - 1} locations added.
-                    </Form.Text>}
+                    <div className="d-flex rs-lbl-wrapper">
+                        {(!props.isAuthenticated && props.markers.length > FREE_LOCATIONS_NUMBER) && <span>Please Log in to add more</span>}
+                        {props.markers.length === 2 && <Form.Text className="text-muted">
+                            {props.markers.length - 1} location added.
+                        </Form.Text>}
+                    </div>
                 </Form>
             </div>
             <div className={classes.SideContent}>
                 <LocInput value={props.selectedStartPoint} onSelectPoint={props.onStartPointSelect}
                           text="Starting point"/>
-                <hr/>
             </div>
+            
         </div>
     )
 };
@@ -144,7 +154,8 @@ const mapStateToProps = (state) => {
         currentReference: state.sideContent.reference,
         currentWayPoint: state.sideContent.wayPoint,
         currentAddress: state.sideContent.address,
-        wayPointForm: state.sideContent.wayPointForm
+        wayPointForm: state.sideContent.wayPointForm,
+        isAuthenticated: state.auth.userId !== null
     }
 }
 
@@ -160,7 +171,8 @@ const mapDispatchToProps = (dispatch) => {
         setCurrentWayPoint: (point) => dispatch(actions.setWayPoint(point)),
         setCurrentAddress: (address) => dispatch(actions.setAddress(address)),
         setCurrentReference: (reference) => dispatch(actions.setReference(reference)),
-        resetForm: () => dispatch(actions.resetForm())
+        resetForm: () => dispatch(actions.resetForm()),
+        setLoginModalOpen: (value) => dispatch(actions.setLoginModalOpen(value))
     }
 }
 

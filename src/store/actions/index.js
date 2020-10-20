@@ -6,7 +6,12 @@ export {
     updateWayPoint,
     prepareDirectionServiceOptions,
     setIsOptimized,
-    addWayPoint
+    addWayPoint,
+    resetMap,
+    removeWayPoint,
+    setCurrentDirection,
+    prepareWayPointTraversalOrder,
+    setLoading
 } from './mapActions'
 
 export {
@@ -18,3 +23,54 @@ export {
     wayPointFormSubmit,
     resetForm
 } from './sideContentActions'
+
+export {
+    setSidePanelOpen,
+    saveApiConsumption,
+    saveOptimizedRoute
+} from './homeActions'
+
+export {
+    setLoginModalOpen,
+    authStart,
+    authUser,
+    logout,
+    logoutSucceed
+} from './authActions'
+
+export {
+    dashboardSummaryRequest,
+    dashboardSummarySuccess,
+    dashboardSummaryFailure,
+    fetchRecentRoutes,
+    startFetchRecentRoutes,
+    setFetchRecentRoutesSuccess,
+    setFetchRecentRoutesFail,
+    fetchSpecificRouteRequest,
+    fetchSpecificRouteSuccess,
+    fetchSpecificRouteFail,
+    fetchWeeklySummaryRequest,
+    fetchWeeklySummarySuccess,
+    fetchWeeklySummaryFail
+} from './dashboardSummaryActions';
+
+export {
+    travelLogRequest,
+    travelLogSuccess,
+    travelLogFailure
+} from './travelLogActions';
+
+export {
+    clearDriverState
+} from './driverActions'
+
+export {
+    changePassword,
+    startChangePassword,
+    setChangePasswordSuccess,
+    setChangePasswordFail,
+    fetchAggregatedQuota,
+    startFetchingAggregatedQuota,
+    setAggregatedQuotaFetchSuccess,
+    setAggregatedQuotaFetchFail
+} from './dashBoardSettingsActions'

@@ -4,13 +4,14 @@
 
 @media (min-width:800px) {
     .NavBar {
+        cursor: pointer;
         height: 100%;
         width: 50%;
         margin: 10px;
         padding: 0;
         display: flex;
         justify-content: space-evenly;
-        align-items: right;
+        align-items: center;
         list-style: none;
         flex-flow: row;
     }

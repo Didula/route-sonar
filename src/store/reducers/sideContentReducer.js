@@ -18,7 +18,8 @@ const initialState = {
             reference: '',
             location: '',
         }
-    }
+    },
+    sidePanelWidthPercentage: 25
 }
 
 const setPlaceId = (state, action) => {
@@ -41,7 +42,6 @@ const setAddress = (state, action) => {
 }
 
 const validateWaypoint = (state, action) => {
-    console.log(action);
     return state
 }
 

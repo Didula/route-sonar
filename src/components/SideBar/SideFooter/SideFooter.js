@@ -1,21 +1,39 @@
-import React from "react";
+import React, {useState} from "react";
+import {Button} from 'react-bootstrap';
 
 import classes from "./SideFooter.module.css";
-import Btn from '../../UI/Buttons/GenericButton/GenericButton';
 import {connect} from "react-redux";
+import RouteInfoModal from "../../RouteInfoModal/RouteInfoModal";
 
-const sideFooter = (props) => (
-    <div className={classes.SideFooter}>
-        {/* <Btn clicked={() => {
-        }} btnType='Secondary'>Upload Locations</Btn> */}
-        <Btn disabled={props.isOptimized} clicked={props.onOptimize} btnType='Main'>OPTIMIZE</Btn>
-    </div>
-);
+const SideFooter = (props) => {
+
+    let [showRouteModal, setShowRouteModal] = useState(false);
+
+    const togglePopup = () => {
+        setShowRouteModal(
+            showRouteModal = !showRouteModal
+        );
+    }
+
+    const openRouteInfoModal = () => {
+        togglePopup();
+    };
+
+
+    return (
+        <div className={classes.SideFooter}>
+            <Button disabled={props.isOptimized || props.markers.length <= 2} variant="danger" onClick={props.onOptimize}>Optimize</Button>
+            <Button disabled={!props.isOptimized} variant="danger" onClick={openRouteInfoModal}>Send</Button>
+            {showRouteModal ? <RouteInfoModal show={showRouteModal} onHide={() => setShowRouteModal(false)}/> : ''}
+        </div>
+        );
+};
 
 const mapStateToProps = (state) => {
     return {
+        markers: state.map.markers,
         isOptimized: state.map.isOptimized
     }
 }
 
-export default connect(mapStateToProps)(sideFooter);
+export default connect(mapStateToProps)(SideFooter);

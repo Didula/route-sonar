@@ -1,5 +1,4 @@
 import React from "react";
-import classes from '../About/About.module.css';
 
 const FAQs = () => {
     return(

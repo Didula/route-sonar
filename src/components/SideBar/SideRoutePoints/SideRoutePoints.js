@@ -1,10 +1,10 @@
 import React from "react";
+import {Col, Container, Row} from 'react-bootstrap';
 import {connect} from 'react-redux';
 
-import classes from './SideRoutePoint.module.css'
+import classes from './SideRoutePoints.module.css'
 import LocInput from '../../UI/Input/LocInput/LocInput';
 import * as actions from "../../../store/actions";
-import Form from 'react-bootstrap/Form'
 
 const sideRoutePoints = (props) => (
     <div className={classes.SideRoutePoints}>
@@ -14,23 +14,27 @@ const sideRoutePoints = (props) => (
                     // Remove 1st element from rendering because it is the starting point.
                     if (i !== 0) {
                         locationInputArray.push((
-                            <div className="row mx-0 form-inline" key={i}>
-                                <div className={"col-4 pl-0 pr-1"}>
-                                    {point.reference}
-                                </div>
-                                <div className={"col-8 pl-0 pr-1"}>
-                                    <LocInput
-                                        className={classes}
-                                        data-letter={point.id}
-                                        value={point.address}
-                                        onSelectPoint={(location) => {
-                                            props.onSelectingLocation(location, i)
-                                        }
-                                        }
-                                        text="Route point"/>
-                                </div>
-
-                            </div>
+                            
+                                <Row key={i}>
+                                    <Col sm={3} style={{
+                                        lineHeight: "50px", overflow: "hidden",
+                                        whiteSpace: 'nowrap'
+                                    }}>
+                                        {point.reference}
+                                    </Col>
+                                    <Col sm={9}>
+                                        <LocInput
+                                            hoverClose
+                                            onClose={() => props.onDeletePoint(point)}
+                                            data-letter={point.id}
+                                            value={point.address}
+                                            onSelectPoint={(location) => {
+                                                props.onSelectingLocation(location, i)
+                                            }
+                                            }
+                                            text="Route point"/>
+                                    </Col>
+                                </Row>
 
                         ))
                     }
@@ -48,7 +52,8 @@ const mapDispatchToProps = (dispatch) => {
         onSelectingLocation: (point, index) => {
             dispatch(actions.updateWayPoint(point, index));
             dispatch(actions.setCurrentLocationPoint(point.coordinates));
-        }
+        },
+        onDeletePoint: (point) => dispatch(actions.removeWayPoint(point))
     }
 }
 

@@ -4,12 +4,6 @@ import {DirectionsRenderer, DirectionsService, GoogleMap, InfoWindow, Marker} fr
 import mapStyles from './map-styles'
 import * as actions from '../../store/actions/index'
 
-
-const mapsContainerStyle = {
-    width: '100vw',
-    height: '100vh',
-    float: 'right'
-}
 const mapOptions = {
     styles: mapStyles,
     disableDefaultUI: true,
@@ -18,11 +12,36 @@ const mapOptions = {
 const Map = (props) => {
 
     const [selectedMarker, setSelectedMarker] = useState({});
-    const [currentDirection, setCurrentDirection] = useState(null);
+    const [mapsContainerStyle, setMapsContainerStyle] = useState({
+        width: '100vw',
+        height: '100vh',
+        float: 'right'
+    });
 
     useEffect(() => {
+        props.setMapLoading(true);
         props.onFetchingCurrentUserLocation();
     }, []);
+
+    // Dynamic view width setting for map when side panel opens up.
+    useEffect(() => {
+        if(props.isSidePanelOpen){
+            const updatedMapContainerStyle = {
+                width: (100 - props.sidePanelWidthPercentage) +'vw',
+                height: '100vh',
+                float: 'right'
+            }
+            setMapsContainerStyle(updatedMapContainerStyle);
+        } else {
+            setMapsContainerStyle(
+                {
+                    width: '100vw',
+                    height: '100vh',
+                    float: 'right'
+                }
+            );
+        }
+    },[props.isSidePanelOpen])
 
     const onSelect = marker => {
         setSelectedMarker(marker)
@@ -30,28 +49,27 @@ const Map = (props) => {
 
     const directionsCallback = useCallback((googleResponse) => {
         if (googleResponse) {
-            console.log(googleResponse)
+            // console.log(googleResponse)
             props.onSuccessFullOptimization(true);
-            if (currentDirection) {
+            if (props.currentDirection) {
                 if (googleResponse.status === "OK" &&
                     googleResponse.routes[0].overview_polyline !==
-                    currentDirection.routes[0].overview_polyline) {
-                    console.log("since the route is changed to update the state");
-
-                    setCurrentDirection(googleResponse);
+                    props.currentDirection.routes[0].overview_polyline) {
+                    // console.log("since the route is changed to update the state");
+                    props.onDirectionCallBack(googleResponse);
                 } else {
-                    console.log("same as last time do not update state for route");
+                    // console.log("same as last time do not update state for route");
                 }
             } else {
                 if (googleResponse.status === "OK") {
-                    console.log("first time for a route is set, updates the state");
-                    setCurrentDirection(googleResponse);
+                    // console.log("first time for a route is set, updates the state");
+                    props.onDirectionCallBack(googleResponse);
                 } else {
-                    console.log("not update the state for the same route as the previous");
+                    // console.log("not update the state for the same route as the previous");
                 }
             }
         }
-    }, [currentDirection]);
+    }, []);
 
     let directionService = null
 
@@ -79,20 +97,6 @@ const Map = (props) => {
         return markerArray;
     })
 
-    let infoWindowElements = null;
-    infoWindowElements = props.markers.map(marker => {
-        let windowArray = [];
-        if (marker.coordinates.lat !== '' && marker.coordinates.lng !== '') {
-            windowArray.push(
-                <InfoWindow
-                    key={marker.placeId}
-                    position={marker.coordinates}
-                > {marker.reference && (<p>{marker.reference}</p>)}
-                </InfoWindow>)
-        }
-        return windowArray;
-    });
-
     return (
         <div>
             <GoogleMap
@@ -101,10 +105,12 @@ const Map = (props) => {
                 center={props.currentLocation}
                 options={mapOptions}
                 onClick={(event) => {
-                }}>
+                }}
+                onTilesLoaded={() => props.setMapLoading(false)}
+                onUnmount={() => props.onUnmount()}>
                 {!props.isOptimized && markerElements}
                 {directionService}
-                {currentDirection !== null && (<DirectionsRenderer options={{directions: currentDirection}}/>)}
+                {props.currentDirection !== null && (<DirectionsRenderer options={{directions: props.currentDirection}}/>)}
             </GoogleMap>
         </div>
     );
@@ -116,14 +122,23 @@ const mapStateToProps = (state) => {
         startLocation: state.map.startLocation,
         markers: state.map.markers,
         directionServiceOptions: state.map.directionServiceOptions,
-        isOptimized: state.map.isOptimized
+        isOptimized: state.map.isOptimized,
+        sidePanelWidthPercentage: state.sideContent.sidePanelWidthPercentage,
+        isSidePanelOpen: state.home.isSidePanelOpen,
+        currentDirection: state.map.currentDirection
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
         onFetchingCurrentUserLocation: () => dispatch(actions.fetchStartPoint()),
-        onSuccessFullOptimization: (value) => dispatch(actions.setIsOptimized(value))
+        onSuccessFullOptimization: (value) => dispatch(actions.setIsOptimized(value)),
+        onDirectionCallBack: (direction) => {
+            dispatch(actions.setCurrentDirection(direction));
+            dispatch(actions.prepareWayPointTraversalOrder());
+        },
+        onUnmount: () => dispatch(actions.resetMap()),
+        setMapLoading:(value) => dispatch(actions.setLoading(value))
     }
 }
 

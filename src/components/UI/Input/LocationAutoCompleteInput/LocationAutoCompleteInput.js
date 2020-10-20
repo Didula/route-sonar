@@ -10,7 +10,6 @@ const LocationAutoCompleteInput = (props) => {
 
     const handleChange = address => {
         let matchResult = address.match(/^[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?),\s*[-+]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))(\.\d+)?)$/g);
-        console.log(matchResult);
         if (matchResult && matchResult.length === 0) {
             setState({address});
         }

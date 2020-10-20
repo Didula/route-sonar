@@ -1,0 +1,22 @@
+.Icon {
+    height: 70px;
+    width: 70px;
+    border-radius: 35px;
+    position: absolute;
+    float: right;
+    left: auto;
+    right: 80px;
+    top: 30px;
+    overflow: hidden;
+    /*border: 2px solid #b60000;*/
+    cursor: pointer;
+}
+
+.Icon:hover {
+    filter: brightness(103%);
+}
+
+.Icon img {
+    width: 100%;
+    height: auto;
+}

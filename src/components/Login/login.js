@@ -1,32 +1,64 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
+import {connect} from "react-redux";
 
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import * as actions from "../../store/actions";
 
-const Login = ({show, onHide}) => {
+const Login = (props) => {
+
+    function simulateNetworkRequest() {
+        return new Promise((resolve) => setTimeout(resolve, 2000));
+    }
+
+    const [isLoading, setLoading] = useState(false);
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    useEffect(() => {
+        if (props.isLoading) {
+            simulateNetworkRequest().then(() => {
+
+            });
+        }
+    }, [props.isLoading]);
+
+    const onLogin = (event) => {
+        if (!props.isLoading) {
+            event.preventDefault();
+            if(email !== '' && password !== ''){
+                props.onLogin(email,password)
+            }
+        }
+    };
 
     return (
-        <Modal show={show} onHide={onHide} size="md" aria-labelledby="contained-modal-title-vcenter" centered>
+        <Modal show={props.show} onHide={props.onHide} size="md" aria-labelledby="contained-modal-title-vcenter" centered>
             <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter">
                     Please Sign In
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <Form>
+                <Form onSubmit={onLogin}>
                     <Form.Group controlId="username" className="mt-3 mb-4">
-                        <Form.Control size="lg" type="email" placeholder="Enter email"/>
+                        <Form.Control value={email} onChange={(event) => setEmail(event.target.value)} size="lg" type="email" placeholder="Enter email"/>
                     </Form.Group>
                     <Form.Group controlId="password" className="my-4">
-                        <Form.Control size="lg" type="password" placeholder="Password"/>
+                        <Form.Control value={password} onChange={(event) => setPassword(event.target.value)} size="lg" type="password" placeholder="Password"/>
                     </Form.Group>
                     <div className="row mx-1">
-                        <Button size="lg" className="col-12 mt-4" variant="primary" type="submit">
-                            Submit
+                        <Button
+                            size="lg"
+                            className="col-12 mt-4"
+                            variant="primary"
+                            disabled={props.isLoading || (email === '' && password === '')}
+                            type="submit">
+                            {props.isLoading ? 'Signing in...' : 'Sign In'}
                         </Button>
                     </div>
-                    <hr/>
+                    {/*<hr/>
                     <div className="text-center">Don't want to complete the form?</div>
                     <hr/>
                     <div className="row">
@@ -53,11 +85,23 @@ const Login = ({show, onHide}) => {
                                                                           target="_blank" rel="noopener noreferrer">Create an account</a></div>
                     <div className="text-center ternary-txt">This site is protected by reCAPTCHA and the Google Privacy
                         Policy and Terms of Service apply.
-                    </div>
+                    </div>*/}
                 </Form>
             </Modal.Body>
         </Modal>
     )
 }
 
-export default Login;
+const mapStateToProps = (state) => {
+    return {
+        isLoading: state.auth.loading
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onLogin: (email , password) => dispatch(actions.authUser(email, password)),
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Login);
