@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { connect, useSelector } from 'react-redux';
+import { connect } from 'react-redux';
 import { Bar } from 'react-chartjs-2';
 import CountUp from 'react-countup';
 import { Card, CardGroup, Col, Container, Dropdown, DropdownButton, Nav, Row } from "react-bootstrap";
@@ -17,28 +17,10 @@ const Overview = (props) => {
 
     useEffect(() => {
         props.dispatchGetDashboardSummart(props.customerId, startDate.toLocaleDateString('en-CA'), endDate.toLocaleDateString('en-CA'));
+        props.dispatchWeeklyOrders(props.customerId);
     }, []);
 
-    const data = {
-        labels: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-        datasets: [{
-            label: 'Avg orders delivered',
-            backgroundColor: 'rgba(23, 162, 184,0.5)',
-            borderColor: 'rgba(23, 162, 184,1)',
-            borderWidth: 1,
-            hoverBackgroundColor: 'rgba(23, 162, 184,1)',
-            hoverBorderColor: 'rgba(23, 162, 184,0.5)',
-            data: [65, 59, 80, 81, 56, 55, 40, 12]
-        }, {
-            label: 'Avg distance traveled (km)',
-            backgroundColor: 'rgba(0, 123, 255,0.5)',
-            borderColor: 'rgba(0, 123, 255,1)',
-            borderWidth: 1,
-            hoverBackgroundColor: 'rgba(0, 123, 255,1)',
-            hoverBorderColor: 'rgba(0, 123, 255,0.5)',
-            data: [135, 139, 60, 71, 142, 123, 67, 35]
-        }]
-    };
+    
 
     const month = ["January", "February", "March", "April", "May", "June",
         "July", "August", "September", "October", "November", "December"]
@@ -109,8 +91,6 @@ const Overview = (props) => {
                             <Card.Title><strong><CountUp end={Number(props.distanceCovered)} /></strong> &nbsp;km</Card.Title>
                         </Card>
                     </CardGroup>
-                </Col>
-                <Col sm={4}>
                     <CardGroup className={classes.DataItem}>
                         <Card border="info">
                             <Card.Title>Number of<br />Locations</Card.Title>
@@ -119,8 +99,6 @@ const Overview = (props) => {
                             <Card.Title><strong><CountUp end={Number(props.totalLocations)} /></strong></Card.Title>
                         </Card>
                     </CardGroup>
-                </Col>
-                <Col sm={4}>
                     <CardGroup className={classes.DataItem}>
                         <Card border="info">
                             <Card.Title>Avg Locations<br />per Route</Card.Title>
@@ -130,9 +108,9 @@ const Overview = (props) => {
                         </Card>
                     </CardGroup>
                 </Col>
-                {/* <Col>
-                    <Bar data={data}/>
-                </Col> */}
+                <Col sm={8}>
+                    <Bar data={props.weeklyOrders}/>
+                </Col>
             </Row>
             <br />
             <hr />
@@ -153,13 +131,15 @@ const mapStateToProps = (state) => {
         totalLocations: state.dashboardSummary.totalLocations,
         totalTrips: state.dashboardSummary.totalTrips,
         distanceCovered: state.dashboardSummary.distanceCovered,
-        customerId: state.auth.customerId
+        customerId: state.auth.customerId,
+        weeklyOrders: state.dashboardSummary.weeklySummary
     }
 }
 
 const mapDispatchToProps = (dispatch, props) => {
     return {
-        dispatchGetDashboardSummart: (customerId, startDate, endDate) => dispatch(actions.dashboardSummaryRequest(customerId, startDate, endDate))
+        dispatchGetDashboardSummart: (customerId, startDate, endDate) => dispatch(actions.dashboardSummaryRequest(customerId, startDate, endDate)),
+        dispatchWeeklyOrders: (customerId) => dispatch(actions.fetchWeeklySummaryRequest(customerId))
     }
 }
 

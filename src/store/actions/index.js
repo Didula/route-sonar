@@ -49,6 +49,9 @@ export {
     fetchSpecificRouteRequest,
     fetchSpecificRouteSuccess,
     fetchSpecificRouteFail,
+    fetchWeeklySummaryRequest,
+    fetchWeeklySummarySuccess,
+    fetchWeeklySummaryFail
 } from './dashboardSummaryActions';
 
 export {
