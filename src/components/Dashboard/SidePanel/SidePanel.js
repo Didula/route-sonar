@@ -17,7 +17,7 @@ const sidePanel = (props) => {
 
     return (
         <Container fluid>
-            <img onClick={onClickTravelToHome} src={logo} alt="RouteSONAR" className="img-fluid"/>
+            <img onClick={onClickTravelToHome} src={logo} alt="RouteSONAR" className="img-fluid rs-dashboard-sp-logo"/>
             <ul className={classes.Nav}>
                 <li><Button onClick={onClickTravelToHome}  className={classes.AddNew}><img src={add} alt="+"/>Optimize a Route</Button></li>
                 <br/><hr/>

@@ -91,8 +91,6 @@ const Overview = (props) => {
                             <Card.Title><strong><CountUp end={Number(props.distanceCovered)} /></strong> &nbsp;km</Card.Title>
                         </Card>
                     </CardGroup>
-                </Col>
-                <Col sm={4}>
                     <CardGroup className={classes.DataItem}>
                         <Card border="info">
                             <Card.Title>Number of<br />Locations</Card.Title>
@@ -101,8 +99,6 @@ const Overview = (props) => {
                             <Card.Title><strong><CountUp end={Number(props.totalLocations)} /></strong></Card.Title>
                         </Card>
                     </CardGroup>
-                </Col>
-                <Col sm={4}>
                     <CardGroup className={classes.DataItem}>
                         <Card border="info">
                             <Card.Title>Avg Locations<br />per Route</Card.Title>
@@ -112,7 +108,7 @@ const Overview = (props) => {
                         </Card>
                     </CardGroup>
                 </Col>
-                <Col>
+                <Col sm={8}>
                     <Bar data={props.weeklyOrders}/>
                 </Col>
             </Row>
