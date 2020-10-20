@@ -1,6 +1,6 @@
 import {call, put, takeEvery} from 'redux-saga/effects';
 
-const apiUrl = "http://18.138.23.29:5000/driverAdd";
+const DRIVER_ADD_END_POINT = 'driverAdd'
 
 function getAPI(driverDetails, customerID) {
     const reqBody = {
@@ -10,7 +10,7 @@ function getAPI(driverDetails, customerID) {
         "tele": '94' + driverDetails.mobileNo
     }
     return fetch(
-        apiUrl,
+        (process.env.REACT_APP_API_URL + DRIVER_ADD_END_POINT),
         {
             method: 'POST',
             headers: {
