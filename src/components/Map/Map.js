@@ -19,6 +19,7 @@ const Map = (props) => {
     });
 
     useEffect(() => {
+        props.setMapLoading(true);
         props.onFetchingCurrentUserLocation();
     }, []);
 
@@ -105,6 +106,7 @@ const Map = (props) => {
                 options={mapOptions}
                 onClick={(event) => {
                 }}
+                onTilesLoaded={() => props.setMapLoading(false)}
                 onUnmount={() => props.onUnmount()}>
                 {!props.isOptimized && markerElements}
                 {directionService}
@@ -135,7 +137,8 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actions.setCurrentDirection(direction));
             dispatch(actions.prepareWayPointTraversalOrder());
         },
-        onUnmount: () => dispatch(actions.resetMap())
+        onUnmount: () => dispatch(actions.resetMap()),
+        setMapLoading:(value) => dispatch(actions.setLoading(value))
     }
 }
 

@@ -61,6 +61,10 @@ export {
 } from './travelLogActions';
 
 export {
+    clearDriverState
+} from './driverActions'
+
+export {
     changePassword,
     startChangePassword,
     setChangePasswordSuccess,

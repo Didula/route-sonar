@@ -1,6 +1,7 @@
 import React, {useEffect} from "react";
 import {connect, useSelector} from "react-redux";
 import {useLoadScript} from "@react-google-maps/api";
+import {Spinner} from 'react-bootstrap';
 
 import FBox from "../../components/FloatingBox/FloatingBox";
 import SideBar from "../../components/SideBar/SideBar";
@@ -15,6 +16,13 @@ const Home = (props) => {
 
     const isOptimized = useSelector(state => state.map.isOptimized);
     const driverDetailsSent = useSelector(state => state.driver.list);
+
+    useEffect(() => {
+        return () => {
+            // on component destroy.
+            props.clearDriverState()
+        }
+    },[])
 
     useEffect(() => {
         setShowNotification(false);
@@ -71,7 +79,8 @@ const Home = (props) => {
 
     return (
         <Auxi>
-            {inputComponent}
+            {!props.isMapLoading && inputComponent}
+            {props.isMapLoading && <Spinner style={{position:'absolute',display:'block',top:'50%',left:'50%'}} animation="border" variant="danger"/>}
             <Map/>
             {/* { showToast ? <RouteToast /> : null } */}
             {showNotification ? <Notification/> : ''}
@@ -85,7 +94,8 @@ const mapStateToProps = (state) => {
         startLocation: state.map.startLocation,
         markers: state.map.markers,
         customerId: state.auth.customerId,
-        isAuthenticated: state.auth.userId !== null
+        isAuthenticated: state.auth.userId !== null,
+        isMapLoading: state.map.loading
     }
 }
 
@@ -98,7 +108,8 @@ const mapDispatchToProps = (dispatch) => {
         onAddingBlankRoutePoint: () => dispatch(actions.addBlankWayPoint()),
         onOptimizeRoutes: () => dispatch(actions.prepareDirectionServiceOptions()),
         onSaveApiConsumption: (customerId, placesNumber, geoCodeNumber, directionsNumber) => dispatch(actions.saveApiConsumption(customerId, placesNumber, geoCodeNumber, directionsNumber)),
-        onClickingAddLocations: (value) => dispatch(actions.setSidePanelOpen(value))
+        onClickingAddLocations: (value) => dispatch(actions.setSidePanelOpen(value)),
+        clearDriverState:() => dispatch(actions.clearDriverState())
     }
 }
 

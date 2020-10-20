@@ -42,7 +42,6 @@ const setAddress = (state, action) => {
 }
 
 const validateWaypoint = (state, action) => {
-    console.log(action);
     return state
 }
 

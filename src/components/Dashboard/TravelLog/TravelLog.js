@@ -21,7 +21,6 @@ const TravelLog = (props) => {
 
     const handleShow = (index) => {
         setTripID(index);
-        console.log('yo', index, tripID);
         setShow(true);
     }
 

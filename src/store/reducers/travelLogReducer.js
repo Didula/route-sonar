@@ -31,7 +31,6 @@ export default function travelLogReducer(state= initialState, action){
                 loading: false
             }
         case type.TRAVEL_LOG_FAILURE:
-            console.log('error', action.payload);
             return {
                 ...state,
                 loading: false,

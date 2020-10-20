@@ -12,6 +12,7 @@ import './styles/main.scss';
 import * as actions from "./store/actions";
 import {connect} from "react-redux";
 import Login from "./components/Login/login";
+import {Spinner} from "react-bootstrap";
 
 const lazyLoadedAbout = asyncLoader(() => {
     return import("./containers/About/About");
