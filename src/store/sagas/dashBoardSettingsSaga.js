@@ -14,7 +14,10 @@ export function* fetchAggregatedQuotaSaga(action) {
     let url = process.env.REACT_APP_API_URL + FETCH_AGGREGATED_QUOTA_END_POINT;
     try {
         axios.defaults.headers.post['Content-Type'] = 'application/json';
-        axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
+        axios.defaults.headers.post['Access-Control-Allow-Origin'] = 'http://www.routesonar.com';
+        axios.defaults.headers.post['Access-Control-Allow-Headers'] = 'http://www.routesonar.com';
+        axios.defaults.headers.post['Access-Control-Expose-Headers'] = 'http://www.routesonar.com';
+        axios.defaults.headers.post['Access-Control-Allow-Credentials'] = true;
         const response = yield axios.post(url, aggregatedQuotaRequest);
         yield put(actions.setAggregatedQuotaFetchSuccess(response.data.package_limit, response.data.used, response.data.remaining));
     } catch (error) {
@@ -34,7 +37,10 @@ export function* changePasswordSaga(action){
     let url = process.env.REACT_APP_API_URL + CHANGE_PASSWORD_END_POINT;
     try {
         axios.defaults.headers.post['Content-Type'] = 'application/json';
-        axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
+        axios.defaults.headers.post['Access-Control-Allow-Origin'] = 'http://www.routesonar.com';
+        axios.defaults.headers.post['Access-Control-Allow-Headers'] = 'http://www.routesonar.com';
+        axios.defaults.headers.post['Access-Control-Expose-Headers'] = 'http://www.routesonar.com';
+        axios.defaults.headers.post['Access-Control-Allow-Credentials'] = true;
         const response = yield axios.post(url, changePasswordRequest);
         yield put(actions.setChangePasswordSuccess(response.data));
     } catch (error) {

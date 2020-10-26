@@ -9,7 +9,10 @@ function* getTravelLogData(action) {
     const apiUrl = process.env.REACT_APP_API_URL + `travelLog?customerID=${customerID}&startDate=${startDate}&endDate=${endDate}`;
     try {
         axios.defaults.headers.post['Content-Type'] = 'application/json';
-        axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
+        axios.defaults.headers.post['Access-Control-Allow-Origin'] = 'http://www.routesonar.com';
+        axios.defaults.headers.post['Access-Control-Allow-Headers'] = 'http://www.routesonar.com';
+        axios.defaults.headers.post['Access-Control-Expose-Headers'] = 'http://www.routesonar.com';
+        axios.defaults.headers.post['Access-Control-Allow-Credentials'] = true;
         const response = yield axios.get(apiUrl);
         if (response.status === 200){
             yield put({
