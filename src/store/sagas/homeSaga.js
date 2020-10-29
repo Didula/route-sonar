@@ -22,9 +22,9 @@ export function* saveApiConsumptionSaga(action) {
     let url = process.env.REACT_APP_API_URL + CONSUMPTION_SAVE_END_POINT;
     try {
         axios.defaults.headers.post['Content-Type'] = 'application/json';
-        axios.defaults.headers.post['Access-Control-Allow-Origin'] = 'http://www.routesonar.com';
-        axios.defaults.headers.post['Access-Control-Allow-Headers'] = 'http://www.routesonar.com';
-        axios.defaults.headers.post['Access-Control-Expose-Headers'] = 'http://www.routesonar.com';
+        axios.defaults.headers.post['Access-Control-Allow-Origin'] = 'https://www.routesonar.com';
+        axios.defaults.headers.post['Access-Control-Allow-Headers'] = 'https://www.routesonar.com';
+        axios.defaults.headers.post['Access-Control-Expose-Headers'] = 'https://www.routesonar.com';
         axios.defaults.headers.post['Access-Control-Allow-Credentials'] = true;
         const response = yield axios.post(url, saveApiConsumptionRequest);
     } catch (error) {
