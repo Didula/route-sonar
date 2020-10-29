@@ -14,7 +14,7 @@ export function* fetchAggregatedQuotaSaga(action) {
     let url = process.env.REACT_APP_API_URL + FETCH_AGGREGATED_QUOTA_END_POINT;
     try {
         axios.defaults.headers.post['Content-Type'] = 'application/json';
-        axios.defaults.headers.post['Access-Control-Allow-Origin'] = 'https://www.routesonar.com';
+        axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
         axios.defaults.headers.post['Access-Control-Allow-Headers'] = 'https://www.routesonar.com';
         axios.defaults.headers.post['Access-Control-Expose-Headers'] = 'https://www.routesonar.com';
         axios.defaults.headers.post['Access-Control-Allow-Credentials'] = true;
@@ -37,7 +37,7 @@ export function* changePasswordSaga(action){
     let url = process.env.REACT_APP_API_URL + CHANGE_PASSWORD_END_POINT;
     try {
         axios.defaults.headers.post['Content-Type'] = 'application/json';
-        axios.defaults.headers.post['Access-Control-Allow-Origin'] = 'https://www.routesonar.com';
+        axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
         axios.defaults.headers.post['Access-Control-Allow-Headers'] = 'https://www.routesonar.com';
         axios.defaults.headers.post['Access-Control-Expose-Headers'] = 'https://www.routesonar.com';
         axios.defaults.headers.post['Access-Control-Allow-Credentials'] = true;
