@@ -13,9 +13,9 @@ function* getDashboardSummaryData(action) {
     const apiUrl = process.env.REACT_APP_API_URL + `getSummary?customerID=${customerID}&startDate=${startDate}&endDate=${endDate}`;
     try {
         axios.defaults.headers.post['Content-Type'] = 'application/json';
-        axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
-        axios.defaults.headers.post['Access-Control-Allow-Headers'] = 'https://www.routesonar.com';
-        axios.defaults.headers.post['Access-Control-Expose-Headers'] = 'https://www.routesonar.com';
+        axios.defaults.headers.post['Access-Control-Allow-Origin'] = process.env.REACT_APP_ORIGIN;
+        axios.defaults.headers.post['Access-Control-Allow-Headers'] = process.env.REACT_APP_ORIGIN;
+        axios.defaults.headers.post['Access-Control-Expose-Headers'] = process.env.REACT_APP_ORIGIN;
         axios.defaults.headers.post['Access-Control-Allow-Credentials'] = true;
         const response = yield axios.get(apiUrl);
         if (response.status === 200) {
