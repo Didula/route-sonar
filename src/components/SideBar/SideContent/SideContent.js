@@ -13,6 +13,7 @@ let autoComplete;
 const latLngRegex = /^[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?),\s*[-+]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))(\.\d+)?)$/g
 
 const FREE_LOCATIONS_NUMBER = 6;
+const LOCATIONS_MAX_LIMIT = 25;
 const SideContent = (props) => {
 
     const [query, setQuery] = useState("");
@@ -88,9 +89,9 @@ const SideContent = (props) => {
         event.preventDefault();
         if (props.markers.length <= FREE_LOCATIONS_NUMBER) {
             addPoint();
-        } else if (props.markers.length > FREE_LOCATIONS_NUMBER && props.isAuthenticated) {
+        } else if (props.markers.length > FREE_LOCATIONS_NUMBER && props.markers.length < LOCATIONS_MAX_LIMIT && props.isAuthenticated) {
             addPoint();
-        } else {
+        } else if (props.markers.length <= FREE_LOCATIONS_NUMBER && !props.isAuthenticated) {
             props.setLoginModalOpen(true);
         }
     }
@@ -132,6 +133,7 @@ const SideContent = (props) => {
                     </div>
                     <div className="d-flex rs-lbl-wrapper">
                         {(!props.isAuthenticated && props.markers.length > FREE_LOCATIONS_NUMBER) && <span>Please Log in to add more</span>}
+                        {(props.isAuthenticated && props.markers.length === LOCATIONS_MAX_LIMIT) && <span>You have entered maximum number of locations</span>}
                         {props.markers.length === 2 && <Form.Text className="text-muted">
                             {props.markers.length - 1} location added.
                         </Form.Text>}
