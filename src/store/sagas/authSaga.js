@@ -19,7 +19,7 @@ export function* authUserSaga(action) {
     }
     let url = process.env.REACT_APP_API_URL + LOG_IN_END_POINT;
     try {
-        axios.defaults.headers.post['Access-Control-Allow-Origin'] = 'http://www.routesonar.com';
+        axios.defaults.headers.post['Access-Control-Allow-Origin'] = process.env.REACT_APP_ORIGIN;
         axios.defaults.headers.post['Accept-Language'] = 'en-US,en;q=0.9';
         const response = yield axios.post(url, authData);
         yield localStorage.setItem('userName', authData.user_name)

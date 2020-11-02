@@ -15,7 +15,7 @@ function getAPI(driverDetails, customerID) {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin':'http://www.routesonar.com'
+                'Access-Control-Allow-Origin':process.env.REACT_APP_ORIGIN
             },
             body: JSON.stringify(reqBody)
         }
