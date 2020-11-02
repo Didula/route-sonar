@@ -10,7 +10,8 @@ const initialState = {
     loading: true,
     isOptimized: false,
     currentDirection: null,
-    wayPointTraversalOrder: []
+    wayPointTraversalOrder: [],
+    urls: []
 }
 
 
@@ -129,7 +130,8 @@ const resetMap = (state) => {
         loading: state.loading,
         isOptimized: false,
         currentDirection: null,
-        wayPointTraversalOrder: []
+        wayPointTraversalOrder: [],
+        urls : []
     })
 }
 
@@ -142,6 +144,8 @@ const removeWayPoint = (state, action) => {
 }
 
 const setWayPointTraversalOrder = (state) => {
+    let url = "https://www.google.com/maps/dir/?api=1";
+    let urlList = [];
     let shuffledWayPointOrder = [];
     let updatedWayPointTraversalOrder = [];
     if(state.currentDirection){
@@ -154,8 +158,37 @@ const setWayPointTraversalOrder = (state) => {
         shuffledWayPointOrder.forEach(wayPointIndex => {
             updatedWayPointTraversalOrder.push(wayPoints[wayPointIndex]);
         })
+
+        // Since travelling order of waypoints is only available after receiving the direction response, URL preparation is also done here.
+        // 8 or less waypoints : origin -> 8 or les way points -> destination : 1 URL
+        if(wayPoints.length <= 8){
+            url = url +
+                "&origin=" + state.startLocation.coordinates.lat + ',' + state.startLocation.coordinates.lng +
+                "&destination=" + state.endLocation.coordinates.lat + ',' + state.endLocation.coordinates.lng + "&waypoints=";
+            wayPoints.forEach(waypoint => {
+               url = url + '|';
+               url = url + waypoint.coordinates.lat + ',' + waypoint.coordinates.lng;
+            });
+            urlList.push(url);
+        }
+        // 16 or less way points : first origin -> first 8 way points -> first URL dest -> second origin -> second more than 8 but less than or equal to 16 waypoints -> second dest.
+        else if (wayPoints.length <= 16){
+            let firstUrl = url +
+                "&origin=" + state.startLocation.coordinates.lat + ',' + state.startLocation.coordinates.lng +
+                "&destination=" + state.endLocation.coordinates.lat + ',' + state.endLocation.coordinates.lng + "&waypoints=";
+        }
+        // more than 16 but less than 23 waypoints.
+        else if (wayPoints.length <= 23) {
+
+        } else {
+            // this should not happen ever!
+        }
     }
-    return updateObject(state, {wayPointTraversalOrder : updatedWayPointTraversalOrder})
+    return updateObject(state, {wayPointTraversalOrder : updatedWayPointTraversalOrder, urls: urlList})
+}
+
+const prepareNavigationUrls = (state) => {
+
 }
 
 const setLoading = (state, action) => {
