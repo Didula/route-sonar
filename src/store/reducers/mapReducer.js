@@ -165,20 +165,46 @@ const setWayPointTraversalOrder = (state) => {
             url = url +
                 "&origin=" + state.startLocation.coordinates.lat + ',' + state.startLocation.coordinates.lng +
                 "&destination=" + state.endLocation.coordinates.lat + ',' + state.endLocation.coordinates.lng + "&waypoints=";
-            wayPoints.forEach(waypoint => {
-               url = url + '|';
+            wayPoints.forEach((waypoint,index) => {
+                if(index !== 0){
+                    url = url + '|';
+                }
                url = url + waypoint.coordinates.lat + ',' + waypoint.coordinates.lng;
             });
             urlList.push(url);
         }
         // 16 or less way points : first origin -> first 8 way points -> first URL dest -> second origin -> second more than 8 but less than or equal to 16 waypoints -> second dest.
-        else if (wayPoints.length <= 16){
+        else if (wayPoints.length <= 16) {
             let firstUrl = url +
                 "&origin=" + state.startLocation.coordinates.lat + ',' + state.startLocation.coordinates.lng +
                 "&destination=" + state.endLocation.coordinates.lat + ',' + state.endLocation.coordinates.lng + "&waypoints=";
+            let secondUrl = url +
+                "&origin=" + state.startLocation.coordinates.lat + ',' + state.startLocation.coordinates.lng +
+                "&destination=" + state.endLocation.coordinates.lat + ',' + state.endLocation.coordinates.lng + "&waypoints=";
+            wayPoints.forEach((waypoint, index) => {
+                if (index < 8) {
+                    if (index !== 0) {
+                        firstUrl = firstUrl + '|';
+                    }
+                    firstUrl = firstUrl + waypoint.coordinates.lat + ',' + waypoint.coordinates.lng;
+                } else {
+                    if (index !== 8) {
+                        secondUrl = secondUrl + '|';
+                    }
+                    secondUrl = secondUrl + waypoint.coordinates.lat + ',' + waypoint.coordinates.lng;
+                }
+            })
+            urlList.push(firstUrl);
+            urlList.push(secondUrl);
         }
         // more than 16 but less than 23 waypoints.
         else if (wayPoints.length <= 23) {
+            let firstUrl = url +
+                "&origin=" + state.startLocation.coordinates.lat + ',' + state.startLocation.coordinates.lng +
+                "&destination=" + state.endLocation.coordinates.lat + ',' + state.endLocation.coordinates.lng + "&waypoints=";
+            let secondUrl = url +
+                "&origin=" + state.startLocation.coordinates.lat + ',' + state.startLocation.coordinates.lng +
+                "&destination=" + state.endLocation.coordinates.lat + ',' + state.endLocation.coordinates.lng + "&waypoints=";
 
         } else {
             // this should not happen ever!
