@@ -4,6 +4,7 @@ import {Button} from 'react-bootstrap';
 import classes from "./SideFooter.module.css";
 import {connect} from "react-redux";
 import RouteInfoModal from "../../RouteInfoModal/RouteInfoModal";
+import * as actions from "../../../store/actions";
 
 const SideFooter = (props) => {
 
@@ -32,7 +33,8 @@ const SideFooter = (props) => {
 const mapStateToProps = (state) => {
     return {
         markers: state.map.markers,
-        isOptimized: state.map.isOptimized
+        isOptimized: state.map.isOptimized,
+        longUrls: state.map.urls
     }
 }
 
