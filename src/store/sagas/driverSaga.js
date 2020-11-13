@@ -1,6 +1,6 @@
 import {call, put, takeEvery} from 'redux-saga/effects';
 
-const DRIVER_ADD_END_POINT = 'driverAdd'
+const DRIVER_ADD_END_POINT = 'sendSMS'
 
 function getAPI(driverDetails, customerID, urls) {
     const reqBody = {
