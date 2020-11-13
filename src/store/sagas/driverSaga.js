@@ -2,12 +2,13 @@ import {call, put, takeEvery} from 'redux-saga/effects';
 
 const DRIVER_ADD_END_POINT = 'driverAdd'
 
-function getAPI(driverDetails, customerID) {
+function getAPI(driverDetails, customerID, urls) {
     const reqBody = {
         "customer_id": customerID,
         "name": driverDetails.name,
         "address": driverDetails.vehicleNo,
-        "tele": '94' + driverDetails.mobileNo
+        "tele": '94' + driverDetails.mobileNo,
+        "long_url_ar": urls
     }
     return fetch(
         (process.env.REACT_APP_API_URL + DRIVER_ADD_END_POINT),
@@ -29,7 +30,7 @@ function getAPI(driverDetails, customerID) {
 
 function* sendDrivers(action) {
     try{
-        const response = yield call(getAPI, action.payload, action.customerIDPayload);
+        const response = yield call(getAPI, action.payload, action.customerIDPayload, action.urls);
         if (response === 'ERROR: this driver already exists'){
             throw Error;
         }

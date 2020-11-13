@@ -74,7 +74,7 @@ const RouteInfoModal = (props) => {
             return false;
         } else {
             if (props.isAuthenticated) {
-                props.onClickingSendButton(driverDetails, props.customerId, props.userId, props.direction, props.locationArray);
+                props.onClickingSendButton(driverDetails, props.longUrls, props.customerId, props.userId, props.direction, props.locationArray);
                 props.onHide(true);
             }
         }
@@ -146,14 +146,15 @@ const mapStateToProps = (state, ownProps) => {
         customerId: state.auth.customerId,
         userId: state.auth.userId,
         isAuthenticated: state.auth.userId !== null,
-        direction: state.map.currentDirection
+        direction: state.map.currentDirection,
+        longUrls: state.map.urls
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onClickingSendButton: (driverDetails, customerId, userId, direction,locationArray) => {
-            dispatch(sendDriverDetails(driverDetails, customerId));
+        onClickingSendButton: (driverDetails, longUrls,customerId, userId, direction,locationArray) => {
+            dispatch(sendDriverDetails(driverDetails, customerId, longUrls));
             dispatch(actions.saveOptimizedRoute(userId, customerId, driverDetails.mobileNo, driverDetails.vehicleNo, direction,locationArray));
         },
         onLoadClearDriverState: () => dispatch(clearDriverState())
