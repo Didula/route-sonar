@@ -23,9 +23,6 @@ export function* saveApiConsumptionSaga(action) {
     try {
         axios.defaults.headers.post['Content-Type'] = 'application/json';
         axios.defaults.headers.post['Access-Control-Allow-Origin'] = process.env.REACT_APP_ORIGIN;
-        axios.defaults.headers.post['Access-Control-Allow-Headers'] = process.env.REACT_APP_ORIGIN;
-        axios.defaults.headers.post['Access-Control-Expose-Headers'] = process.env.REACT_APP_ORIGIN;
-        axios.defaults.headers.post['Access-Control-Allow-Credentials'] = true;
         const response = yield axios.post(url, saveApiConsumptionRequest);
     } catch (error) {
 
@@ -52,9 +49,6 @@ export function* saveOptimizedRouteSaga(action) {
     try {
         axios.defaults.headers.post['Content-Type'] = 'application/json';
         axios.defaults.headers.post['Access-Control-Allow-Origin'] = process.env.REACT_APP_ORIGIN;
-        axios.defaults.headers.post['Access-Control-Allow-Headers'] = process.env.REACT_APP_ORIGIN;
-        axios.defaults.headers.post['Access-Control-Expose-Headers'] = process.env.REACT_APP_ORIGIN;
-        axios.defaults.headers.post['Access-Control-Allow-Credentials'] = true;
         const response = yield axios.post(url, routeSaveRequest);
     } catch (error) {
 
