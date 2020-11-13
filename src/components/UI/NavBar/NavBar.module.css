@@ -1,4 +1,8 @@
 .NavBar {
+    
+}
+
+.icon{
     display: none;
 }
 
@@ -16,3 +20,15 @@
         flex-flow: row;
     }
 }
+
+@media (max-width:768px) {
+    .NavBar {
+        display: none;
+    }
+}
+@media (max-width:768px) {
+    .icon {
+        display: inline-block;
+    }
+}
+

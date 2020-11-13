@@ -22,6 +22,9 @@ export const SET_REFERENCE = 'SET_REFERENCE'; // side content - adding a referen
 export const SET_ADDRESS = 'SET_ADDRESS';
 export const RESET_FORM = 'RESET_FORM';
 export const WAY_POINT_FROM_SUBMIT = 'WAY_POINT_FROM_SUBMIT';
+export const PREPARE_SHORT_URLS =  'PREPARE_SHORT_URLS';
+export const PREPARE_SHORT_URLS_SUCCESS =  'PREPARE_SHORT_URLS_SUCCESS';
+export const PREPARE_SHORT_URLS_FAILURE =  'PREPARE_SHORT_URLS_FAILURE';
 
 // Home action types.
 export const SET_SIDE_PANEL_OPEN = 'SET_SIDE_PANEL_OPEN';

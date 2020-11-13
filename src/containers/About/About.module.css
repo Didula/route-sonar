@@ -71,14 +71,14 @@
 
 /* Pricing Section */
 .rsPricingSection {
-    height: 100vh;
+    min-height: 100vh;
     background: #f2f0f4;
 }
 
 /* Contact Section */
 .rsContact{
     background: #5145c1;
-    height: 60vh;
+    min-height: 60vh;
     z-index: 999;
 }
 
@@ -135,4 +135,18 @@
 }
 .btnLgOutline:hover{
     background: #ff625a;
+}
+
+@media (max-width:768px) {
+    .aboutTxt {
+        margin-top: 78px;
+    }
+    .aboutTxt > h1{
+        font-size: 32px;
+    }
+
+    .aboutTxtSmall h4{
+        font-size: 1.2rem;
+        font-weight: 300;
+    }
 }
